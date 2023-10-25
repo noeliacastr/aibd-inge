@@ -8,75 +8,19 @@
 
 body {
     overflow: hidden;
-}
-section {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* min-height: 80vh; */
+    min-height: 80vh;
     height: 100vh;
-    /* background-image: url('https://i.postimg.cc/nhtWpHrL/hero-bg-1.jpg'); */
     background-image: url('https://i.postimg.cc/jd3MwJzg/bf847d011a61bbfd42a9e0c027914079.jpg');
-    /* background-color: linear-gradient(to bottom, #4a86e8, #dff1ff); */
-    background-size: cover;
+    background-size: cover; /* Escala la imagen para cubrir todo el fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-attachment: fixed;
+    
+    /* background-color:  #9034; */
 }
-section .color {
-   position: absolute;
-   filter: blur(150px);    
-}
-section .color:nth-child(1) {
-    top: -350;
-    width: 600px; height: 600px;
-    background-color: #ff359a55;
-}
-section .color:nth-child(2) {
-    bottom: -150px; left: 100px;
-    width: 500px; height: 500px;
-    background-color: #0128d66a;
-}
-section .color:nth-child(3) {
-    bottom: 50px; right: 100px;
-    width: 300px; height: 300px;
-    background-color: #00d0ffde;
-} */
-section .box {
-    position: relative;
-}
-section .box .square {
-    position: absolute;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    animation: animate 10s linear infinite;
-    animation-delay: calc(-1s * var(--i));
-}
-@keyframes animate {
-    0%, 100% {transform: translate(-30px);}
-    50% {transform: translate(30px);}
-}
-section .box .square:nth-child(1) {
-    top: -50px;right: -60px;
-    width: 100px; height: 100px;
-}
-section .box .square:nth-child(2) {
-    top: 150px; left: -80px;
-    width: 100px; height: 100px;
-    z-index: 2;
-}
-section .box .square:nth-child(3) {
-    bottom: 50px; right: -60px;
-    width: 80px; height: 80px;
-    z-index: 2;
-}
-section .box .square:nth-child(4) {
-    bottom: -80px; left: 100px;
-    width: 50px; height: 50px;
-}
-section .box .square:nth-child(5) {
-    top: -80px; left: 140px;
-    width: 60px; height: 60px;
-} 
+
 section .container {
     position: relative;
     /* margin-right: 300px;aca muevo todo */
@@ -103,7 +47,7 @@ section .container .from h2 {
     font-size: 24px;
     font-weight: 600;
     letter-spacing: 1px;
-    /* margin-left: px; */
+   
 }
 
 /* la linea del centro debajo de */
