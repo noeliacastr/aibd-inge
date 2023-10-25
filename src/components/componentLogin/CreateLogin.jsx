@@ -53,6 +53,15 @@ const CreateLogin = () => {
                         <div className="from">
                             <img src={aliciaAvatar} alt="Alicia's Avatar" className="avatar-image"/>
                             <h2>Iniciar</h2>
+                        
+                
+                        </div>
+                    </div>
+                    <div className="containerRight">
+        
+                        <div className="from">
+                            
+                            <h2>Welcome to login system</h2>
                             <form onSubmit={handleSubmit}>
                                 <div className="input-field col s6">
                                     <input name='name' type='text' placeholder="Usuario" 
