@@ -1,0 +1,54 @@
+#btnEditar, #btnEliminar{
+    padding: 2px;
+    margin: 1px;
+    border-radius: 10%;
+    border-width: 4px;
+}
+#btnEditar{
+    background-color: #c98f10;
+    border-color: #c98f10;
+}
+#btnEliminar{
+    background-color: #930001;
+    border-color: #930001;
+}
+
+#table{
+    margin: 15px;
+    width: 98%;
+    height: auto;
+
+}
+#btnAdd{
+    padding: 2px;
+    margin-left: 15px;
+    display: block;
+    width: 150px;
+    height: 30px;
+    background-color: #27606e;
+    
+}
+
+.Container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+
+}
+
+.css-i9gxme{
+    margin: 50px;
+}
+
+.bg-dark{
+    margin: 10px;
+}
+
+.form{
+    display: flexbox;
+    width: 50%;
+    height: fit-content;
+    margin-left: 20px;
+
+}
