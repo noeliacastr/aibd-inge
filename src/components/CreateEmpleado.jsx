@@ -1,53 +1,67 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {useMutation, useQueryClient} from "@tanstack/react-query"
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css';
 import './style.css';
-
-const endpoint = 'http://localhost:8000/aibd/empleado';
+import {createEmployee} from "../api/empleado"
+import EmployeeForm from "./EmployeeForm"
 
 const CreateEmpleado = () => {
-  const [cedula, setCedula] = useState(0);
-  const [nombre, setNombre] = useState('');
-  const [apellidos, setApellidos] = useState('');
-  const [email, setEmail] = useState('');
-  const [telefono, setTelefono] = useState('');
-  const [domicilio, setDomicilio] = useState('');
-  const [rol, setRol] = useState('');
-  const [nombreUsuario, setNombreUsuario] = useState('');
-  const [password, setPassword] = useState('');
+  const [employee, setEmployee] = useState(
+    {
+      "cedula": 0,
+      "nombre": "",
+      "apellidos": "",
+      "telefono": "",
+      "email": "",
+      "domicilio": "",
+      "rol": "",
+      "nombreUsuario": "",
+      "password": ""
+    }
+  );
   const navigate = useNavigate();
   M.AutoInit();
-  const create = (e) => {
+  const queyCLient = useQueryClient();
+
+  const create = useMutation({
+    mutationFn: createEmployee,
+    onSuccess: () => {
+      queyCLient.invalidateQueries("employee")
+      navigate('/empleados');
+    },
+  });
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(endpoint, {
-      cedula: cedula,
-      nombre: nombre,
-      apellidos: apellidos,
-      email: email,
-      telefono: telefono,
-      domicilio: domicilio,
-      rol: rol,
-      nombreUsuario: nombreUsuario,
-      password: password,
+    create.mutate({
+      ...employee,
     });
-    navigate('/empleado');
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+        setEmployee((employee) => ({
+            ...employee,
+            [name]: value
+        }));
+  };
+    
   return (
     <div className="fondo-from-conteiner">
       <div className="container">
         <div className="row">
-          <form className="col s12" onSubmit={create}>
+          <form className="col s12" onSubmit={handleSubmit}>
             <div className="row">
               <div className="input-field col s6">
                 <input
                   id="cedula"
                   type="text"
+                  name = "cedula"
                   className="validate"
-                  value={cedula}
-                  onChange={(e) => setCedula(e.target.value)}
+                  value={employee.cedula}
+                  onChange={handleChange}
                 />
                 <label htmlFor="cedula">Cedula</label>
               </div>
@@ -56,33 +70,49 @@ const CreateEmpleado = () => {
               <div className="input-field col s6">
                 <input
                   id="nombre"
+                  name="nombre"
                   type="text"
                   className="validate"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
+                  value={employee.nombre}
+                  onChange={handleChange}
                 />
                 <label htmlFor="nombre">Nombre</label>
               </div>
-
+              
               <div className="input-field col s6">
                 <input
                   id="apellidos"
+                  name="apellidos"
                   type="text"
                   className="validate"
-                  value={apellidos}
-                  onChange={(e) => setApellidos(e.target.value)}
+                  value={employee.apellidos}
+                  onChange={handleChange}
                 />
                 <label htmlFor="apellidos">Apellidos</label>
+              </div>
+            </div>
+            <div className="row">
+              <div className="input-field col s12">
+                <input
+                  id="telefono"
+                  name="telefono"
+                  type="tel"
+                  className="validate"
+                  value={employee.telefono}
+                  onChange={handleChange}
+                />
+                <label htmlFor="telefono">Telefono</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s6">
                 <input
                   id="domicilio"
+                  name="domicilio"
                   type="text"
                   className="validate"
-                  value={domicilio}
-                  onChange={(e) => setDomicilio(e.target.value)}
+                  value={employee.domicilio}
+                  onChange={handleChange}
                 />
                 <label htmlFor="domicilio">Domicilio</label>
               </div>
@@ -90,10 +120,11 @@ const CreateEmpleado = () => {
               <div className="input-field col s6">
                 <input
                   id="rol"
+                  name="rol"
                   type="text"
                   className="validate"
-                  value={rol}
-                  onChange={(e) => setRol(e.target.value)}
+                  value={employee.rol}
+                  onChange={handleChange}
                 />
                 <label htmlFor="rol">Rol</label>
               </div>
@@ -102,10 +133,11 @@ const CreateEmpleado = () => {
               <div className="input-field col s12">
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   className="validate"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={employee.email}
+                  onChange={handleChange}
                 />
                 <label htmlFor="email">Email</label>
               </div>
@@ -114,10 +146,11 @@ const CreateEmpleado = () => {
               <div className="input-field col s6">
                 <input
                   id="usuario"
+                  name="nombreUsuario"
                   type="text"
                   className="validate"
-                  value={nombreUsuario}
-                  onChange={(e) => setNombreUsuario(e.target.value)}
+                  value={employee.nombreUsuario}
+                  onChange={handleChange}
                 />
                 <label htmlFor="usuario">Nombre de usuario</label>
               </div>
@@ -126,9 +159,10 @@ const CreateEmpleado = () => {
                 <input
                   id="password"
                   type="password"
+                  name="password"
                   className="validate"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={employee.password}
+                  onChange={handleChange}
                 />
                 <label htmlFor="password">Password</label>
               </div>
@@ -147,6 +181,7 @@ const CreateEmpleado = () => {
         </div>
       </div>
     </div>
+    // <EmployeeForm onSubmit={handleSubmit} initialValue={{}} /> 
   );
 };
 

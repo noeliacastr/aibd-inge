@@ -1,40 +1,52 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import {login} from "../api/login"
 import {} from './Login.css';
 import { useNavigate } from 'react-router-dom'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css';
-import aliciaAvatar from './../../img/aliciaAvatar.png';
+import aliciaAvatar from '../img/aliciaAvatar.png';
+import {useQueryClient, useMutation} from "@tanstack/react-query"
 
 
-const endpoint = 'http://localhost:8000/aibd/empleado/login'
-
-const CreateLogin = () => {
-    const [nombreUsuario, setNombreUsuario] = useState('');
-    const [password, setPassword] = useState('');
+ const CreateLogin = () => {
+    const [authentications, setAuthentications] = useState(
+        {
+         "nombreUsuario": '',
+         "password": '',
+        }
+    );
     const navigate = useNavigate()
-    M.AutoInit();
+    const queryClient = useQueryClient();
 
-    const handleEmpleUsu = (e) => {
-        setNombreUsuario(e.target.value)
-    };
-    const handleEmplePassword = (e) =>{
-        setPassword(e.target.value)
-    };
+    const createLogin = useMutation({
+        mutationFn: login,
+        
+        onSuccess: (response) => {
+            localStorage.setItem('token', response.data);
+            queryClient.invalidateQueries('users');
+            navigate('home')
+        },
+        onError: (error) => {
+            console.log(error.message)
+        },
+    });
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        try{
-            const response = await axios.post(endpoint, {nombreUsuario, password});
-            console.log(response.data);
-            localStorage.setItem('token',JSON.stringify(response.data));
-            navigate('/home')
-        }catch (error){
-            console.log(error);
+        createLogin.mutate({
+            ...authentications,
         }
+        );
     };
 
-    
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setAuthentications((prevAuthentications) => ({
+          ...prevAuthentications,
+          [name]: value,
+        }));
+      };
 
     return(
         <section>
@@ -64,15 +76,16 @@ const CreateLogin = () => {
                             <h2>Welcome to login system</h2>
                             <form onSubmit={handleSubmit}>
                                 <div className="input-field col s6">
-                                    <input name='name' type='text' placeholder="Usuario" 
-                                    value={nombreUsuario} onChange={ handleEmpleUsu}/>
+                                    <input name='nombreUsuario' type='text' placeholder="Usuario" 
+                                    value={authentications.nombreUsuario} onChange={handleChange}/>
                                 </div>
                                 <div className="input-field col s6">
                                     <input type="password" name="password" placeholder="Contrasena" 
-                                    value={password} onChange={handleEmplePassword}/> 
+                                    value={authentications.password} onChange={handleChange}/> 
                                 </div>
                                 <div className="inputBox">
                                     <input type="submit" value="Iniciar"/>
+                                    
                                 </div>
                                 {/* <p Link to="" class="forget"><a Link to="/create-user">¿No tienes una cuenta? </a></p> */}
                             </form>
@@ -87,6 +100,6 @@ const CreateLogin = () => {
         
     )
 
-
 }
+
 export default CreateLogin

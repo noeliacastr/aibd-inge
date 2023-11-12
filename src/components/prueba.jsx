@@ -8,11 +8,11 @@ import '../../styles/components/employee/store.css'
 
 export const StoreEmployee = () => {
 
-    const queryClient = useQueryClient()
+    const queryClient = useQueryClient() //(icializa el reacyquery, se usa SOLO para GETS)
     const [open, setOpen] = useState(false);
     const [messagge, setMessagge] = useState('')
     const [verify, setVerify] = useState(false)
-    const { isLoading, data: employees, isError } = useQuery(['employees'], getEmployees);
+    const { isLoading, data: employees, isError } = useQuery(['employees'], getEmployees); 
     const [openError, setOpenError] = useState(false);
     const closeAlertError = (e) => {
         setOpenError(false)
