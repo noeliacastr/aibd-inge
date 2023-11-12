@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios'
-import {} from './Login.css';
+import {} from '../StyleHome.css';
 import { useNavigate } from 'react-router-dom'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css';
 import aliciaAvatar from './../../img/aliciaAvatar.png';
+
 
 
 const endpoint = 'http://localhost:8000/aibd/empleado/login'
@@ -37,22 +38,19 @@ const CreateLogin = () => {
     
 
     return(
-        <section>
-            <div className="color"></div>
-            <div className="color"></div>
-            <div className="color"></div>
-        
+        <>
+        <section  className="fondo-from">
+        {/* className="fondo-from" */}
                 <div className="box">
-                    {/* <div class="square" style="--i:0;"></div>
-                        <div class="square" style="--i:1;"></div>
-                        <div class="square" style="--i:2;"></div>
-                        <div class="square" style="--i:3;"></div>
-                        <div class="square" style="--i:4;"></div> */}
                     <div className="container">
         
                         <div className="from">
                             <img src={aliciaAvatar} alt="Alicia's Avatar" className="avatar-image"/>
-                            <h2>Iniciar</h2>
+                            <h2>Welcome to AIBD</h2>
+                                <h1>El sistema se basa en seguridad-detección de amenazas, servicio 
+                                al cliente y producción empresarial, 
+                                con el apoyo de Inteligencia Artificial, Alicia, por medio de la recolección 
+                                de imágenes y cámaras en tiempo real, y así brindar las alertas necesarias. </h1>
                         
                 
                         </div>
@@ -61,7 +59,7 @@ const CreateLogin = () => {
         
                         <div className="from">
                             
-                            <h2>Welcome to login system</h2>
+                            <h2>Inicio de Sesión </h2>
                             <form onSubmit={handleSubmit}>
                                 <div className="input-field col s6">
                                     <input name='name' type='text' placeholder="Usuario" 
@@ -81,8 +79,9 @@ const CreateLogin = () => {
                     </div>
         
                 </div>
+                
         </section>
-        
+        </>
 
         
     )

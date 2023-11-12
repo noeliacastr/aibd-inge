@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import M from 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css'
+import '../components/StyleHome.css';
+import { Link } from 'react-router-dom';
+import aliciaLogo from '../img/aliciaLogo.png';
+import logoA from '../img/logoA.gif';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const Navbar = () => {
   useEffect(() => {
@@ -10,25 +14,34 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div>
-      <ul id="dropdown1" className="dropdown-content">
-        <li><a href="#!">one</a></li>
-        <li><a href="#!">two</a></li>
-        <li className="divider"></li>
-        <li><a href="#!">three</a></li>
-      </ul>
-      <nav>
-        <div className="nav-wrapper">
-          <a href="#!" className="brand-logo"></a>
-          <ul className="right hide-on-med-and-down">
-            <li><a>Login</a></li>
-            <li><a href="empleado">Empleado</a></li>
-            {/* Dropdown Trigger */}
-            <li><a className="dropdown-trigger" href="#!" data-target="dropdown1">no se<i className="material-icons right">arrow_drop_down</i></a></li>
+    <>
+        <nav className="nav-extended">
+          <div className="nav-wrapper">
+              <Link to="/home" className="brand-logo">
+              {/* <img src={logoA} alt="Alicia's Avatar" className="avatar-A" /> */}
+              <img src={aliciaLogo} alt="Alicia's Avatar" className="avatar-logo" />
+              </Link>
+              <ul id="nav-mobile" className="left hide-on-med-and-down">
+                <li className="tab"><a className="nav-link" href="/home">Inicio</a></li>
+                <li className="tab"><a className="nav-link" href="/empleado/show">Empleado</a></li>
+              </ul>
+          </div>
+        </nav>
+
+      {/* <nav className="nav-extended">
+        <div className="nav-content">
+          <Link to="/home" className="brand-logo">
+            <img src={aliciaLogo} alt="Alicia's Avatar" className="avatar-logo" />
+          </Link>
+          
+          <ul className="tabs tabs-transparent ">
+            <li className="tab"><a  href="/home">Inicio</a></li>
+            <li className="tab"><a  href="/empleado/create">Empleado</a></li>
           </ul>
         </div>
-      </nav>
-    </div>
+      </nav> */}
+
+    </>
   );
 };
 

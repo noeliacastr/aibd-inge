@@ -4,6 +4,9 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import CreateEmpleado from './components/empleadoComponent/CreateEmpleado';
 import CreateLogin from './components/componentLogin/CreateLogin';
 import Home from './components/Home';
+// import ShowEmpleado from './components/empleadoComponent/ShowEmpleado';
+import { CustomersTable } from './components/empleadoComponent/ShowEmpleado';
+
 
 function App() {
   return (
@@ -13,8 +16,9 @@ function App() {
   
       <Routes>
       <Route path='/home' element={<Home/>}/>
-        <Route path='/empleado' element ={<CreateEmpleado/>} />
+        <Route path='/empleado/create' element ={<CreateEmpleado/>} />
         <Route path='/' element={<CreateLogin/>}/>
+        <Route path='/empleado/show' element={<CustomersTable/>}/>
       </Routes>
   
       </BrowserRouter>

@@ -3,7 +3,10 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css';
-import './style.css';
+import {} from '../StyleHome.css';
+import Navbar from '../Navbar';
+
+
 
 const endpoint = 'http://localhost:8000/aibd/empleado';
 
@@ -36,12 +39,14 @@ const CreateEmpleado = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="fondo-from-conteiner">
-      <div className="container">
-        <div className="row">
+      <div className="container ">
+        <div className="row formulario-custom">
           <form className="col s12" onSubmit={create}>
-            <div className="row">
-              <div className="input-field col s6">
+            <div className="rowCreate">
+              <div className="input-field col s6" >
                 <input
                   id="cedula"
                   type="text"
@@ -52,7 +57,7 @@ const CreateEmpleado = () => {
                 <label htmlFor="cedula">Cedula</label>
               </div>
             </div>
-            <div className="row">
+            <div className="rowCreate">
               <div className="input-field col s6">
                 <input
                   id="nombre"
@@ -75,7 +80,7 @@ const CreateEmpleado = () => {
                 <label htmlFor="apellidos">Apellidos</label>
               </div>
             </div>
-            <div className="row">
+            <div className="rowCreate">
               <div className="input-field col s6">
                 <input
                   id="domicilio"
@@ -98,8 +103,8 @@ const CreateEmpleado = () => {
                 <label htmlFor="rol">Rol</label>
               </div>
             </div>
-            <div className="row">
-              <div className="input-field col s12">
+            <div className="rowCreate">
+              <div className="input-field col s6">
                 <input
                   id="email"
                   type="email"
@@ -109,8 +114,18 @@ const CreateEmpleado = () => {
                 />
                 <label htmlFor="email">Email</label>
               </div>
+              <div className="input-field col s6">
+                <input
+                  id="telefono"
+                  type="number"
+                  className="validate"
+                  value={telefono}
+                  onChange={(e) => setTelefono(e.target.value)}
+                />
+                <label htmlFor="telefono">Telefono</label>
+              </div>
             </div>
-            <div className="row">
+            <div className="rowCreate">
               <div className="input-field col s6">
                 <input
                   id="usuario"
@@ -134,19 +149,21 @@ const CreateEmpleado = () => {
               </div>
             </div>
 
-            <div className="row">
-              <button type="submit" className="btn btn-primary">
+            <div className="rowCreate">
+              <button type="submit" className="btn-primary">
                 Guardar
               </button>
-
-              <button type="button" className="btn btn-secondary">
+              <a href="/empleado/show" >
+              <button type="button" className="btn-secondary">
                 Cancelar
               </button>
+              </a>
             </div>
           </form>
         </div>
       </div>
     </div>
+    </>
   );
 };
 

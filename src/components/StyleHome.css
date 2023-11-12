@@ -1,54 +1,573 @@
-#btnEditar, #btnEliminar{
-    padding: 2px;
-    margin: 1px;
-    border-radius: 10%;
-    border-width: 4px;
+.nav-extended {
+    top: 0;
+    left: 0;
+    position: absolute;
+    /* background-color: #9034; */
+    background-color:#E4BBC9;;
+    
 }
-#btnEditar{
-    background-color: #c98f10;
-    border-color: #c98f10;
+.camaras{
+    width: 250px;
+    height: 360px;
 }
-#btnEliminar{
-    background-color: #930001;
-    border-color: #930001;
+.row{
+    margin-top: 50px;
+    width: 930px;
+    margin-left: 0px;
 }
 
-#table{
-    margin: 15px;
-    width: 98%;
-    height: auto;
-
+.avatar-A{
+    width: 50px;
+    height: 50px;
+    margin-left: -1100px;
+    margin-top: 11px;
 }
-#btnAdd{
-    padding: 2px;
-    margin-left: 15px;
-    display: block;
-    width: 150px;
-    height: 30px;
-    background-color: #27606e;
+.avatar-logo {
+    width: 130px;
+    height: 40px;
+    margin-left: -1100px;
+    margin-top: 14px;
+}
+.left{
+    margin-left: 250px;
+    font-size: 20px;
+}
+
+.nav-link {
+    color: #000000;
+    font-size: 20px;
+  }
+  
+  /* Estilos adicionales para resaltar cuando se pasa el mouse */
+.nav-link:hover {
+    color: #7b7878; /* Cambia "red" al color que desees cuando el mouse pasa por encima */
+}
+
+
+/*-----------------------------------------------------------------------------------------*/
+
+.fondo-from-conteiner {
+    /* background-image: url('https://i.postimg.cc/cLWJfzbH/81ea5c62cb1742e3333c92696298d236.jpg'); */
+    position: absolute;
+    top: 48px; 
+    left: 0;
+    right: 0;
+    bottom: -90px;
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+    
+  }
+  
+  .formulario-custom {
+    background-color: rgba(247, 247, 247, 0.81);
+    margin: 210px;
+    max-width: 600px;
+    height: 480px;
+    background-color: #f7f7f7cf; 
+    border: 1px solid #ddd; /* Borde alrededor del contenedor */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-top: 75px; /* Espacio superior */
+    
+  }
+  
+  .bottonAgregar{
+    margin-top: -50px;
+    margin-bottom: 35px;
+    width: 10%;
+    height: 40px;
+    margin-left: 900px;
+  }
+  
+  
+  
+  
+  
+  /* Estilos para los botones */
+  .btn-primary {
+    background-color: #745C9E;
+    color: #fff;
+  }
+  
+  .btn-secondary {
+    background-color: #745C9E;
+    color: #fff;
+  }
+  .btn-primary,
+  .btn-secondary {
+    margin-right: 10px; /* Espacio entre los botones */
+  }
+  
+  .colores{
+    
+    /* background-color: #745C9E; */
+    background-color: #E4BBC9;
+    border-radius: 0px;
+    
+  }
+  .button {
+    margin-left: 240px;
+    border-radius: 10px;
+    background-color:  #745C9E;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 18px;
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+  
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    /* content: '\00bb'; */
+    content: '+';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button:hover span {
+    padding-right: 25px;
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  
+   /* label color */
+   .input-field label {
+    color: #745C9E;
+  }
+  
+  
+  
+  /* valid color */
+  .input-field input[type=text].valid {
+    border-bottom: 1px solid #745C9E;
+    box-shadow: 0 1px 0 0 #745C9E;
+  }
+  .input-field input[type=number].valid {
+    border-bottom: 1px solid #745C9E;
+    box-shadow: 0 1px 0 0 #745C9E;
+  }
+  .input-field input[type=number].valid {
+    border-bottom: 1px solid #745C9E;
+    box-shadow: 0 1px 0 0 #745C9E;
+  }
+  .input-field input[type=email].valid {
+    border-bottom: 1px solid #745C9E;
+    box-shadow: 0 1px 0 0 #745C9E;
+  }
+  .input-field input[type=password].valid {
+    border-bottom: 1px solid #745C9E;
+    box-shadow: 0 1px 0 0 #745C9E;
+  }
+  
+  /* .input-field input[type=text].valid:hover {
+    border-bottom: 1px solid #745C9E;
+    color: #745C9E;
+    box-shadow: 0 1px 0 0 #745C9E; 
+  } */
+  /*----------------------------------------------------------------*/
+  
+.avatar-image {
+    width: 200px;
+    height: 180px;
+    margin-left: -10px;
+    margin-top: -60px;
+}
+
+
+
+body {
+    
+    overflow-x: hidden;
+}
+
+section {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.fondo-from {
+    background-image: url('https://i.postimg.cc/bNPGCTpB/Alicia-00031.png');
+    position: absolute;
+    top: 0px; 
+    left: 0;
+    right: 0;
+    bottom:0;
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
     
 }
 
-.Container{
+section .container {
+    position: relative;
+    margin-right: 10px;
+    top: 240px;
+    width: 400px;
+    min-height: 500px;
+    background-color:  rgb(255, 255, 255);
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    /* border-radius: 10px; */
+    /* border-radius: 0px 50px 50px 0px; */
+    border-radius: 0px 100px 0px 0px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* backdrop-filter: blur(5px); */
+    /* box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1); */
+    
+}
+
+/* el iniciar */
+section .container .from h2 {
+    /* margin-top: 130px; */
+    position: relative;
+    color: #240d0d;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    
+   
+}
+section .container h1 {
+    position: relative;
+    color: #240d0d;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+}
+
+/* la linea del centro debajo de */
+section .container .from h2::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    width: 210px; height: 4px;
+    background: #804999;
+}
+
+/* aca dice el color de si no tenes cuanta */
+section .container form .forget a {  
+    margin-right: 30px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: #fff;  
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/*------------------------------------------------------------------*/
+section .containerRight {
+    position: relative;
+    margin-right: 410px;
+    top: -260px;
+    width: 400px;
+    min-height: 500px;
+    background-color: rgba(255, 255, 255, 0.1);
+    /* border-radius: 10px; */
+    border-radius: 0px 0px 0px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.4);
+}
+/* se sube el iniciar */
+section .containerRight form {
+    margin-top: 100px;
+    position: relative;
+
+}
+
+/* el iniciar */
+section .containerRight .from h2 {
+    /* font-family: 'Humanst521 BT'; */
+    /* font-family: 'Poppins'; */
+    /* top: 10px; */
+    position: relative;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    
+    
+   
+}
+
+/* la linea del centro debajo de */
+section .containerRight .from h2::before {
+    /* font-family: 'Humanst521 BT'; */
+    font-family: 'Poppins';
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    width: 190px; height: 3px;
+    background: #fff;
+}
+/* section .container .from .inputBox {
     width: 100%;
-    height: auto;
+    margin-top: 10px;
+} */
+
+
+section .containerRight .from .inputBox input {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    /* border-radius: 10px; */
+    border-radius: 0px 15px 0px 15px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #f5f5f5;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-top: 40px;
+    
+}
+
+
+section .containerRight .from .inputBox input::placeholder {
+    color: #fff;
+}
+
+/* el color del boton iniciar */
+section .containerRight .from .inputBox input[type="submit"] {
+    background: #fff;
+    color: #080808;
+    max-width: 100px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+section .containerRight .from .forget {
+    
+    margin-top: 5px;
+    color: #fff;
+}
+
+/* aca dice el color de si no tenes cuanta */
+section .containerRight form .forget a {  
+    margin-right: 200px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: #fff;  
+    cursor: pointer;
+    text-decoration: none;
+}
+/*-------------------------------------------------------*/
+
+
+  
+.avatar-image {
+    width: 200px;
+    height: 180px;
+    margin-left: -10px;
+    margin-top: -60px;
+}
+
+
+
+body {
+    
+    overflow-x: hidden;
+}
+
+section {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.fondo-from {
+    background-image: url('https://i.postimg.cc/bNPGCTpB/Alicia-00031.png');
+    position: absolute;
+    top: 0px; 
+    left: 0;
+    right: 0;
+    bottom:0;
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+    
+}
+
+section .container {
+    position: relative;
+    margin-right: 10px;
+    top: 240px;
+    width: 400px;
+    min-height: 500px;
+    background-color:  rgb(255, 255, 255);
+    /* background-color: rgba(255, 255, 255, 0.1); */
+    /* border-radius: 10px; */
+    /* border-radius: 0px 50px 50px 0px; */
+    border-radius: 0px 100px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* backdrop-filter: blur(5px); */
+    /* box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1); */
+    
+}
+
+/* el iniciar */
+section .container .from h2 {
+    /* margin-top: 130px; */
+    position: relative;
+    color: #240d0d;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    
+   
+}
+section .container h1 {
+    position: relative;
+    color: #240d0d;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
 
 }
 
-.css-i9gxme{
-    margin: 50px;
+/* la linea del centro debajo de */
+section .container .from h2::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    width: 210px; height: 4px;
+    background: #804999;
 }
 
-.bg-dark{
-    margin: 10px;
+/* aca dice el color de si no tenes cuanta */
+section .container form .forget a {  
+    margin-right: 30px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: #fff;  
+    cursor: pointer;
+    text-decoration: none;
 }
 
-.form{
-    display: flexbox;
-    width: 50%;
-    height: fit-content;
-    margin-left: 20px;
+/*------------------------------------------------------------------*/
+section .containerRight {
+    position: relative;
+    margin-right: 410px;
+    top: -260px;
+    width: 400px;
+    min-height: 500px;
+    background-color: rgba(255, 255, 255, 0.1);
+    /* border-radius: 10px; */
+    border-radius: 0px 0px 0px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.4);
+}
+/* se sube el iniciar */
+section .containerRight form {
+    margin-top: 100px;
+    position: relative;
 
 }
+
+/* el iniciar */
+section .containerRight .from h2 {
+    /* font-family: 'Humanst521 BT'; */
+    /* font-family: 'Poppins'; */
+    /* top: 10px; */
+    position: relative;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    
+    
+   
+}
+
+/* la linea del centro debajo de */
+section .containerRight .from h2::before {
+    /* font-family: 'Humanst521 BT'; */
+    font-family: 'Poppins';
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    width: 190px; height: 3px;
+    background: #fff;
+}
+/* section .container .from .inputBox {
+    width: 100%;
+    margin-top: 10px;
+} */
+
+
+section .containerRight .from .inputBox input {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    /* border-radius: 10px; */
+    border-radius: 0px 15px 0px 15px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #f5f5f5;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-top: 40px;
+    
+}
+
+
+section .containerRight .from .inputBox input::placeholder {
+    color: #fff;
+}
+
+/* el color del boton iniciar */
+section .containerRight .from .inputBox input[type="submit"] {
+    background: #fff;
+    color: #080808;
+    max-width: 100px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+section .containerRight .from .forget {
+    
+    margin-top: 5px;
+    color: #fff;
+}
+
+/* aca dice el color de si no tenes cuanta */
+section .containerRight form .forget a {  
+    margin-right: 200px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: #fff;  
+    cursor: pointer;
+    text-decoration: none;
+}
+  
+  
+  
+  
