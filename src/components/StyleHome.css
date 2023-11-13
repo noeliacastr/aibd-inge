@@ -2,8 +2,7 @@
     top: 0;
     left: 0;
     position: absolute;
-    /* background-color: #9034; */
-    background-color:#E4BBC9;;
+    background-color: #9034;
     
 }
 .camaras{
@@ -40,10 +39,24 @@
   
   /* Estilos adicionales para resaltar cuando se pasa el mouse */
 .nav-link:hover {
-    color: #7b7878; /* Cambia "red" al color que desees cuando el mouse pasa por encima */
+    color: #745C9E; /* Cambia "red" al color que desees cuando el mouse pasa por encima */
 }
+.delete-icon {
+    color: rgb(255, 255, 255); /* Puedes ajustar el color según tus necesidades */
+    display: flex;
+    align-items: center;
+  }
 
-
+  .style {
+    position: 'absolute';
+    top: '50%';
+    left: '50%';
+    transform: 'translate(-50%, -50%)';
+    width: 400;
+   
+    border: '2px solid #000';
+    
+  };
 /*-----------------------------------------------------------------------------------------*/
 
 .fondo-from-conteiner {
@@ -63,11 +76,11 @@
     background-color: rgba(247, 247, 247, 0.81);
     margin: 210px;
     max-width: 600px;
-    height: 480px;
+    height: 580px;
     background-color: #f7f7f7cf; 
     border: 1px solid #ddd; /* Borde alrededor del contenedor */
     border-radius: 5px; /* Bordes redondeados */
-    margin-top: 75px; /* Espacio superior */
+    margin-top: 20px; /* Espacio superior */
     
   }
   
@@ -99,8 +112,6 @@
   }
   
   .colores{
-    
-    /* background-color: #745C9E; */
     background-color: #E4BBC9;
     border-radius: 0px;
     

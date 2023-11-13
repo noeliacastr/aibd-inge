@@ -5,14 +5,15 @@ import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { createEmployee } from '../../api/employeeAPI';
 import { getEmployees } from '../../api/employeeAPI';
 import '../../styles/components/employee/store.css'
+import Navbar from './Navbar';
 
 export const StoreEmployee = () => {
 
-    const queryClient = useQueryClient()
+    const queryClient = useQueryClient() //(icializa el reacyquery, se usa SOLO para GETS)
     const [open, setOpen] = useState(false);
     const [messagge, setMessagge] = useState('')
     const [verify, setVerify] = useState(false)
-    const { isLoading, data: employees, isError } = useQuery(['employees'], getEmployees);
+    const { isLoading, data: employees, isError } = useQuery(['employees'], getEmployees); 
     const [openError, setOpenError] = useState(false);
     const closeAlertError = (e) => {
         setOpenError(false)
@@ -85,6 +86,7 @@ export const StoreEmployee = () => {
 
     return (
         <>
+            <Navbar />
             <Snackbar open={open} autoHideDuration={3000} onClose={closeAlert} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                 <Alert onClose={() => { }}
                     severity="success" sx={{ width: '100%' }}

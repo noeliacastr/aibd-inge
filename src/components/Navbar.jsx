@@ -23,7 +23,7 @@ const Navbar = () => {
               </Link>
               <ul id="nav-mobile" className="left hide-on-med-and-down">
                 <li className="tab"><a className="nav-link" href="/home">Inicio</a></li>
-                <li className="tab"><a className="nav-link" href="/empleado/show">Empleado</a></li>
+                <li className="tab"><a className="nav-link" href="/empleados">Empleado</a></li>
               </ul>
           </div>
         </nav>

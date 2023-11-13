@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css';
+import {} from '../StyleHome.css';
 
 import Navbar from '../Navbar';
 import {

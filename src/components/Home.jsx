@@ -28,10 +28,7 @@ const Home = () => {
                         </p>
                     </div>
                     <a href="#" className="btn btn-primary">VER</a>
-                    {/* <div className="card-action">
-                        <a href="#">Ver</a>
-                        
-                    </div> */}
+                    
                 </div>
             </div>
             <div className="col m6">
@@ -45,10 +42,7 @@ const Home = () => {
                             Mesas sucias a las 10:00am
                         </p>
                     </div>
-                    <div className="card-action">
-                        <a href="#">Ver</a>
-                        <a href="#" className="btn btn-primary">VER</a>
-                    </div>
+                    <a href="#" className="btn btn-primary">VER</a>
                 </div>
             </div>
             <div className="col m6">
@@ -80,9 +74,7 @@ const Home = () => {
                             entrega de producto
                         </p>
                     </div>
-                    <div className="card-action">
-                        <a href="#">Ver</a>
-                    </div>
+                    <a href="#" className="btn btn-primary">VER</a>
                 </div>
             </div>
         </div>

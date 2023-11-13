@@ -1,26 +1,52 @@
-import React from 'react'
+import * as React from 'react';
 import './App.css'
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import CreateEmpleado from './components/empleadoComponent/CreateEmpleado';
-import CreateLogin from './components/componentLogin/CreateLogin';
+import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import CreateEmpleado from './components/CreateEmpleado';
+import CreateLogin from './components/CreateLogin';
+import ShowEmpleado from './components/ShowEmpleado'
 import Home from './components/Home';
-// import ShowEmpleado from './components/empleadoComponent/ShowEmpleado';
-import { CustomersTable } from './components/empleadoComponent/ShowEmpleado';
+import EditEmpleado from './components/EditEmpleado';
+import AuthenticatedComponent from './components/Authenticated';
+import { PrivateRoute } from './components/PrivateRoute';
 
 
 function App() {
+
+
   return (
     <>
       <div className="App">
       <BrowserRouter>
   
       <Routes>
-      <Route path='/home' element={<Home/>}/>
-        <Route path='/empleado/create' element ={<CreateEmpleado/>} />
-        <Route path='/' element={<CreateLogin/>}/>
-        <Route path='/empleado/show' element={<CustomersTable/>}/>
+        
+        <Route path='/'  exact element={<CreateLogin/>}/>
+        
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <Home/>
+            </PrivateRoute>
+          }
+        />
+        <Route path='/empleados'element={
+            <PrivateRoute>
+              <ShowEmpleado/>
+            </PrivateRoute>
+          }/>
+        <Route path='/empleado' element={
+            <PrivateRoute>
+              <CreateEmpleado/>
+            </PrivateRoute>
+          } />
+        <Route path='/empleado/edit/:id' element={
+            <PrivateRoute>
+              <EditEmpleado/>
+            </PrivateRoute>
+          } />
+        
       </Routes>
-  
       </BrowserRouter>
       
     </div>
@@ -28,4 +54,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
