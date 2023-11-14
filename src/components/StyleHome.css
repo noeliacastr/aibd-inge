@@ -61,7 +61,7 @@
 
 .fondo-from-conteiner {
     /* background-image: url('https://i.postimg.cc/cLWJfzbH/81ea5c62cb1742e3333c92696298d236.jpg'); */
-    position: absolute;
+    /* position: absolute; */
     top: 48px; 
     left: 0;
     right: 0;
@@ -71,16 +71,39 @@
     background-attachment: fixed;
     
   }
+  h4 {
+    /* Estilos que desees aplicar al h4 */
+    color: #745C9E; /* Cambiar el color del texto */
+    font-size: 28px; /* Cambiar el tamaño del texto */
+    /* Otros estilos... */
+  }
+  .modal {
+    width: 530px; /* Ancho en píxeles */
+    position: fixed;
+    top: 50%;
+    left: 0%;
+    max-height: 80vh; /* Establece la altura máxima en el 80% del viewport height */
+    overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    
+    
+    
+
+  }
+
   
   .formulario-custom {
     background-color: rgba(247, 247, 247, 0.81);
-    margin: 210px;
+    margin: 100px;
     max-width: 600px;
-    height: 580px;
+    height: 520px;
     background-color: #f7f7f7cf; 
     border: 1px solid #ddd; /* Borde alrededor del contenedor */
     border-radius: 5px; /* Bordes redondeados */
-    margin-top: 20px; /* Espacio superior */
+    margin-top: 50px; /* Espacio superior */
     
   }
   

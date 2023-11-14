@@ -4,16 +4,12 @@ import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 import Navbar from './Navbar';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CreateEmpleado from "./CreateEmpleado";
+import EditEmpleado from "./EditEmpleado";
 
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from 'react-router-dom';
-
-import "materialize-css/dist/css/materialize.min.css";
-import M from "materialize-css";
 import React, { useState, useEffect } from 'react';
-import CreateEmpleado from './CreateEmpleado';
-
-import Modal from '@mui/material/Modal';
 import {
   Avatar,
   Box,
@@ -28,8 +24,6 @@ import {
   TableRow,
   Typography
 } from '@mui/material';
-
-
 
 
 const Empleyees = (props) => {
@@ -47,15 +41,6 @@ const Empleyees = (props) => {
     selected = []
 } = props;
 
-useEffect(() => {
-  initModal();
-}, []);
-const initModal = () => {
-  const modalElement = document.getElementById('modal1'); // Use the appropriate ID for your modal
-  M.Modal.init(modalElement);
-};
-
-
 const selectedSome = (selected.length > 0) && (selected.length < items.length);
 const selectedAll = (items.length > 0) && (selected.length === items.length);
 
@@ -70,6 +55,7 @@ const selectedAll = (items.length > 0) && (selected.length === items.length);
     });
     const queryClient = useQueryClient();
     const navigate = useNavigate();
+    
     const deleteEmployees = useMutation({
       mutationFn: deleteEmployee,
       onSuccess: () => {
@@ -77,8 +63,11 @@ const selectedAll = (items.length > 0) && (selected.length === items.length);
       },
     });
 
-
-     
+    const [empleadoData, setEmpleadoData] = useState(null);
+    const handleOpenEditModal = (empleado) => {
+      setEmpleadoData(empleado); // Actualiza el estado con los datos del empleado seleccionado
+      // Lógica para abrir el modal aquí (cambiar estado, etc.)
+    };
 
     if (isLoading) return  <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
     <CircularProgress color="secondary" />
@@ -94,8 +83,7 @@ const selectedAll = (items.length > 0) && (selected.length === items.length);
                   <button className="button" style={{ verticalAlign: 'middle' }}><span>Agregar</span></button>
                 </a>
               </div> */}
-   
-   <div className="bottonAgregar">
+              <div className="bottonAgregar">
     <a href="#modal1" className="modal-trigger">
       <button className="button" style={{ verticalAlign: 'middle' }}>
         <span>Agregar</span>
@@ -104,12 +92,10 @@ const selectedAll = (items.length > 0) && (selected.length === items.length);
   </div>
 
   <div id="modal1" className="modal">
-  <CreateEmpleado/>
     <div className="modal-content">
       <h4>Crear un Empleado</h4>
-      
+      <CreateEmpleado/>
     </div>
-    
     
     <div className="modal-footer">
       <a href="#!" className="modal-close waves-effect waves-green btn-flat">
@@ -117,7 +103,6 @@ const selectedAll = (items.length > 0) && (selected.length === items.length);
       </a>
     </div>
   </div>
-  
  
               <Card>
         <Box sx={{ minWidth: 1000 }}>
@@ -182,7 +167,7 @@ const selectedAll = (items.length > 0) && (selected.length === items.length);
                     <TableCell>{empleado.domicilio}</TableCell>
                     <TableCell>{empleado.rol}</TableCell>
                     <TableCell>{empleado.nombreUsuario}</TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       <button
                         type="submit"
                         className="btn btn-primary"
@@ -201,6 +186,39 @@ const selectedAll = (items.length > 0) && (selected.length === items.length);
                       >
                         Editar
                       </button>
+                    </TableCell> */}
+                    <TableCell>
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        onClick={() => {
+                          deleteEmployees.mutate(empleado.cedula);
+                        }}
+                      >
+                        <DeleteIcon className="delete-icon"/> 
+                      </button>
+                      <div className="OtroModal">
+                        <a href="#modal2" className="modal-trigger">
+                          <button
+                            type="button"
+                            onClick={() => handleOpenEditModal(empleado)}>
+                            Editar
+                          </button>
+                        </a>
+                      </div>
+                      <div id="modal2" className="modal">
+                        <div className="modal-content">
+                          <h4>Editar un Empleado</h4>
+                            
+                          <EditEmpleado empleado={empleadoData} />
+                        </div>
+    
+                        <div className="modal-footer">
+                          <a href="#!" className="modal-close waves-effect waves-green btn-flat">
+                            Agree
+                          </a>
+                        </div>
+                      </div>
                     </TableCell>
                   </TableRow>
                 );

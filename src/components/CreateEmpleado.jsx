@@ -50,11 +50,9 @@ const CreateEmpleado = () => {
   };
     
   return (
-    <div className="fondo-from-conteiner">
-      <div className="container">
-        <div className="row">
-          <form className="col s12" onSubmit={handleSubmit}>
-            <div className="rowCreate">
+  
+      <form className="col s12" onSubmit={handleSubmit}>
+            <div className="row">
               <div className="input-field col s6">
                 <input
                   id="cedula"
@@ -67,8 +65,8 @@ const CreateEmpleado = () => {
                 <label htmlFor="cedula">Cedula</label>
               </div>
             </div>
-            <div className="rowCreate">
-              <div className="input-field col s6">
+            <div className="row">
+              <div className="input-field col s3">
                 <input
                   id="nombre"
                   name="nombre"
@@ -80,7 +78,7 @@ const CreateEmpleado = () => {
                 <label htmlFor="nombre">Nombre</label>
               </div>
               
-              <div className="input-field col s6">
+              <div className="input-field col s3">
                 <input
                   id="apellidos"
                   name="apellidos"
@@ -92,8 +90,8 @@ const CreateEmpleado = () => {
                 <label htmlFor="apellidos">Apellidos</label>
               </div>
             </div>
-            <div className="rowCreate">
-              <div className="input-field col s6">
+            <div className="row">
+              <div className="input-field col s3">
                 <input
                   id="telefono"
                   name="telefono"
@@ -104,9 +102,8 @@ const CreateEmpleado = () => {
                 />
                 <label htmlFor="telefono">Telefono</label>
               </div>
-            </div>
-            <div className="rowCreate">
-              <div className="input-field col s6">
+            
+              <div className="input-field col s3">
                 <input
                   id="domicilio"
                   name="domicilio"
@@ -117,8 +114,9 @@ const CreateEmpleado = () => {
                 />
                 <label htmlFor="domicilio">Domicilio</label>
               </div>
-
-              <div className="input-field col s6">
+              </div>
+              <div className="row">
+              <div className="input-field col s3">
                 <input
                   id="rol"
                   name="rol"
@@ -129,9 +127,9 @@ const CreateEmpleado = () => {
                 />
                 <label htmlFor="rol">Rol</label>
               </div>
-            </div>
-            <div className="rowCreate">
-              <div className="input-field col s12">
+            
+            
+              <div className="input-field col s3">
                 <input
                   id="email"
                   name="email"
@@ -143,8 +141,8 @@ const CreateEmpleado = () => {
                 <label htmlFor="email">Email</label>
               </div>
             </div>
-            <div className="rowCreate">
-              <div className="input-field col s6">
+            <div className="row">
+              <div className="input-field col s3">
                 <input
                   id="usuario"
                   name="nombreUsuario"
@@ -156,7 +154,7 @@ const CreateEmpleado = () => {
                 <label htmlFor="usuario">Nombre de usuario</label>
               </div>
 
-              <div className="input-field col s6">
+              <div className="input-field col s3">
                 <input
                   id="password"
                   type="password"
@@ -169,7 +167,7 @@ const CreateEmpleado = () => {
               </div>
             </div>
 
-            <div className="rowCreate">
+            <div className="row">
               <button type="submit" className="btn btn-primary">
                 Guardar
               </button>
@@ -179,10 +177,9 @@ const CreateEmpleado = () => {
               </button>
               </a>
             </div>
+            
           </form>
-        </div>
-      </div>
-    </div>
+
     // <EmployeeForm onSubmit={handleSubmit} initialValue={{}} /> 
   );
 };
