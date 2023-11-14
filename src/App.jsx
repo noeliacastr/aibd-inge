@@ -3,7 +3,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import CreateEmpleado from './components/CreateEmpleado';
 import CreateLogin from './components/CreateLogin';
-import ShowEmpleado from './components/ShowEmpleado'
+import ShowAllEmployees from './components/ShowEmpleados'
 import Home from './components/Home';
 import EditEmpleado from './components/EditEmpleado';
 import AuthenticatedComponent from './components/Authenticated';
@@ -32,7 +32,7 @@ function App() {
         />
         <Route path='/empleados'element={
             <PrivateRoute>
-              <ShowEmpleado/>
+              <ShowAllEmployees/>
             </PrivateRoute>
           }/>
         <Route path='/empleado' element={
