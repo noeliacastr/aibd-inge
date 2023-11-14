@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
 import Navbar from './Navbar';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import { format } from 'date-fns';
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from 'react-router-dom';
 
@@ -43,7 +43,7 @@ const Empleyees = (props) => {
     onSelectAll,
     onSelectOne,
     page = 0,
-    rowsPerPage = 0,
+    rowsPerPage = 5,
     selected = []
 } = props;
 
@@ -125,11 +125,13 @@ const selectedAll = (items.length > 0) && (selected.length === items.length);
             <TableHead>
               <TableRow>
                 <TableCell padding="checkbox" className="colores">
-                  <Checkbox
+                  <Checkbox id="checkbox"
+                  
                     checked={selectedAll}
                     indeterminate={selectedSome}
                     onChange={(event) => {
                       if (event.target.checked) {
+                        color: pink[800],
                         onSelectAll?.();
                       } else {
                         onDeselectAll?.();
@@ -144,25 +146,29 @@ const selectedAll = (items.length > 0) && (selected.length === items.length);
                 <TableCell className="colores">Telefono</TableCell>
                 <TableCell className="colores">Domicilio</TableCell>
                 <TableCell className="colores">Rol</TableCell>
-                <TableCell className="colores">Nombre Usuario</TableCell>
+                <TableCell className="colores">Fecha de Ingreso</TableCell>
+            
                 <TableCell className="colores"></TableCell>
                 
               </TableRow>
             </TableHead>
             <TableBody>
               {empleados.map((empleado) => {
-                const isSelected = selected.includes(empleado.id);
+                const isSelected = selected.includes(empleado.cedula);
+                // const createdAt = format(empleado.createdAt, 'dd/MM/yyyy');
+
 
                 return (
                   <TableRow key={empleado.cedula} hover selected={isSelected}>
                     <TableCell padding="checkbox">
-                      <Checkbox
+                      <Checkbox id="checkbox"
                         checked={isSelected}
                         onChange={(event) => {
                           if (event.target.checked) {
-                            onSelectOne?.(empleado.cedula);
+                            onSelectOne?.();
+                            console.log('Selected:', selected);
                           } else {
-                            onDeselectOne?.(empleado.cedula);
+                            onDeselectOne?.();
                           }
                         }}
                       />
@@ -181,7 +187,7 @@ const selectedAll = (items.length > 0) && (selected.length === items.length);
                     <TableCell>{empleado.telefono}</TableCell>
                     <TableCell>{empleado.domicilio}</TableCell>
                     <TableCell>{empleado.rol}</TableCell>
-                    <TableCell>{empleado.nombreUsuario}</TableCell>
+                  
                     <TableCell>
                       <button
                         type="submit"
@@ -216,7 +222,7 @@ const selectedAll = (items.length > 0) && (selected.length === items.length);
           onRowsPerPageChange={onRowsPerPageChange}
           page={page}
           rowsPerPage={rowsPerPage}
-          rowsPerPageOptions={[1, 2, 3]}
+          rowsPerPageOptions={[5, 10, 20]}
         />
       </Card>
   </>
@@ -238,7 +244,20 @@ const selectedAll = (items.length > 0) && (selected.length === items.length);
     
     // ));
     );
-};
 
+};
+Empleyees.propTypes = {
+  count: PropTypes.number,
+  items: PropTypes.array,
+  onDeselectAll: PropTypes.func,
+  onDeselectOne: PropTypes.func,
+  onPageChange: PropTypes.func,
+  onRowsPerPageChange: PropTypes.func,
+  onSelectAll: PropTypes.func,
+  onSelectOne: PropTypes.func,
+  page: PropTypes.number,
+  rowsPerPage: PropTypes.number,
+  selected: PropTypes.array
+}
 
 export default Empleyees;
