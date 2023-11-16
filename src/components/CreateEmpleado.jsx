@@ -15,6 +15,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const CreateEmpleado = ({isOpen, onClose}) => {
   
@@ -44,8 +46,8 @@ const CreateEmpleado = ({isOpen, onClose}) => {
     },
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     create.mutate({
       ...employee,
     });
@@ -61,123 +63,18 @@ const CreateEmpleado = ({isOpen, onClose}) => {
   };
     
   return (
-    <div>
-      <Dialog open={isOpen} onClose={onClose}>
+    <div >
+      <Dialog open={isOpen} onClose={onClose} className="dialogContainer">
         <DialogTitle>Agregar empleado</DialogTitle>
-        <DialogContent>
+        <a href="/empleados" >
+        <IconButton aria-label="close" onClick={onClose} style={{ position: 'absolute', right: '8px', top: '8px' }}>
+          <CloseIcon />
+        </IconButton>
+        </a>
+        <DialogContent >
           <DialogContentText>
             Agregue un nuevo empleado al sistema, llenando los siguientes campos. 
           </DialogContentText>
-          <form className="col s12" onSubmit={handleSubmit}>
-            <TextField
-            autoFocus
-            margin="dense"
-            name="cedula"
-            label="Cedula"
-            type="number"
-            value={employee.cedula}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="nombre"
-            label="Nombre"
-            type="text"
-            value={employee.nombre}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="apellidos"
-            label="Apellidos"
-            type="text"
-            value={employee.apellidos}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="telefono"
-            label="Telefono"
-            type="tel"
-            value={employee.telefono}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="email"
-            label="Correo Electronico"
-            type="email"
-            value={employee.email}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="domicilio"
-            label="Domicilio"
-            type="text"
-            value={employee.domicilio}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-           <TextField
-            autoFocus
-            margin="dense"
-            name="rol"
-            label="Rol del empleado"
-            type="text"
-            value={employee.rol}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="nombreUsuario"
-            label="Nombre de Usuario"
-            type="text"
-            value={employee.nombreUsuario}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="password"
-            label="Contraseña"
-            type="password"
-            value={employee.password}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={onClose}>Cancel</Button>
-          <Button onClick={handleSubmit}>Subscribe</Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* <div className="container">
-        <div className="row">
           <form className="col s12" onSubmit={handleSubmit}>
             <div className="rowCreate">
               <div className="input-field col s6">
@@ -222,7 +119,7 @@ const CreateEmpleado = ({isOpen, onClose}) => {
                 <input
                   id="telefono"
                   name="telefono"
-                  type="tel"
+                  type="number"
                   className="validate"
                   value={employee.telefono}
                   onChange={handleChange}
@@ -294,20 +191,28 @@ const CreateEmpleado = ({isOpen, onClose}) => {
               </div>
             </div>
 
-            <div className="row">
-              <button type="submit" className="btn btn-primary">
+            {/* <div className="row">
+            <a href="/empleados" >
+              <button 
+              type="submit" className="btn btn-primary">
                 Guardar
               </button>
-              <a href="/empleados" >
+              
               <button type="button" className="btn btn-secondary">
                 Cancelar
               </button>
               </a>
-            </div>
+            </div> */}
             
           </form>
-        </div>
-      </div>
+        </DialogContent>
+        <DialogActions>
+        <a href="/empleados" >
+          <Button onClick={onClose}>Cancel</Button>
+        </a>
+          <Button type="submit" className="btn btn-primary" onClick={handleSubmit}>Subscribe</Button>
+        </DialogActions>
+      </Dialog>
     </div>
     // <EmployeeForm onSubmit={handleSubmit} initialValue={{}} /> 
   );

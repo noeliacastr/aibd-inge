@@ -7,9 +7,13 @@ import Navbar from "./Navbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from '@mui/icons-material/Edit';
+
 import CreateEmpleado from "./CreateEmpleado";
+import EditEmpleado from "./EditEmpleado";
 import Swal from "sweetalert2";
-import DeleteEmployee from "./DeleteEmpleado";
+import 'materialize-css/dist/css/materialize.min.css'
+
 
 const ShowAllEmployees = () => {
   const {
@@ -66,18 +70,38 @@ const ShowAllEmployees = () => {
         
         <button
           type="button"
-          className="btn btn-primary"
+          className="round-button"
           onClick={() => {
+          if (params.row?.id) {
             console.log(params.row.id);
-            deleteEmployees.mutate(params.row.id)
-          }}
+            deleteEmployees.mutate(params.row.id);
+          }
+        }}
         >
-          
           <DeleteIcon className="delete-icon" />
         </button>
       ),
     },
+    {
+      field: "actionAdd",
+      headerName: "Action",
+      width: 90,
+      renderCell: (params) => (
+        <button
+        type="submit"
+        className="round-button"
+        onClick={() => navigate(`/empleado/edit/${params.row.cedula}`)}
+        >
+        <EditIcon className="delete-icon"/>
+      </button>
+        
+      ),
+    },
   ];
+  const handleClickOpen2 = () => {
+    console.log("abriendo dialogo");
+    setOpen(true);
+  };
 
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -114,7 +138,7 @@ const ShowAllEmployees = () => {
         </a>
       </div>
 
-      <div style={{ height: 400, width: "100%" }}>
+      <div className="dataGridContainer">
         <DataGrid
           rows={row}
           columns={columns}

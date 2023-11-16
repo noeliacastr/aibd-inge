@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams} from 'react-router-dom';
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { Box, TextField, Grid, Card, CardContent, FormControl, Typography, Select, MenuItem, InputLabel } from '@mui/material';
-import M from 'materialize-css/dist/js/materialize.min.js';  // Importa también el JavaScript si es necesario
+
 import 'materialize-css/dist/css/materialize.min.css';
 import LoadingButton from '@mui/lab/LoadingButton';
 import {} from './StyleHome.css';
@@ -10,7 +9,15 @@ import {updateEmployee} from "../api/empleado"
 import {getEmployee} from "../api/empleado"
 
 
-
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const EditEmpleado = ({initialValue}) => {
      
@@ -94,20 +101,30 @@ const EditEmpleado = ({initialValue}) => {
       else if (isError) return <div>...{error.message}</div>
 
       return (
-        <div className="fondo-from-conteiner">
-        <div className="container ">
-          <div className="row ">
-            <form className="col s12" onSubmit={handleSubmit}>
+        <div >
+      <Dialog open={isOpen} onClose={onClose} className="dialogContainer">
+        <DialogTitle>Modificar empleado</DialogTitle>
+        <a href="/empleados" >
+        <IconButton aria-label="close" onClick={onClose} style={{ position: 'absolute', right: '8px', top: '8px' }}>
+          <CloseIcon />
+        </IconButton>
+        </a>
+        <DialogContent >
+          <DialogContentText>
+            Agregue un nuevo empleado al sistema, llenando los siguientes campos. 
+          </DialogContentText>
+          <form className="col s12" onSubmit={handleSubmit}>
               <div className="rowCreate">
-                <div className="input-field col s6" >
+                <div className=" col s6" >
                   <input
-                    id="cedula"
+                    disabled
+                    id="disabled"
                     type="text"
                     className="validate"
                     value={employee.cedula}
                     onChange={handleChangeEdit}
                   />
-                  <label htmlFor="cedula">Cedula</label>
+                  <label for="disabled">Cedula</label>
                 </div>
               </div>
               <div className="rowCreate">
@@ -157,110 +174,18 @@ const EditEmpleado = ({initialValue}) => {
   
                 
               </div>
-
-  
-              
             </form>
-            <Box sx={{ '& > button': { m: 1 } }}>
-                    <LoadingButton
-                      size="small"
-                      onClick={() => handleSubmit()}
-                      loading={isLoading}
-                      variant="outlined"
-                      disabled={!isLoading ? false : true}
-                    >
-                      Enviar
-                    </LoadingButton>
-                  </Box>
-          </div>
-        </div>
-      </div>
-  //   <div className="container">
-  //     <div className="row">
-  //       <form className="col s12" onSubmit={handleSubmit}>
-  //         <div className="row">
-  //           <div className="input-field col s6">
-  //             <input
-  //               id="cedula"
-  //               type="text"
-  //               name = "cedula"
-  //               className="validate"
-  //               value={employee.cedula}
-  //               onChange={handleChangeEdit}
-  //             />
-  //             <label htmlFor="cedula">Cedula</label>
-  //           </div>
-  //         </div>
-  //         <div className="row">
-  //           <div className="input-field col s6">
-  //             <input
-  //               id="nombre"
-  //               name="nombre"
-  //               type="text"
-  //               className="validate"
-  //               value={employee.nombre}
-  //               onChange={handleChangeEdit}
-  //             />
-             
-  //           </div>
-            
-  //           <div className="input-field col s6">
-  //             <input
-  //               id="apellidos"
-  //               name="apellidos"
-  //               type="text"
-  //               className="validate"
-  //               value={employee.apellidos}
-  //               onChange={handleChangeEdit}
-  //             />
-  //             <label htmlFor="apellidos">Apellidos</label>
-  //           </div>
-  //         </div>
-  //         <div className="row">
-  //           <div className="input-field col s12">
-  //             <input
-  //               id="telefono"
-  //               name="telefono"
-  //               type="tel"
-  //               className="validate"
-  //               value={employee.telefono}
-  //               onChange={handleChangeEdit}
-  //             />
-  //             <label htmlFor="telefono">Telefono</label>
-  //           </div>
-  //         </div>
-  //         <div className="row">
-  //           <div className="input-field col s6">
-  //             <input
-  //               id="domicilio"
-  //               name="domicilio"
-  //               type="text"
-  //               className="validate"
-  //               value={employee.domicilio}
-  //               onChange={handleChangeEdit}
-  //             />
-  //             <label htmlFor="domicilio">Domicilio</label>
-  //           </div>
-
-           
-  //         </div>
           
-          
-
-  //         <div className="row">
-  //           <button type="submit" className="btn btn-primary">
-  //             Guardar
-  //           </button>
-
-  //           <button type="button" className="btn btn-secondary">
-  //             Cancelar
-  //           </button>
-  //         </div>
-  //       </form>
-  //     </div>
-  //   </div>
-  // </div>
-  
+        </DialogContent>
+        <DialogActions>
+        <a href="/empleados" >
+          <Button onClick={onClose}>Cancel</Button>
+        </a>
+          <Button type="submit" className="btn btn-primary" onClick={() => handleSubmit()}>Modificar</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+        
       );
 }
 export default EditEmpleado;

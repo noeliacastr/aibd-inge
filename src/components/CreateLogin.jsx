@@ -88,7 +88,7 @@ import {useQueryClient, useMutation} from "@tanstack/react-query"
                                     value={authentications.password} onChange={handleChange}/> 
                                 </div>
                                 <div className="inputBox">
-                                    <input type="submit" value="Iniciar"/>
+                                    <input type="submit" value="Ingresar"/>
                                     
                                 </div>
                                 {/* <p Link to="" class="forget"><a Link to="/create-user">¿No tienes una cuenta? </a></p> */}
