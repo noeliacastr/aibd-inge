@@ -1,15 +1,17 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import M from 'materialize-css';
-import 'materialize-css/dist/css/materialize.min.css'
-import '../components/StyleHome.css';
-import { Link } from 'react-router-dom';
-import aliciaLogo from '../img/aliciaLogo.png';
-import logoA from '../img/logoA.gif';
-import { BrowserRouter as Router } from 'react-router-dom';
+import M from "materialize-css";
+import "materialize-css/dist/css/materialize.min.css";
+import "../components/StyleHome.css";
+import { Link } from "react-router-dom";
+import aliciaLogo from "../img/aliciaLogo.png";
 import Avatar from "@mui/material/Avatar";
+import logoAIBD from "../img/logoAIBD.png"
 import Stack from "@mui/material/Stack";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import logoA from "../img/logoA.gif";
+
+import { BrowserRouter as Router } from "react-router-dom";
 import Button from "@mui/material/Button";
 import {
   Dialog,
@@ -17,9 +19,6 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
-
-
-
 
 const Navbar = () => {
   useEffect(() => {
@@ -46,17 +45,28 @@ const Navbar = () => {
 
   return (
     <>
-        <nav className="nav-extended">
-          <div className="nav-wrapper">
-              <Link to="/home" className="brand-logo">
-              {/* <img src={logoA} alt="Alicia's Avatar" className="avatar-A" /> */}
-              <img src={aliciaLogo} alt="Alicia's Avatar" className="avatar-logo" />
-              </Link>
-              <ul id="nav-mobile" className="left hide-on-med-and-down">
-                <li><a className="nav-link" href="/home">Inicio</a></li>
-                <li><a className="nav-link" href="/empleados">Empleado</a></li>
-              </ul>
-              <Stack direction="row-reverse" spacing={4} className="avatar">
+      <nav className="nav-extended">
+          <Link to="/home" className="brand-logo">
+            {/* <img src={logoA} alt="Alicia's Avatar" className="avatar-A" /> */}
+            <img
+              src={logoAIBD}
+              alt="Alicia's Avatar"
+              className="avatar-logo"
+            />
+          </Link>
+          <ul id="nav-mobile" className="left hide-on-med-and-down">
+            <li className="tab">
+              <a className="nav-link" href="/home">
+                Inicio
+              </a>
+            </li>
+            <li className="tab">
+              <a className="nav-link" href="/empleados">
+                Empleado
+              </a>
+            </li>
+          </ul>
+          <Stack direction="row-reverse" spacing={4} className="avatar">
             <Button onClick={handleOpen}>
               <Avatar>
                 <AccountCircleRoundedIcon />
@@ -68,17 +78,16 @@ const Navbar = () => {
                 ¿Estás seguro de que deseas cerrar sesión?
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose} color="primary">
+                <Button onClick={handleClose} className="out-button">
                   Cancelar
                 </Button>
-                <Button onClick={logout} color="primary">
+                <Button onClick={logout} className="cancel-button " >
                   Cerrar Sesión
                 </Button>
               </DialogActions>
             </Dialog>
           </Stack>
-          </div>
-        </nav>
+      </nav>
     </>
   );
 };

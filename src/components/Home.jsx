@@ -24,7 +24,7 @@ const Home = () => {
                     </div>
                     <div className="card-content">
                         <p>
-                            persona con mascara a las 3:00pm 
+                            Persona con mascara a las 3:00pm 
                         </p>
                     </div>
                     <a href="#" className="btn btn-primary">VER</a>
@@ -53,7 +53,7 @@ const Home = () => {
                     </div>
                     <div className="card-content">
                         <p>
-                            lavado de manos correctamente 
+                            Lavado de manos correctamente 
                         </p>
                     </div>
                     
@@ -71,7 +71,7 @@ const Home = () => {
                     </div>
                     <div className="card-content">
                         <p>
-                            entrega de producto
+                            Entrega de producto
                         </p>
                     </div>
                     <a href="#" className="btn btn-primary">VER</a>

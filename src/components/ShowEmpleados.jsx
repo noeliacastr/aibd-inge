@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getEmployess, deleteEmployee } from "../api/empleado";
 import Navbar from "./Navbar";
+import 'materialize-css/dist/css/materialize.min.css'
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -12,7 +13,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import CreateEmpleado from "./CreateEmpleado";
 import EditEmpleado from "./EditEmpleado";
 import Swal from "sweetalert2";
-import 'materialize-css/dist/css/materialize.min.css'
+import DeleteEmpleado from "./DeleteEmpleado";
 
 
 const ShowAllEmployees = () => {
@@ -26,13 +27,20 @@ const ShowAllEmployees = () => {
     queryFn: getEmployess,
   });
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const deleteEmployees = useMutation({
     mutationFn: deleteEmployee,
     onSuccess: () => {
+      const confirmDelete = () => {
+        Swal.fire({
+          title: "Empleado eliminado",
+          text: "Los datos han sido eliminados",
+          icon: "success"
+        });
+        queryClient.invalidateQueries("employees");
+      };
       Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        title: "¿Seguro al eliminar el empleado?",
+        text: "No se podran revertir los cambios",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -40,14 +48,11 @@ const ShowAllEmployees = () => {
         confirmButtonText: "Yes, delete it!"
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success"
-          });
-          queryClient.invalidateQueries("employees");
+          confirmDelete();
+        }else{
+          result.dismiss === Swal.DismissReason.cancel
         }
-      });
+      })
     },
   });
 
@@ -55,63 +60,42 @@ const ShowAllEmployees = () => {
     ? empleados.map((cls) => ({ ...cls, id: cls.cedula }))
     : [];
   const columns = [
-    { field: "cedula", headerName: "Cedula", width: 100 },
+    { field: "cedula", headerName: "Cédula", width: 100 },
     { field: "nombre", headerName: "Nombre", width: 130 },
     { field: "apellidos", headerName: "Apellidos", width: 130 },
-    { field: "telefono", headerName: "Telefono", width: 130 },
+    { field: "telefono", headerName: " Teléfono", width: 130 },
     { field: "email", headerName: "Correo Electronico", width: 100 },
     { field: "domicilio", headerName: "Domicilio", width: 130 },
     { field: "rol", headerName: "Rol", width: 90 },
     {
       field: "action",
-      headerName: "Action",
+      headerName: "Acción",
       width: 90,
+      className:"round-button",
       renderCell: (params) => (
         
-        <button
-          type="button"
-          className="round-button"
-          onClick={() => {
-          if (params.row?.id) {
-            console.log(params.row.id);
-            deleteEmployees.mutate(params.row.id);
-          }
-        }}
-        >
-          <DeleteIcon className="delete-icon" />
-        </button>
+       <DeleteEmpleado emp = {params.row.id}/>
+        
       ),
     },
     {
-      field: "actionAdd",
-      headerName: "Action",
+      field: "Action",
+      headerName: "Acción",
       width: 90,
+      className:"round-button",
       renderCell: (params) => (
-        <button
-        type="submit"
-        className="round-button"
-        onClick={() => navigate(`/empleado/edit/${params.row.cedula}`)}
-        >
-        <EditIcon className="delete-icon"/>
-      </button>
         
+        <>
+        <EditEmpleado emp={params.row}/>
+        
+        </>
       ),
     },
+
   ];
   const handleClickOpen2 = () => {
     console.log("abriendo dialogo");
     setOpen(true);
-  };
-
-  const [open, setOpen] = useState(false);
-  const handleClickOpen = () => {
-    console.log("abriendo dialogo");
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    console.log("cerrando dialogo");
-    setOpen(false);
   };
 
   if (isLoading)
@@ -125,19 +109,7 @@ const ShowAllEmployees = () => {
   return (
     <>
       <Navbar />
-      <div className="bottonAgregar">
-        <a>
-          <button
-            className="button"
-            style={{ verticalAlign: "middle" }}
-            onClick={handleClickOpen}
-          >
-            <CreateEmpleado isOpen={open} onClose={handleClose} />
-            <span>Agregar</span>
-          </button>
-        </a>
-      </div>
-
+      <CreateEmpleado />
       <div className="dataGridContainer">
         <DataGrid
           rows={row}

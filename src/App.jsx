@@ -6,7 +6,6 @@ import CreateLogin from './components/CreateLogin';
 import ShowAllEmployees from './components/ShowEmpleados'
 import Home from './components/Home';
 import EditEmpleado from './components/EditEmpleado';
-import AuthenticatedComponent from './components/Authenticated';
 import { PrivateRoute } from './components/PrivateRoute';
 
 

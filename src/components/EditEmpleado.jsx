@@ -1,192 +1,183 @@
-import React, { useState } from 'react';
-import { useNavigate, useParams} from 'react-router-dom';
-import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import M from "materialize-css/dist/js/materialize.min.js"; // Importa también el JavaScript si es necesario
+import "materialize-css/dist/css/materialize.min.css";
+import {} from "./StyleHome.css";
+import { updateEmployee } from "../api/empleado";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import EditIcon from "@mui/icons-material/Edit";
+import Swal from "sweetalert2";
 
-import 'materialize-css/dist/css/materialize.min.css';
-import LoadingButton from '@mui/lab/LoadingButton';
-import {} from './StyleHome.css';
-import {updateEmployee} from "../api/empleado"
-import {getEmployee} from "../api/empleado"
+const EditEmpleado = ({ emp }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
+  const queyCLient = useQueryClient();
+  const [employe, setEmploye] = useState({
+    cedula: emp.cedula,
+    nombre: emp.nombre,
+    apellidos: emp.apellidos,
+    telefono: emp.telefono,
+    domicilio: emp.domicilio,
+  });
 
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-
-const EditEmpleado = ({initialValue}) => {
-     
-      const {id}  = useParams();
-      const [cedula, setCedula] = useState(id);  
-      const navigate = useNavigate();
-      
-      
-      const queyCLient = useQueryClient();
-      const [employe, setEmploye] = useState(
-        {
-          cedula: cedula,
-          nombre: "",
-          apellidos:   "",
-          telefono:  "",
-          domicilio: "",
-        }
-      );
-    
-      const {
-        isLoading,
-        isError,
-        data: employee,
-        error,
-        isSuccess,
-      } = useQuery({
-        queryKey: ["employee"],
-        queryFn: () => getEmployee(cedula),
+  const editEmpleado = useMutation({
+    mutationFn: updateEmployee,
+    onSuccess: () => {
+      queyCLient.invalidateQueries("employee");
+      setOpen(false);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "¡Datos actualizados!",
+        showConfirmButton: false,
+        timer: 1500,
       });
-      
-      const editEmpleado = useMutation({
-        mutationFn: updateEmployee,
-        onSuccess: () => {
-            queyCLient.invalidateQueries("employee")
-            navigate("/empleados")
-        },
-      });
+    },
+  });
 
-      const handleSubmit = (e) => {
-        // e.preventDefault()
-        console.log(employe)
-        editEmpleado.mutate({
-          ...employe
-        });
-      }; 
-      const handleChangeInput = (e) => {
-        setEmploye({
-          ...employee,
-          [e.target.name]: e.target.value
-        })
-      }
-      const handleChangeEdit = (e) => {
-    
-        const { name, value } = e.target;
-        console.log(value)
-        console.log(name)
-            setEmploye((employee) => ({
-                ...employee,
-                [name]: value
-                
-            }));
-            console.log('Employee State:', employe);
-        if (name == "nombre" ){
-          employee.nombre = value
-        }
-        if (name == "apellidos" ){
-          employee.apellidos = value
-        }
-        if (name == "telefono" ){
-          employee.telefono = value
-        }
-        if (name == "email" ){
-          employee.email = value
-        }
-        if (name == "domicilio" ){
-          employee.domicilio = value
-        }
-      };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(employe);
+    editEmpleado.mutate({
+      ...employe,
+    });
+  };
 
-      if (isLoading) return <div>...is Loading</div>
-      else if (isError) return <div>...{error.message}</div>
+  const handleChangeEdit = (e) => {
+    const { name, value } = e.target;
+    console.log(value);
+    console.log(name);
+    setEmploye((employe) => ({
+      ...employe,
+      [name]: value,
+    }));
+  };
 
-      return (
-        <div >
-      <Dialog open={isOpen} onClose={onClose} className="dialogContainer">
-        <DialogTitle>Modificar empleado</DialogTitle>
-        <a href="/empleados" >
-        <IconButton aria-label="close" onClick={onClose} style={{ position: 'absolute', right: '8px', top: '8px' }}>
-          <CloseIcon />
-        </IconButton>
-        </a>
-        <DialogContent >
-          <DialogContentText>
-            Agregue un nuevo empleado al sistema, llenando los siguientes campos. 
-          </DialogContentText>
-          <form className="col s12" onSubmit={handleSubmit}>
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 500,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+
+  return (
+    <>
+      <button
+          type="button"
+          className="round-button"
+          onClick={handleOpen}
+        >
+          <EditIcon className="delete-icon" />
+      </button>
+      <div className="fondo-from-conteiner">
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Editar informacion del empleado
+            </Typography>
+            <form className="col s12" onSubmit={handleSubmit}>
               <div className="rowCreate">
-                <div className=" col s6" >
+                <div className=" col s6">
                   <input
                     disabled
-                    id="disabled"
+                    id="cedula"
                     type="text"
+                    name="cedula"
                     className="validate"
-                    value={employee.cedula}
+                    value={employe.cedula}
                     onChange={handleChangeEdit}
                   />
                   <label for="disabled">Cedula</label>
                 </div>
               </div>
-              <div className="rowCreate">
-                <div className="col s6">
+              <div className="row">
+                <div className=" col s3">
                   <input
                     id="nombre"
+                    name="nombre"
                     type="text"
                     className="validate"
-                    value={employee.nombre}
+                    value={employe.nombre}
                     onChange={handleChangeEdit}
                   />
                   <label htmlFor="nombre">Nombre</label>
                 </div>
-  
-                <div className="col s6">
+
+                <div className="col s3">
                   <input
                     id="apellidos"
+                    name="apellidos"
                     type="text"
                     className="validate"
-                    value={employee.apellidos}
+                    value={employe.apellidos}
                     onChange={handleChangeEdit}
                   />
                   <label htmlFor="apellidos">Apellidos</label>
                 </div>
               </div>
-              <div className="rowCreate">
-                <div className=" col s6">
-                  <input
-                    id="domicilio"
-                    type="text"
-                    className="validate"
-                    value={employee.domicilio}
-                    onChange={handleChangeEdit}
-                  />
-                  <label htmlFor="domicilio">Domicilio</label>
-                </div>
-                <div className="col s6">
+              <div className="row">
+                <div className="col s3">
                   <input
                     id="telefono"
-                    type="text"
+                    name="telefono"
+                    type="number"
                     className="validate"
-                    value={employee.telefono}
+                    value={employe.telefono}
                     onChange={handleChangeEdit}
                   />
                   <label htmlFor="telefono">Telefono</label>
                 </div>
-  
-                
+
+                <div className=" col s3">
+                  <input
+                    id="domicilio"
+                    name="domicilio"
+                    type="text"
+                    className="validate"
+                    value={employe.domicilio}
+                    onChange={handleChangeEdit}
+                  />
+                  <label htmlFor="domicilio">Domicilio</label>
+                </div>
+              </div>
+              <div className="row">
+                <a href="/empleados">
+                  <button type="submit" className="btn-primary">
+                    Guardar
+                  </button>
+
+                  <button
+                    type="button"
+                    className="btn-secondary"
+                    onClick={handleClose}
+                  >
+                    Cancelar
+                  </button>
+                </a>
               </div>
             </form>
-          
-        </DialogContent>
-        <DialogActions>
-        <a href="/empleados" >
-          <Button onClick={onClose}>Cancel</Button>
-        </a>
-          <Button type="submit" className="btn btn-primary" onClick={() => handleSubmit()}>Modificar</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-        
-      );
-}
+          </Box>
+        </Modal>
+      </div>
+    </>
+  );
+};
 export default EditEmpleado;
-
