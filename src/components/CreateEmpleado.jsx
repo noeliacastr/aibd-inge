@@ -199,125 +199,23 @@ const CreateEmpleado = ({}) => {
                 <label htmlFor="password">Password</label>
               </div>
             </div>
-          </form>
-          {/* form que sharon tenia  */}
-          {/* <form className="col s12" onSubmit={handleSubmit}>
-            <TextField
-            autoFocus
-            margin="dense"
-            name="cedula"
-            label="Cedula"
-            type="number"
-            value={employee.cedula}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="nombre"
-            label="Nombre"
-            type="text"
-            value={employee.nombre}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="apellidos"
-            label="Apellidos"
-            type="text"
-            value={employee.apellidos}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="telefono"
-            label="Telefono"
-            type="tel"
-            value={employee.telefono}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="email"
-            label="Correo Electronico"
-            type="email"
-            value={employee.email}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="domicilio"
-            label="Domicilio"
-            type="text"
-            value={employee.domicilio}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-           <TextField
-            autoFocus
-            margin="dense"
-            name="rol"
-            label="Rol del empleado"
-            type="text"
-            value={employee.rol}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="nombreUsuario"
-            label="Nombre de Usuario"
-            type="text"
-            value={employee.nombreUsuario}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-            <TextField
-            autoFocus
-            margin="dense"
-            name="password"
-            label="Contraseña"
-            type="password"
-            value={employee.password}
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
-          </form> */}
-        </DialogContent>
-        <DialogActions>
-          <div className="row">
-            <button type="submit" className="btn btn-primary">
-              Guardar
-            </button>
+            <DialogActions>
+              <div className="row">
+                <button type="submit" className="btn btn-primary">
+                  Guardar
+                </button>
 
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={handleClose}
-            >
-              Cancelar
-            </button>
-          </div>
-        </DialogActions>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleClose}
+                >
+                  Cancelar
+                </button>
+              </div>
+            </DialogActions>
+          </form>
+        </DialogContent>
       </Dialog>
 
       {/* <div className="container">
