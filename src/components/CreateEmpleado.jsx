@@ -15,6 +15,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Swal from "sweetalert2";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close"; // Asegúrate de importar el icono que necesitas
+
+
 
 const CreateEmpleado = ({}) => {
   const [employee, setEmployee] = useState({
@@ -50,8 +54,8 @@ const CreateEmpleado = ({}) => {
     },
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     create.mutate({
       ...employee,
     });
@@ -78,13 +82,20 @@ const CreateEmpleado = ({}) => {
           </button>
         </a>
       </div>
-      <Dialog open={open} onClose={handleClose}>
+      
+      <Dialog  open={open} onClose={handleClose}>
         <DialogTitle>Agregar empleado</DialogTitle>
-        <DialogContent>
+        <a href="/empleados" >
+        <IconButton aria-label="close" onClick={handleClose} className="custom-icon-button">
+          <CloseIcon />
+        </IconButton>
+        </a>
+        <DialogContent >
           <DialogContentText>
             Agregue un nuevo empleado al sistema, llenando los siguientes
             campos.
           </DialogContentText>
+          
           <form className="col s12" onSubmit={handleSubmit}>
             <div className="rowCreate">
               <div className="input-field col s6">
@@ -199,12 +210,29 @@ const CreateEmpleado = ({}) => {
                 <label htmlFor="password">Password</label>
               </div>
             </div>
+          </form>
+          <div className="row">
+            <button type="submit"  className="button-primary"
+            onClick={handleSubmit}>
+              Guardar
+            </button>
             <DialogActions>
               <div className="row">
                 <button type="submit" className="btn btn-primary">
                   Guardar
                 </button>
 
+            <button
+              type="button"
+              className="button-secondary"
+              onClick={handleClose}
+            >
+              Cancelar
+            </button>
+          </div>
+
+        </DialogContent>
+        
                 <button
                   type="button"
                   className="btn btn-secondary"
@@ -217,138 +245,6 @@ const CreateEmpleado = ({}) => {
           </form>
         </DialogContent>
       </Dialog>
-
-      {/* <div className="container">
-        <div className="row">
-          <form className="col s12" onSubmit={handleSubmit}>
-            <div className="rowCreate">
-              <div className="input-field col s6">
-                <input
-                  id="cedula"
-                  type="text"
-                  name = "cedula"
-                  className="validate"
-                  value={employee.cedula}
-                  onChange={handleChange}
-                />
-                <label htmlFor="cedula">Cedula</label>
-              </div>
-            </div>
-            <div className="rowCreate">
-              <div className="input-field col s6">
-                <input
-                  id="nombre"
-                  name="nombre"
-                  type="text"
-                  className="validate"
-                  value={employee.nombre}
-                  onChange={handleChange}
-                />
-                <label htmlFor="nombre">Nombre</label>
-              </div>
-              
-              <div className="input-field col s6">
-                <input
-                  id="apellidos"
-                  name="apellidos"
-                  type="text"
-                  className="validate"
-                  value={employee.apellidos}
-                  onChange={handleChange}
-                />
-                <label htmlFor="apellidos">Apellidos</label>
-              </div>
-            </div>
-            <div className="rowCreate">
-              <div className="input-field col s6">
-                <input
-                  id="telefono"
-                  name="telefono"
-                  type="tel"
-                  className="validate"
-                  value={employee.telefono}
-                  onChange={handleChange}
-                />
-                <label htmlFor="telefono">Telefono</label>
-              </div>
-            </div>
-            <div className="rowCreate">
-              <div className="input-field col s6">
-                <input
-                  id="domicilio"
-                  name="domicilio"
-                  type="text"
-                  className="validate"
-                  value={employee.domicilio}
-                  onChange={handleChange}
-                />
-                <label htmlFor="domicilio">Domicilio</label>
-              </div>
-
-              <div className="input-field col s6">
-                <input
-                  id="rol"
-                  name="rol"
-                  type="text"
-                  className="validate"
-                  value={employee.rol}
-                  onChange={handleChange}
-                />
-                <label htmlFor="rol">Rol</label>
-              </div>
-            </div>
-            <div className="rowCreate">
-              <div className="input-field col s12">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  className="validate"
-                  value={employee.email}
-                  onChange={handleChange}
-                />
-                <label htmlFor="email">Email</label>
-              </div>
-            </div>
-            <div className="rowCreate">
-              <div className="input-field col s6">
-                <input
-                  id="usuario"
-                  name="nombreUsuario"
-                  type="text"
-                  className="validate"
-                  value={employee.nombreUsuario}
-                  onChange={handleChange}
-                />
-                <label htmlFor="usuario">Nombre de usuario</label>
-              </div>
-
-              <div className="input-field col s6">
-                <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  className="validate"
-                  value={employee.password}
-                  onChange={handleChange}
-                />
-                <label htmlFor="password">Password</label>
-              </div>
-            </div>
-
-            <div className="rowCreate">
-              <button type="submit" className="btn btn-primary">
-                Guardar
-              </button>
-              <a href="/empleados" >
-              <button type="button" className="btn btn-secondary">
-                Cancelar
-              </button>
-              </a>
-            </div>
-          </form>
-        </div>
-      </div> */}
     </div>
     // <EmployeeForm onSubmit={handleSubmit} initialValue={{}} />
   );

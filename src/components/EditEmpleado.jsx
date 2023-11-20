@@ -75,9 +75,13 @@ const EditEmpleado = ({ emp }) => {
 
   return (
     <>
-      <Button onClick={handleOpen}>
-        <EditIcon />
-      </Button>
+      <button
+          type="button"
+          className="round-button"
+          onClick={handleOpen}
+        >
+          <EditIcon className="delete-icon" />
+      </button>
       <div className="fondo-from-conteiner">
         <Modal
           open={open}
@@ -91,7 +95,7 @@ const EditEmpleado = ({ emp }) => {
             </Typography>
             <form className="col s12" onSubmit={handleSubmit}>
               <div className="rowCreate">
-                <div className="input-field col s6">
+                <div className=" col s6">
                   <input
                     disabled
                     id="cedula"
@@ -101,11 +105,11 @@ const EditEmpleado = ({ emp }) => {
                     value={employe.cedula}
                     onChange={handleChangeEdit}
                   />
-                  <label htmlFor="cedula">Cedula</label>
+                  <label for="disabled">Cedula</label>
                 </div>
               </div>
               <div className="row">
-                <div className="input-field col s3">
+                <div className=" col s3">
                   <input
                     id="nombre"
                     name="nombre"
@@ -117,7 +121,7 @@ const EditEmpleado = ({ emp }) => {
                   <label htmlFor="nombre">Nombre</label>
                 </div>
 
-                <div className="input-field col s3">
+                <div className="col s3">
                   <input
                     id="apellidos"
                     name="apellidos"
@@ -130,7 +134,7 @@ const EditEmpleado = ({ emp }) => {
                 </div>
               </div>
               <div className="row">
-                <div className="input-field col s3">
+                <div className="col s3">
                   <input
                     id="telefono"
                     name="telefono"
@@ -142,7 +146,7 @@ const EditEmpleado = ({ emp }) => {
                   <label htmlFor="telefono">Telefono</label>
                 </div>
 
-                <div className="input-field col s3">
+                <div className=" col s3">
                   <input
                     id="domicilio"
                     name="domicilio"
@@ -156,13 +160,13 @@ const EditEmpleado = ({ emp }) => {
               </div>
               <div className="row">
                 <a href="/empleados">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn-primary">
                     Guardar
                   </button>
 
                   <button
                     type="button"
-                    className="btn btn-secondary"
+                    className="btn-secondary"
                     onClick={handleClose}
                   >
                     Cancelar

@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css';
 import aliciaAvatar from '../img/aliciaAvatar.png';
+import logoAI from '../img/logoAI.png'
+import logoLogin from '../img/logoLogin.png'
 import {useQueryClient, useMutation} from "@tanstack/react-query"
 
 
@@ -60,16 +62,17 @@ import {useQueryClient, useMutation} from "@tanstack/react-query"
         <section  className="fondo-from">
         {/* className="fondo-from" */}
                 <div className="box">
-                    <div className="container">
+                    <div  className="container">
         
                         <div className="from">
-                            <img src={aliciaAvatar} alt="Alicia's Avatar" className="avatar-image"/>
-                            <h2>Welcome to AIBD</h2>
+                            <img src={logoLogin} alt="Alicia's Avatar" className="avatar-image"/>
+                            <div>
+                            <h2>Bienvenido a AIBD</h2>
                                 <h1>El sistema se basa en seguridad-detección de amenazas, servicio 
                                 al cliente y producción empresarial, 
                                 con el apoyo de Inteligencia Artificial, Alicia, por medio de la recolección 
                                 de imágenes y cámaras en tiempo real, y así brindar las alertas necesarias. </h1>
-                        
+                            </div>
                 
                         </div>
                     </div>
@@ -88,7 +91,7 @@ import {useQueryClient, useMutation} from "@tanstack/react-query"
                                     value={authentications.password} onChange={handleChange}/> 
                                 </div>
                                 <div className="inputBox">
-                                    <input type="submit" value="Iniciar"/>
+                                    <input type="submit" value="Ingresar"/>
                                     
                                 </div>
                                 {/* <p Link to="" class="forget"><a Link to="/create-user">¿No tienes una cuenta? </a></p> */}

@@ -42,7 +42,7 @@ const DeleteEmpleado = (emp) => {
       return (
         <button
           type="button"
-          className="btn btn-primary"
+          className="round-button"
           onClick={handleConfirm}
         >
           

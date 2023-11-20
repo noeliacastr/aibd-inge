@@ -8,9 +8,11 @@ import 'materialize-css/dist/css/materialize.min.css'
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from '@mui/icons-material/Edit';
+
 import CreateEmpleado from "./CreateEmpleado";
-import Swal from "sweetalert2";
 import EditEmpleado from "./EditEmpleado";
+import Swal from "sweetalert2";
 import DeleteEmpleado from "./DeleteEmpleado";
 
 
@@ -58,17 +60,18 @@ const ShowAllEmployees = () => {
     ? empleados.map((cls) => ({ ...cls, id: cls.cedula }))
     : [];
   const columns = [
-    { field: "cedula", headerName: "Cedula", width: 100 },
+    { field: "cedula", headerName: "Cédula", width: 100 },
     { field: "nombre", headerName: "Nombre", width: 130 },
     { field: "apellidos", headerName: "Apellidos", width: 130 },
-    { field: "telefono", headerName: "Telefono", width: 130 },
+    { field: "telefono", headerName: " Teléfono", width: 130 },
     { field: "email", headerName: "Correo Electronico", width: 100 },
     { field: "domicilio", headerName: "Domicilio", width: 130 },
     { field: "rol", headerName: "Rol", width: 90 },
     {
       field: "action",
-      headerName: "Action",
+      headerName: "Acción",
       width: 90,
+      className:"round-button",
       renderCell: (params) => (
         
        <DeleteEmpleado emp = {params.row.id}/>
@@ -77,8 +80,9 @@ const ShowAllEmployees = () => {
     },
     {
       field: "Action",
-      headerName: "Action",
+      headerName: "Acción",
       width: 90,
+      className:"round-button",
       renderCell: (params) => (
         
         <>
@@ -89,6 +93,10 @@ const ShowAllEmployees = () => {
     },
 
   ];
+  const handleClickOpen2 = () => {
+    console.log("abriendo dialogo");
+    setOpen(true);
+  };
 
   if (isLoading)
     return (
@@ -102,7 +110,7 @@ const ShowAllEmployees = () => {
     <>
       <Navbar />
       <CreateEmpleado />
-      <div style={{ height: 400, width: "100%" }}>
+      <div className="dataGridContainer">
         <DataGrid
           rows={row}
           columns={columns}

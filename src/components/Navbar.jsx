@@ -6,9 +6,11 @@ import "../components/StyleHome.css";
 import { Link } from "react-router-dom";
 import aliciaLogo from "../img/aliciaLogo.png";
 import Avatar from "@mui/material/Avatar";
+import logoAIBD from "../img/logoAIBD.png"
 import Stack from "@mui/material/Stack";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import logoA from "../img/logoA.gif";
+
 import { BrowserRouter as Router } from "react-router-dom";
 import Button from "@mui/material/Button";
 import {
@@ -23,7 +25,6 @@ const Navbar = () => {
     // Inicializar elementos de Materialize al cargar el componente
     M.AutoInit();
   }, []);
-
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const handleOpen = () => {
@@ -45,11 +46,10 @@ const Navbar = () => {
   return (
     <>
       <nav className="nav-extended">
-        <div className="nav-wrapper">
           <Link to="/home" className="brand-logo">
             {/* <img src={logoA} alt="Alicia's Avatar" className="avatar-A" /> */}
             <img
-              src={aliciaLogo}
+              src={logoAIBD}
               alt="Alicia's Avatar"
               className="avatar-logo"
             />
@@ -78,16 +78,15 @@ const Navbar = () => {
                 ¿Estás seguro de que deseas cerrar sesión?
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose} color="primary">
+                <Button onClick={handleClose} className="out-button">
                   Cancelar
                 </Button>
-                <Button onClick={logout} color="primary">
+                <Button onClick={logout} className="cancel-button " >
                   Cerrar Sesión
                 </Button>
               </DialogActions>
             </Dialog>
           </Stack>
-        </div>
       </nav>
     </>
   );
