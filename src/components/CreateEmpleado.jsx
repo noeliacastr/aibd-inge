@@ -17,7 +17,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Swal from "sweetalert2";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close"; // Asegúrate de importar el icono que necesitas
-
+import Box from "@mui/material/Box";
 
 
 const CreateEmpleado = ({}) => {
@@ -68,6 +68,17 @@ const CreateEmpleado = ({}) => {
       [name]: value,
     }));
   };
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 600,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
 
   return (
     <div>
@@ -83,7 +94,7 @@ const CreateEmpleado = ({}) => {
         </a>
       </div>
       
-      <Dialog  open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} className="dialogContainer">
         <DialogTitle>Agregar empleado</DialogTitle>
         <a href="/empleados" >
         <IconButton aria-label="close" onClick={handleClose} className="custom-icon-button">
@@ -96,8 +107,8 @@ const CreateEmpleado = ({}) => {
             campos.
           </DialogContentText>
           
-          <form className="col s12" onSubmit={handleSubmit}>
-            <div className="rowCreate">
+          <form onSubmit={handleSubmit} className="form-dialog">
+            <div className="row">
               <div className="input-field col s6">
                 <input
                   id="cedula"
@@ -207,10 +218,11 @@ const CreateEmpleado = ({}) => {
                   value={employee.password}
                   onChange={handleChange}
                 />
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Contraseña</label>
               </div>
             </div>
           </form>
+          
           <div className="row">
             <button type="submit"  className="button-primary"
             onClick={handleSubmit}>

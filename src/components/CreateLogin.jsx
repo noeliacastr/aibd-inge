@@ -5,13 +5,23 @@ import {} from '././StyleHome.css';
 import { useNavigate } from 'react-router-dom'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css';
-import aliciaAvatar from '../img/aliciaAvatar.png';
+import aliciaAvatar from './../img/aliciaAvatar.png';
 import logoAI from '../img/logoAI.png'
 import logoLogin from '../img/logoLogin.png'
 import {useQueryClient, useMutation} from "@tanstack/react-query"
+import Swal from "sweetalert2";
+
+
 
 
  const CreateLogin = () => {
+      const handleEnter = () => {
+        Swal.fire({
+            title: "¡Hola! soy Alicia",
+            html: `<img src="${aliciaAvatar}" alt="Alicia Avatar" class="alicia-img" /> <br/> Cualquier consulta estoy para ayudarte`,
+            
+        });
+    }
     const [authentications, setAuthentications] = useState(
         {
          "nombreUsuario": '',
@@ -20,6 +30,8 @@ import {useQueryClient, useMutation} from "@tanstack/react-query"
     );
     const navigate = useNavigate()
     const queryClient = useQueryClient();
+  
+
 
     const createLogin = useMutation({
         mutationFn: login,
@@ -87,13 +99,16 @@ import {useQueryClient, useMutation} from "@tanstack/react-query"
                                     value={authentications.nombreUsuario} onChange={handleChange}/>
                                 </div>
                                 <div className="input-field col s6">
-                                    <input type="password" name="password" placeholder="Contrasena" 
+                                    <input type="password" name="password" placeholder="Contraseña" 
                                     value={authentications.password} onChange={handleChange}/> 
                                 </div>
+                                <p Link to="" class="forget"><a Link to="/create-user">¿No tienes una cuenta? </a></p>
+                                
                                 <div className="inputBox">
-                                    <input type="submit" value="Ingresar"/>
+                                    <input type="submit" value="Ingresar" onClick={handleEnter}/>
                                     
                                 </div>
+                                
                                 {/* <p Link to="" class="forget"><a Link to="/create-user">¿No tienes una cuenta? </a></p> */}
                             </form>
                 

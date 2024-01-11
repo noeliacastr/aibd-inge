@@ -11,7 +11,10 @@
 .nav-wrapper {
   width: 100%; 
 }
-
+.alicia-img {
+  width: 200px; /* Define el ancho deseado */
+  height: auto; /* Permite que la altura se ajuste automáticamente */
+}
 
 
 
@@ -149,7 +152,18 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     
   }
-  
+ 
+  .css-ypiqx9-MuiDialogContent-root::-webkit-scrollbar{
+    width: 9px;
+  }
+  .css-ypiqx9-MuiDialogContent-root::-webkit-scrollbar-thumb{
+    background: #ca7db6;
+    border-radius: 10px;
+  }
+ 
+  .css-ypiqx9-MuiDialogContent-root{
+    overflow-x: hidden; 
+  }
   
   .dialogContainer {
     width: 580px;
@@ -164,6 +178,8 @@
     /* border: 1px solid #ccc; */
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   }
+
+
 
   
   .formulario-custom {
@@ -207,6 +223,8 @@
   .MuiDataGrid-columnHeaderTitle{
     color: #fff;
   }
+
+  
 
   .custom-icon-button {
     position: absolute;
@@ -336,7 +354,13 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-
+body::-webkit-scrollbar{
+  width: 8px;
+}
+body::-webkit-scrollbar-thumb{
+  background: #ca7db6;
+  border-radius: 10px;
+}
 section {
     overflow: hidden;
     display: flex;
@@ -650,23 +674,25 @@ section .containerRight .from .inputBox input::placeholder {
 /* el color del boton iniciar */
 section .containerRight .from .inputBox input[type="submit"] {
     background: #fff;
+    margin-top: 25px;
     color: #080808;
     max-width: 100px;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: 600;
 }
 section .containerRight .from .forget {
     
-    margin-top: 5px;
+    margin-top: 3px;
     color: #fff;
 }
 
 /* aca dice el color de si no tenes cuanta */
-section .containerRight form .forget a {  
-    margin-right: 200px;
+section .containerRight form .forget a { 
+  margin-left: 50px; 
+    margin-right: 50px;
     color: #fff;
-    font-weight: 600;
+    font-weight: 400;
     text-decoration: underline;
     text-decoration-color: #fff;  
     cursor: pointer;
