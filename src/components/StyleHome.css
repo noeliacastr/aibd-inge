@@ -358,8 +358,8 @@ body::-webkit-scrollbar{
   width: 8px;
 }
 body::-webkit-scrollbar-thumb{
-  background: #ca7db6;
-  border-radius: 10px;
+  background: #182787;
+  border-radius: 0px;
 }
 section {
     overflow: hidden;
