@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {} from "./StyleHome.css";
-import { updateEmployee } from "../api/empleado";
+import { updateProducto } from "../api/producto";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
@@ -12,24 +12,24 @@ import Modal from "@mui/material/Modal";
 import EditIcon from "@mui/icons-material/Edit";
 import Swal from "sweetalert2";
 
-const EditEmpleado = ({ emp }) => {
+const EditProducto = ({ pro }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const queyCLient = useQueryClient();
-  const [employe, setEmploye] = useState({
-    cedula: emp.cedula,
-    nombre: emp.nombre,
-    apellidos: emp.apellidos,
-    telefono: emp.telefono,
-    domicilio: emp.domicilio,
+  const [product, setProduct] = useState({
+    id: pro.id,
+    nombreProducto: pro.nombreProducto,
+    stock: pro.stock,
+    precio: pro.precio,
+    descripcion: pro.descripcion,
   });
 
-  const editEmpleado = useMutation({
-    mutationFn: updateEmployee,
+  const editProducto = useMutation({
+    mutationFn: updateProducto,
     onSuccess: () => {
-      queyCLient.invalidateQueries("employee");
+      queyCLient.invalidateQueries("product");
       setOpen(false);
       Swal.fire({
         position: "center",
@@ -43,9 +43,9 @@ const EditEmpleado = ({ emp }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(employe);
-    editEmpleado.mutate({
-      ...employe,
+    console.log(product);
+    editProducto.mutate({
+      ...product
     });
   };
 
@@ -53,8 +53,8 @@ const EditEmpleado = ({ emp }) => {
     const { name, value } = e.target;
     console.log(value);
     console.log(name);
-    setEmploye((employe) => ({
-      ...employe,
+    setProduct((product) => ({
+      ...product,
       [name]: value,
     }));
   };
@@ -89,79 +89,78 @@ const EditEmpleado = ({ emp }) => {
         >
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Editar informacion del empleado
+              Editar informacion del producto
             </Typography>
             <form className="col s12" onSubmit={handleSubmit}>
               <div className="rowCreate">
                 <div className=" col s6">
                   <input
                     disabled
-                    id="cedula"
-                    type="text"
-                    name="cedula"
+                    id="id"
+                    type="number"
+                    name="id"
                     className="validate"
-                    value={employe.cedula}
+                    value={product.id}
                     onChange={handleChangeEdit}
                   />
-                  <label for="disabled">Cedula</label>
+                  <label for="disabled">Codigo del producto:</label>
                 </div>
               </div>
               <div className="row">
                 <div className=" col s3">
                   <input
-                    id="nombre"
-                    name="nombre"
+                    id="nombreProducto"
+                    name="nombreProducto"
                     type="text"
                     className="validate"
-                    value={employe.nombre}
+                    value={product.nombreProducto}
                     onChange={handleChangeEdit}
                   />
-                  <label htmlFor="nombre">Nombre</label>
+                  <label htmlFor="nombre">Nombre del Producto:</label>
                 </div>
 
                 <div className="col s3">
                   <input
-                    id="apellidos"
-                    name="apellidos"
-                    type="text"
-                    className="validate"
-                    value={employe.apellidos}
-                    onChange={handleChangeEdit}
-                  />
-                  <label htmlFor="apellidos">Apellidos</label>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col s3">
-                  <input
-                    id="telefono"
-                    name="telefono"
+                    id="stock"
+                    name="stock"
                     type="number"
                     className="validate"
-                    value={employe.telefono}
+                    value={product.stock}
                     onChange={handleChangeEdit}
                   />
-                  <label htmlFor="telefono">Telefono</label>
+                  <label htmlFor="apellidos">Stock del producto:</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col s3">
+                  <input
+                    id="precio"
+                    name="precio"
+                    type="number"
+                    className="validate"
+                    value={product.precio}
+                    onChange={handleChangeEdit}
+                  />
+                  <label htmlFor="telefono">Precio del producto:</label>
                 </div>
 
                 <div className=" col s3">
                   <input
-                    id="domicilio"
-                    name="domicilio"
+                    id="descripcion"
+                    name="descripcion"
                     type="text"
                     className="validate"
-                    value={employe.domicilio}
+                    value={product.descripcion}
                     onChange={handleChangeEdit}
                   />
-                  <label htmlFor="domicilio">Domicilio</label>
+                  <label htmlFor="domicilio">Descripcion:</label>
                 </div>
               </div>
               <div className="row">
-                <a href="/empleados">
+                <a href="/productos">
                   <button type="submit" className="btn-primary">
                     Guardar
                   </button>
-
                   <button
                     type="button"
                     className="btn-secondary"
@@ -178,4 +177,4 @@ const EditEmpleado = ({ emp }) => {
     </>
   );
 };
-export default EditEmpleado;
+export default EditProducto;

@@ -4,8 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css";
 import {} from "././StyleHome.css";
-import { createEmployee } from "../api/empleado";
-import Typography from "@mui/material/Typography";
+import { createProducto } from "../api/producto";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -17,18 +16,15 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Swal from "sweetalert2";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close"; // Asegúrate de importar el icono que necesitas
-import Box from "@mui/material/Box";
 
 
-const CreateEmpleado = ({}) => {
-  const [employee, setEmployee] = useState({
-    cedula: 0,
-    nombre: "",
-    apellidos: "",
-    telefono: "",
-    email: "",
-    domicilio: "",
-    rol: "",
+
+const CreateProducto = () => {
+  const [product, setProduct] = useState({
+    nombreProducto: "",
+    stock: 0,
+    precio: 0,
+    descripcion: "",
   });
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -38,14 +34,14 @@ const CreateEmpleado = ({}) => {
   const queyCLient = useQueryClient();
 
   const create = useMutation({
-    mutationFn: createEmployee,
+    mutationFn: createProducto,
     onSuccess: () => {
-      queyCLient.invalidateQueries("employee");
+      queyCLient.invalidateQueries("product");
       setOpen(false);
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "¡Empleado agregado!",
+        title: "!Producto agregado!",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -55,27 +51,16 @@ const CreateEmpleado = ({}) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     create.mutate({
-      ...employee,
+      ...product,
     });
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEmployee((employee) => ({
-      ...employee,
+    setProduct((product) => ({
+      ...product,
       [name]: value,
     }));
-  };
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 600,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
   };
 
   return (
@@ -87,21 +72,21 @@ const CreateEmpleado = ({}) => {
           style={{ verticalAlign: "middle" }}
           onClick={handleOpen}
         >
-          <span>Agregar</span>
+          <span>Agregar un nuevo producto</span>
         </button>
       </a>
     </div>
     
     <Dialog open={open} onClose={handleClose} className="dialogContainer">
-      <DialogTitle>Agregar empleado</DialogTitle>
-      <a href="/empleados" >
+      <DialogTitle>Agregar producto</DialogTitle>
+      <a href="/productos" >
       <IconButton aria-label="close" onClick={handleClose} className="custom-icon-button">
         <CloseIcon />
       </IconButton>
       </a>
       <DialogContent >
         <DialogContentText>
-          Agregue un nuevo empleado al sistema, llenando los siguientes
+          Agregue un nuevo producto al sistema, llenando los siguientes
           campos.
         </DialogContentText>
         
@@ -109,89 +94,52 @@ const CreateEmpleado = ({}) => {
           <div className="row">
             <div className="input-field col s6">
               <input
-                id="cedula"
+                id="nombreProducto"
                 type="text"
-                name="cedula"
+                name="nombreProducto"
                 className="validate"
-                value={employee.cedula}
+                value={product.nombreProducto}
                 onChange={handleChange}
               />
-              <label htmlFor="cedula">Cedula</label>
+              <label htmlFor="nombreProducto">Nombre del Producto:</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s3">
               <input
-                id="nombre"
-                name="nombre"
-                type="text"
-                className="validate"
-                value={employee.nombre}
-                onChange={handleChange}
-              />
-              <label htmlFor="nombre">Nombre</label>
-            </div>
-
-            <div className="input-field col s3">
-              <input
-                id="apellidos"
-                name="apellidos"
-                type="text"
-                className="validate"
-                value={employee.apellidos}
-                onChange={handleChange}
-              />
-              <label htmlFor="apellidos">Apellidos</label>
-            </div>
-          </div>
-          <div className="row">
-            <div className="input-field col s3">
-              <input
-                id="telefono"
-                name="telefono"
+                id="stock"
+                name="stock"
                 type="number"
                 className="validate"
-                value={employee.telefono}
+                value={product.stock}
                 onChange={handleChange}
               />
-              <label htmlFor="telefono">Telefono</label>
+              <label htmlFor="nombre">Cantidad del producto:</label>
             </div>
 
             <div className="input-field col s3">
               <input
-                id="domicilio"
-                name="domicilio"
-                type="text"
+                id="precio"
+                name="precio"
+                type="number"
                 className="validate"
-                value={employee.domicilio}
+                value={product.precio}
                 onChange={handleChange}
               />
-              <label htmlFor="domicilio">Domicilio</label>
+              <label htmlFor="apellidos">Precio del producto:</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s3">
               <input
-                id="rol"
-                name="rol"
+                id="descripcion"
+                name="descripcion"
                 type="text"
                 className="validate"
-                value={employee.rol}
+                value={product.descripcion}
                 onChange={handleChange}
               />
-              <label htmlFor="rol">Rol</label>
-            </div>
-
-            <div className="input-field col s3">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                className="validate"
-                value={employee.email}
-                onChange={handleChange}
-              />
-              <label htmlFor="email">Email</label>
+              <label htmlFor="telefono">Descripcion:</label>
             </div>
           </div>
         </form>
@@ -215,8 +163,7 @@ const CreateEmpleado = ({}) => {
       
     </Dialog>
   </div>
-    // <EmployeeForm onSubmit={handleSubmit} initialValue={{}} />
   );
 };
 
-export default CreateEmpleado;
+export default CreateProducto;
