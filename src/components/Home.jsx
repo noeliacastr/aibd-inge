@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {} from './StyleHome.css';
 import Navbar from './Navbar';
 import 'materialize-css/dist/css/materialize.min.css';

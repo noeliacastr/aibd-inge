@@ -198,15 +198,28 @@
     
     position: right;
     margin-top: 70px;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
     width: 10%;
     height: 40px;
-    margin-left: 900px;
+    margin-left: 860px;
   }
- 
-  .dataGridContainer {
+  .dataGridContainerSale {
     height: 400px;
-    width: 90%;
+    width: 86%;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+  .dataGridContainerProduct {
+    height: 400px;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+  .dataGridContainerEmple {
+    height: 400px;
+    width: 87%;
     margin-left: auto;
     margin-right: auto;
 
