@@ -2,44 +2,48 @@ import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getEmployess, deleteEmployee } from "../api/empleado";
-import Navbar from "./Navbar";
+import { getVentas, deleteVenta } from "../api/venta";
+import Navbar from "../components/Navbar";
 import 'materialize-css/dist/css/materialize.min.css'
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
+import BackupIcon from '@mui/icons-material/Backup';
+import { IconButton } from '@mui/material';
 
-import CreateEmpleado from "./CreateEmpleado";
-import EditEmpleado from "./EditEmpleado";
+import CreateSale from "./CreateSale";
+import EditSale from "./EditSale";
 import Swal from "sweetalert2";
-import DeleteEmpleado from "./DeleteEmpleado";
+import DeleteSale from "./DeleteSale";
+
+import ExportFactura from "./ExportFactura";
 
 
-const ShowAllEmployees = () => {
+const ShowAllVentas = () => {
   const {
     isLoading,
-    data: empleados,
+    data: ventas,
     isError,
     error,
   } = useQuery({
-    queryKey: ["employees"],
-    queryFn: getEmployess,
+    queryKey: ["ventas"],
+    queryFn: getVentas,
   });
   const queryClient = useQueryClient();
-  const deleteEmployees = useMutation({
-    mutationFn: deleteEmployee,
+  const deleteVentas = useMutation({
+    mutationFn: deleteVenta,
     onSuccess: () => {
       const confirmDelete = () => {
         Swal.fire({
-          title: "Empleado eliminado",
+          title: "Factura eliminado",
           text: "Los datos han sido eliminados",
           icon: "success"
         });
-        queryClient.invalidateQueries("employees");
+        queryClient.invalidateQueries("ventas");
       };
       Swal.fire({
-        title: "¿Seguro al eliminar el empleado?",
+        title: "¿Seguro al eliminar la factura?",
         text: "No se podran revertir los cambios",
         icon: "warning",
         showCancelButton: true,
@@ -56,26 +60,37 @@ const ShowAllEmployees = () => {
     },
   });
 
-  const row = empleados
-    ? empleados.map((cls) => ({ ...cls, id: cls.cedula }))
+  const row = ventas
+    ? ventas.map((cls) => ({ ...cls, id: cls.numFactura }))
     : [];
   const columns = [
-    { field: "cedula", headerName: "Cédula", width: 100 },
-    { field: "nombre", headerName: "Nombre", width: 130 },
-    { field: "apellidos", headerName: "Apellidos", width: 130 },
-    { field: "telefono", headerName: " Teléfono", width: 130 },
-    { field: "email", headerName: "Correo Electronico", width: 100 },
-    { field: "domicilio", headerName: "Domicilio", width: 130 },
-    { field: "rol", headerName: "Rol", width: 90 },
+    { field: "idVenta", headerName: "Número Factura", width: 120 },
+    { field: "fecha", headerName: "Fecha", width: 110 },
+    { field: "cantidad", headerName: "Cantidad", width: 100 },
+    { field: "estado", headerName: "Estado", width: 100 },
+    { field: "producto", headerName: "Producto", width: 100 },
+    { field: "metodoPago", headerName: "Metodo de pago", width: 100 },
+    { field: "totalVenta", headerName: "Total de Venta", width: 100 },
     {
       field: "action",
       headerName: "Acción",
-      width: 90,
+      width: 60,
       className:"round-button",
       renderCell: (params) => (
         
-       <DeleteEmpleado emp = {params.row.id}/>
+       <DeleteSale vent = {params.row.id}/>
         
+      ),
+    },
+    {
+      field: "Acción",
+      headerName: "Accion",
+      width: 90,
+      className:"round-button",
+      renderCell: (params) => (
+        <>
+        <ExportFactura ventaData={params.row}/>
+        </>
       ),
     },
     {
@@ -86,7 +101,7 @@ const ShowAllEmployees = () => {
       renderCell: (params) => (
         
         <>
-        <EditEmpleado emp={params.row}/>
+        <EditSale vent={params.row}/>
         
         </>
       ),
@@ -109,12 +124,12 @@ const ShowAllEmployees = () => {
   return (
     <>
       <Navbar />
-      <CreateEmpleado />
-      <div className="dataGridContainerEmple">
+      <CreateSale/>
+      <div className="dataGridContainerSale">
         <DataGrid
           rows={row}
           columns={columns}
-          getRowId={(row) => row.cedula}
+          getRowId={(row) => row.idVenta}
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 5 },
@@ -127,4 +142,4 @@ const ShowAllEmployees = () => {
     </>
   );
 };
-export default ShowAllEmployees;
+export default ShowAllVentas;

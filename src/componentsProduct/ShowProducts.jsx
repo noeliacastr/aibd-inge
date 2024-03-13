@@ -2,44 +2,44 @@ import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getEmployess, deleteEmployee } from "../api/empleado";
-import Navbar from "./Navbar";
+import { getProducts, deleteProduct } from "../api/product";
+import Navbar from "../components/Navbar";
 import 'materialize-css/dist/css/materialize.min.css'
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 
-import CreateEmpleado from "./CreateEmpleado";
-import EditEmpleado from "./EditEmpleado";
+import CreateProduct from "./CreateProduct";
+import EditProducts from "./EditProducts";
 import Swal from "sweetalert2";
-import DeleteEmpleado from "./DeleteEmpleado";
+import DeleteProduct from "./DeleteProduct";
 
 
-const ShowAllEmployees = () => {
+const ShowAllProducts = () => {
   const {
     isLoading,
-    data: empleados,
+    data: productos,
     isError,
     error,
   } = useQuery({
-    queryKey: ["employees"],
-    queryFn: getEmployess,
+    queryKey: ["productos"],
+    queryFn: getProducts,
   });
   const queryClient = useQueryClient();
-  const deleteEmployees = useMutation({
-    mutationFn: deleteEmployee,
+  const deleteProducts = useMutation({
+    mutationFn: deleteProduct,
     onSuccess: () => {
       const confirmDelete = () => {
         Swal.fire({
-          title: "Empleado eliminado",
+          title: "Producto eliminado",
           text: "Los datos han sido eliminados",
           icon: "success"
         });
-        queryClient.invalidateQueries("employees");
+        queryClient.invalidateQueries("productos");
       };
       Swal.fire({
-        title: "¿Seguro al eliminar el empleado?",
+        title: "¿Seguro al eliminar el producto?",
         text: "No se podran revertir los cambios",
         icon: "warning",
         showCancelButton: true,
@@ -56,17 +56,15 @@ const ShowAllEmployees = () => {
     },
   });
 
-  const row = empleados
-    ? empleados.map((cls) => ({ ...cls, id: cls.cedula }))
+  const row = productos
+    ? productos.map((cls) => ({ ...cls, id: cls.idProducto }))
     : [];
   const columns = [
-    { field: "cedula", headerName: "Cédula", width: 100 },
-    { field: "nombre", headerName: "Nombre", width: 130 },
-    { field: "apellidos", headerName: "Apellidos", width: 130 },
-    { field: "telefono", headerName: " Teléfono", width: 130 },
-    { field: "email", headerName: "Correo Electronico", width: 100 },
-    { field: "domicilio", headerName: "Domicilio", width: 130 },
-    { field: "rol", headerName: "Rol", width: 90 },
+    { field: "idProducto", headerName: "Número Producto", width: 100 },
+    { field: "nombreProducto", headerName: "Nombre Producto", width: 110 },
+    { field: "descripcion", headerName: "Descripción", width: 100 },
+    { field: "stock", headerName: "Stock", width: 100 },
+    { field: "precio", headerName: "Precio", width: 100 },
     {
       field: "action",
       headerName: "Acción",
@@ -74,7 +72,7 @@ const ShowAllEmployees = () => {
       className:"round-button",
       renderCell: (params) => (
         
-       <DeleteEmpleado emp = {params.row.id}/>
+       <DeleteProduct prod = {params.row.id}/>
         
       ),
     },
@@ -86,7 +84,7 @@ const ShowAllEmployees = () => {
       renderCell: (params) => (
         
         <>
-        <EditEmpleado emp={params.row}/>
+        <EditProducts prod={params.row}/>
         
         </>
       ),
@@ -109,12 +107,12 @@ const ShowAllEmployees = () => {
   return (
     <>
       <Navbar />
-      <CreateEmpleado />
-      <div className="dataGridContainerEmple">
+      <CreateProduct />
+      <div className="dataGridContainerProduct">
         <DataGrid
           rows={row}
           columns={columns}
-          getRowId={(row) => row.cedula}
+          getRowId={(row) => row.idProducto}
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 5 },
@@ -127,4 +125,4 @@ const ShowAllEmployees = () => {
     </>
   );
 };
-export default ShowAllEmployees;
+export default ShowAllProducts;

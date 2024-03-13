@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import {login} from "../api/login"
 import {} from '././StyleHome.css';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css';
 import aliciaAvatar from './../img/aliciaAvatar.png';
@@ -10,18 +10,16 @@ import logoAI from '../img/logoAI.png'
 import logoLogin from '../img/logoLogin.png'
 import {useQueryClient, useMutation} from "@tanstack/react-query"
 import Swal from "sweetalert2";
-
-
-
+import CreateUser from './CreateUser';
 
  const CreateLogin = () => {
-      const handleEnter = () => {
-        Swal.fire({
-            title: "¡Hola! soy Alicia",
-            html: `<img src="${aliciaAvatar}" alt="Alicia Avatar" class="alicia-img" /> <br/> Cualquier consulta estoy para ayudarte`,
+    //   const handleEnter = () => {
+    //     Swal.fire({
+    //         title: "¡Hola! soy Alicia",
+    //         html: `<img src="${aliciaAvatar}" alt="Alicia Avatar" class="alicia-img" /> <br/> Cualquier consulta estoy para ayudarte`,
             
-        });
-    }
+    //     });
+    // }
     const [authentications, setAuthentications] = useState(
         {
          "nombreUsuario": '',
@@ -29,6 +27,9 @@ import Swal from "sweetalert2";
         }
     );
     const navigate = useNavigate()
+    const handleCreateUserClick = () => {
+        <CreateUser />
+      };
     const queryClient = useQueryClient();
   
 
@@ -40,9 +41,20 @@ import Swal from "sweetalert2";
             localStorage.setItem('token', response.data);
             queryClient.invalidateQueries('users');
             navigate('home')
+            Swal.fire({
+                title: "¡Hola! soy Alicia",
+                html: `<img src="${aliciaAvatar}" alt="Alicia Avatar" class="alicia-img" /> <br/> Cualquier consulta estoy para ayudarte`,
+                
+            });
+            
         },
         onError: (error) => {
             console.log(error.message)
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Usuario o contraseña incorrectas",
+              });
         },
     });
 
@@ -102,10 +114,11 @@ import Swal from "sweetalert2";
                                     <input type="password" name="password" placeholder="Contraseña" 
                                     value={authentications.password} onChange={handleChange}/> 
                                 </div>
-                                <p Link to="" class="forget"><a Link to="/create-user">¿No tienes una cuenta? </a></p>
-                                
+                                <p className="forget">
+                                <CreateUser />
+                                </p>
                                 <div className="inputBox">
-                                    <input type="submit" value="Ingresar" onClick={handleEnter}/>
+                                    <input type="submit" value="Ingresar" onClick={handleSubmit}/>
                                     
                                 </div>
                                 

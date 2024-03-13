@@ -65,6 +65,16 @@ const Navbar = () => {
                 Empleado
               </a>
             </li>
+            <li className="tab">
+              <a className="nav-link" href="/productos">
+                Producto
+              </a>
+            </li>
+            <li className="tab">
+              <a className="nav-link" href="/ventas">
+                Venta
+              </a>
+            </li>
           </ul>
           <Stack direction="row-reverse" spacing={4} className="avatar">
             <Button onClick={handleOpen}>
