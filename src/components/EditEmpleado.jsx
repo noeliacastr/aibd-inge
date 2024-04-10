@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import M from "materialize-css/dist/js/materialize.min.js"; // Importa también el JavaScript si es necesario
-import "materialize-css/dist/css/materialize.min.css";
 import {} from "./StyleHome.css";
 import { updateEmployee } from "../api/empleado";
 import Alert from "@mui/material/Alert";

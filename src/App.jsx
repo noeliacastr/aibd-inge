@@ -14,6 +14,9 @@ import ShowAllProducts from './componentsProduct/ShowProducts';
 import ShowAllVentas from './componentsSale/ShowSales';
 import CreateVenta from './componentsSale/CreateSale';
 import EditVenta from './componentsSale/EditSale';
+import ShowAllReports from './componetsCaja/showInformes';
+import OpenCash from './componetsCaja/AbrirCaja';
+import CloseCash from './componetsCaja/CierreCaja'
 import { PrivateRoute } from './components/PrivateRoute';
 import AlegraTest from './componentsProduct/pruebaAlegra';
 import Notification from './componentsNotification/CreateNotification';
@@ -36,7 +39,9 @@ function App() {
           <Route path='/ventas' element={<PrivateRoute><ShowAllVentas /></PrivateRoute>} />
           <Route path='/venta' element={<PrivateRoute><CreateVenta /></PrivateRoute>} />
           <Route path='/venta/edit/:id' element={<PrivateRoute><EditVenta /></PrivateRoute>} />
-          <Route path='/notification' element={<Notification />} />
+          <Route path='/caja' element={<PrivateRoute><ShowAllReports /></PrivateRoute>} />
+          <Route path='/apertura' element={<PrivateRoute><OpenCash /></PrivateRoute>} />
+          <Route path='/cierre/edit/:id' element={<PrivateRoute><CloseCash /></PrivateRoute>} />
         </Routes>
       </BrowserRouter>
     </div>

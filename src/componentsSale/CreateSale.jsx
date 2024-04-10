@@ -16,14 +16,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Swal from "sweetalert2";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close"; // Asegúrate de importar el icono que necesitas
-import Box from "@mui/material/Box";
-import DateMomentUtils from '@date-io/moment';
-import { DatePicker } from '@material-ui/pickers';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { CSSTransition } from 'react-transition-group';
-import { alpha } from "@mui/system";
-import MomentUtils from '@date-io/moment';
+import CloseIcon from "@mui/icons-material/Close";
 import moment from 'moment';
 import 'moment/locale/es';
 

@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 
 const DeleteVenta = (vent) => {
     const [idVenta, setIdVenta] = useState(vent.vent)
+    console.log(idVenta);
     const queryClient = useQueryClient();
     const deleteVentas = useMutation({
         mutationFn: deleteVenta,

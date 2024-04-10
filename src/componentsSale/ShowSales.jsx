@@ -53,15 +53,15 @@ const ShowAllVentas = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           confirmDelete();
-        }else{
+        } else {
           result.dismiss === Swal.DismissReason.cancel
         }
       })
     },
   });
 
-  const row = venta
-    ? venta.map((cls) => ({ ...cls, id: cls.idVenta }))
+  const row = ventas
+    ? ventas.map((cls) => ({ ...cls, id: cls.idVenta }))
     : [];
   const columns = [
     { field: "idVenta", headerName: "Número Factura", width: 120 },
@@ -75,21 +75,21 @@ const ShowAllVentas = () => {
       field: "action",
       headerName: "Acción",
       width: 60,
-      className:"round-button",
+      className: "round-button",
       renderCell: (params) => (
-        
-       <DeleteSale vent = {params.row.id}/>
-        
+
+        <DeleteSale vent={params.row.id} />
+
       ),
     },
     {
       field: "Acción",
       headerName: "Accion",
       width: 90,
-      className:"round-button",
+      className: "round-button",
       renderCell: (params) => (
         <>
-        <ExportFactura ventaData={params.row}/>
+          <ExportFactura ventaData={params.row} />
         </>
       ),
     },
@@ -97,12 +97,12 @@ const ShowAllVentas = () => {
       field: "Action",
       headerName: "Acción",
       width: 90,
-      className:"round-button",
+      className: "round-button",
       renderCell: (params) => (
-        
+
         <>
-        <EditSale vent={params.row}/>
-        
+          <EditSale vent={params.row} />
+
         </>
       ),
     },
@@ -124,7 +124,7 @@ const ShowAllVentas = () => {
   return (
     <>
       <Navbar />
-      <CreateSale/>
+      <CreateSale />
       <div className="dataGridContainerSale">
         <DataGrid
           rows={row}

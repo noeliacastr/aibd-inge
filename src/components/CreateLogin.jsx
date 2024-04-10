@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import {login} from "../api/login"
 import {} from '././StyleHome.css';
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css';
 import aliciaAvatar from './../img/aliciaAvatar.png';
@@ -13,13 +13,7 @@ import Swal from "sweetalert2";
 import CreateUser from './CreateUser';
 
  const CreateLogin = () => {
-    //   const handleEnter = () => {
-    //     Swal.fire({
-    //         title: "¡Hola! soy Alicia",
-    //         html: `<img src="${aliciaAvatar}" alt="Alicia Avatar" class="alicia-img" /> <br/> Cualquier consulta estoy para ayudarte`,
-            
-    //     });
-    // }
+
     const [authentications, setAuthentications] = useState(
         {
          "nombreUsuario": '',
@@ -27,6 +21,7 @@ import CreateUser from './CreateUser';
         }
     );
     const navigate = useNavigate()
+   
     const handleCreateUserClick = () => {
         <CreateUser />
       };
@@ -41,6 +36,12 @@ import CreateUser from './CreateUser';
             localStorage.setItem('token', response.data);
             queryClient.invalidateQueries('users');
             navigate('home')
+            Swal.fire({
+                title: "¡Hola! soy Alicia",
+                html: `<img src="${aliciaAvatar}" alt="Alicia Avatar" class="alicia-img" /> <br/> Cualquier consulta estoy para ayudarte`,
+                
+            });
+            
             Swal.fire({
                 title: "¡Hola! soy Alicia",
                 html: `<img src="${aliciaAvatar}" alt="Alicia Avatar" class="alicia-img" /> <br/> Cualquier consulta estoy para ayudarte`,
@@ -118,6 +119,7 @@ import CreateUser from './CreateUser';
                                 <CreateUser />
                                 </p>
                                 <div className="inputBox">
+                                   
                                     <input type="submit" value="Ingresar" onClick={handleSubmit}/>
                                     
                                 </div>

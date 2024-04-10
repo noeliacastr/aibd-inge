@@ -76,8 +76,8 @@ const Navbar = () => {
               </a>
             </li>
             <li className="tab">
-              <a className="nav-link" href="/notification">
-                Detecciónes
+              <a className="nav-link" href="/caja">
+                Caja
               </a>
             </li>
           </ul>

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import "materialize-css/dist/css/materialize.min.css";
-import M from "materialize-css";
-import {} from "././StyleHome.css";
+// import "materialize-css/dist/css/materialize.min.css";
+// import "./StyleHome.css";
 import { createEmployee } from "../api/empleado";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -29,8 +28,6 @@ const CreateEmpleado = ({}) => {
     email: "",
     domicilio: "",
     rol: "",
-    nombreUsuario: "",
-    password: "",
   });
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -50,13 +47,21 @@ const CreateEmpleado = ({}) => {
     });
   };
 
-  M.AutoInit();
-  const queyCLient = useQueryClient();
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Verificar si window está definido antes de llamar a M.AutoInit()
+      import("materialize-css").then((M) => {
+        M.AutoInit();
+      });
+    }
+  }, []);
+
+  const queryClient = useQueryClient();
 
   const create = useMutation({
     mutationFn: createEmployee,
     onSuccess: () => {
-      queyCLient.invalidateQueries("employee");
+      queryClient.invalidateQueries("employee");
       setOpen(false);
       Swal.fire({
         position: "center",
@@ -72,19 +77,11 @@ const CreateEmpleado = ({}) => {
     event.preventDefault();
     create.mutate({
       ...employee,
+      
     });
-    // Reiniciar los datos del formulario después de enviarlo
-    setEmployee({
-      cedula: 0,
-      nombre: "",
-      apellidos: "",
-      telefono: "",
-      email: "",
-      domicilio: "",
-      rol: "",
-      nombreUsuario: "",
-      password: "",
-    });
+    if (formRef.current) {
+      formRef.current.reset();
+  }
   };
 
   const handleChange = (e) => {
@@ -94,29 +91,19 @@ const CreateEmpleado = ({}) => {
       [name]: value,
     }));
   };
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 600,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
+  
 
   return (
     <div>
       <div className="bottonAgregar">
         <a>
-          <button
+          <Button
             className="button"
             style={{ verticalAlign: "middle" }}
             onClick={handleOpen}
           >
             <span>Agregar</span>
-          </button>
+          </Button>
         </a>
       </div>
       
@@ -134,81 +121,81 @@ const CreateEmpleado = ({}) => {
           </DialogContentText>
           
           <form onSubmit={handleSubmit} className="form-dialog">
-            <div className="row">
-              <div className="input-field col s6">
-                <input
-                  id="cedula"
-                  type="text"
-                  name="cedula"
-                  className="validate"
-                  value={employee.cedula}
-                  onChange={handleChange}
-                />
-                <label htmlFor="cedula">Cedula</label>
-              </div>
+          <div className="row">
+            <div className="input-field col s6">
+              <input
+                id="cedula"
+                type="text"
+                name="cedula"
+                className="validate"
+                value={employee.cedula}
+                onChange={handleChange}
+              />
+              <label htmlFor="cedula">Cedula</label>
             </div>
-            <div className="row">
-              <div className="input-field col s3">
-                <input
-                  id="nombre"
-                  name="nombre"
-                  type="text"
-                  className="validate"
-                  value={employee.nombre}
-                  onChange={handleChange}
-                />
-                <label htmlFor="nombre">Nombre</label>
-              </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s3">
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                className="validate"
+                value={employee.nombre}
+                onChange={handleChange}
+              />
+              <label htmlFor="nombre">Nombre</label>
+            </div>
 
-              <div className="input-field col s3">
-                <input
-                  id="apellidos"
-                  name="apellidos"
-                  type="text"
-                  className="validate"
-                  value={employee.apellidos}
-                  onChange={handleChange}
-                />
-                <label htmlFor="apellidos">Apellidos</label>
-              </div>
+            <div className="input-field col s3">
+              <input
+                id="apellidos"
+                name="apellidos"
+                type="text"
+                className="validate"
+                value={employee.apellidos}
+                onChange={handleChange}
+              />
+              <label htmlFor="apellidos">Apellidos</label>
             </div>
-            <div className="row">
-              <div className="input-field col s3">
-                <input
-                  id="telefono"
-                  name="telefono"
-                  type="number"
-                  className="validate"
-                  value={employee.telefono}
-                  onChange={handleChange}
-                />
-                <label htmlFor="telefono">Telefono</label>
-              </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s3">
+              <input
+                id="telefono"
+                name="telefono"
+                type="number"
+                className="validate"
+                value={employee.telefono}
+                onChange={handleChange}
+              />
+              <label htmlFor="telefono">Telefono</label>
+            </div>
 
-              <div className="input-field col s3">
-                <input
-                  id="domicilio"
-                  name="domicilio"
-                  type="text"
-                  className="validate"
-                  value={employee.domicilio}
-                  onChange={handleChange}
-                />
-                <label htmlFor="domicilio">Domicilio</label>
-              </div>
+            <div className="input-field col s3">
+              <input
+                id="domicilio"
+                name="domicilio"
+                type="text"
+                className="validate"
+                value={employee.domicilio}
+                onChange={handleChange}
+              />
+              <label htmlFor="domicilio">Domicilio</label>
             </div>
-            <div className="row">
-              <div className="input-field col s3">
-                <input
-                  id="rol"
-                  name="rol"
-                  type="text"
-                  className="validate"
-                  value={employee.rol}
-                  onChange={handleChange}
-                />
-                <label htmlFor="rol">Rol</label>
-              </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s3">
+              <input
+                id="rol"
+                name="rol"
+                type="text"
+                className="validate"
+                value={employee.rol}
+                onChange={handleChange}
+              />
+              <label htmlFor="rol">Rol</label>
+            </div>
 
               <div className="input-field col s3">
                 <input
@@ -255,14 +242,15 @@ const CreateEmpleado = ({}) => {
               Guardar
             </button>
 
-            <button
-              type="button"
-              className="button-secondary"
-              onClick={handleClose}
-            >
-              Cancelar
-            </button>
-          </div>
+          <button
+            type="button"
+            className="button-secondary"
+            onClick={handleClose}
+          >
+            Cancelar
+          </button>
+        </div>
+
 
         </DialogContent>
         
