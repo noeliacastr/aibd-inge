@@ -34,7 +34,21 @@ const CreateEmpleado = ({}) => {
   });
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    // Reiniciar los datos del empleado cuando se cierre el diálogo
+    setEmployee({
+      cedula: 0,
+      nombre: "",
+      apellidos: "",
+      telefono: "",
+      email: "",
+      domicilio: "",
+      rol: "",
+      nombreUsuario: "",
+      password: "",
+    });
+  };
 
   M.AutoInit();
   const queyCLient = useQueryClient();
@@ -58,6 +72,18 @@ const CreateEmpleado = ({}) => {
     event.preventDefault();
     create.mutate({
       ...employee,
+    });
+    // Reiniciar los datos del formulario después de enviarlo
+    setEmployee({
+      cedula: 0,
+      nombre: "",
+      apellidos: "",
+      telefono: "",
+      email: "",
+      domicilio: "",
+      rol: "",
+      nombreUsuario: "",
+      password: "",
     });
   };
 

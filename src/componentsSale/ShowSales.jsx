@@ -23,7 +23,7 @@ import ExportFactura from "./ExportFactura";
 const ShowAllVentas = () => {
   const {
     isLoading,
-    data: ventas,
+    data: venta,
     isError,
     error,
   } = useQuery({
@@ -60,8 +60,8 @@ const ShowAllVentas = () => {
     },
   });
 
-  const row = ventas
-    ? ventas.map((cls) => ({ ...cls, id: cls.numFactura }))
+  const row = venta
+    ? venta.map((cls) => ({ ...cls, id: cls.idVenta }))
     : [];
   const columns = [
     { field: "idVenta", headerName: "Número Factura", width: 120 },

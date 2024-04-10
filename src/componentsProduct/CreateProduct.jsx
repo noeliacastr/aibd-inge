@@ -30,8 +30,17 @@ const CreateProduct = ({}) => {
   });
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
 
+    setProducto({
+    idProducto: 0,
+    nombreProducto: "",
+    stock: 0,
+    descripcion: "",
+    precio: 0,
+    });
+  };
   M.AutoInit();
   const queyCLient = useQueryClient();
 
@@ -55,6 +64,13 @@ const CreateProduct = ({}) => {
     create.mutate({
       ...producto,
     });
+    setProducto({
+      idProducto: 0,
+      nombreProducto: "",
+      stock: 0,
+      descripcion: "",
+      precio: 0,
+      });
   };
 
   const handleChange = (e) => {

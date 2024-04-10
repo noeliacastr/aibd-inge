@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef  } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import M from "materialize-css/dist/js/materialize.min.js"; // Importa también el JavaScript si es necesario
@@ -14,6 +14,9 @@ import Modal from "@mui/material/Modal";
 import EditIcon from "@mui/icons-material/Edit";
 import Swal from "sweetalert2";
 
+import moment from 'moment';
+import 'moment/locale/es';
+
 const EditVenta = ({ vent }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -22,7 +25,7 @@ const EditVenta = ({ vent }) => {
   const queyCLient = useQueryClient();
   const [venta, setVenta] = useState({
     idVenta: vent.idVenta,
-    fecha: vent.fecha,
+    fecha: moment().format("YYYY-MM-DD"),
     cantidad: vent.cantidad,
     metodoPago: vent.metodoPago,
     estado: vent.estado,
@@ -30,7 +33,11 @@ const EditVenta = ({ vent }) => {
     producto: vent.producto,
 
   });
-
+  const formatDateE = (date) => {
+    // const formattedDate = moment(date).format('YYYY-MM-DD');
+    const formattedDate = moment(date, "YYYY-MM-DD").format("YYYY-MM-DD");
+    return formattedDate;
+  }
   const editVenta = useMutation({
     mutationFn: updateVenta,
     onSuccess: () => {
@@ -60,9 +67,17 @@ const EditVenta = ({ vent }) => {
     console.log(name);
     setVenta((venta) => ({
       ...venta,
-      [name]: value,
+      [name]: name === "fecha" ? moment(value).format("YYYY-MM-DD") : value,
     }));
   };
+
+  const handleDateChange = (date) => {
+    setVenta((venta) => ({
+      ...venta,
+      fecha: moment(date).format("YYYY-MM-DD"),
+    }));
+  };
+
 
   const style = {
     position: "absolute",
@@ -75,6 +90,9 @@ const EditVenta = ({ vent }) => {
     boxShadow: 24,
     p: 4,
   };
+
+  const dateRef = useRef(null);
+  const estadoRef = useRef(null);
 
   return (
     <>
@@ -114,12 +132,13 @@ const EditVenta = ({ vent }) => {
               <div className="row">
               <div className="col s3">
               <input
-                id="date"
-                name="date"
+                id="fecha"
+                name="fecha"
                 type="date"
                 className="validate"
-                value={venta.fecha}
+                value={moment(venta.fecha).format("YYYY-MM-DD")}
                 onChange={handleChangeEdit}
+                ref={dateRef}
                 />
                <label htmlFor="disabled">fecha</label>
               </div>
@@ -187,7 +206,8 @@ const EditVenta = ({ vent }) => {
               </div>
               <div className="row">
                 <a href="/ventas">
-                  <button type="submit" className="btn-primary">
+                  <button type="submit" className="btn-primary"
+                  onClick={handleSubmit}>
                     Guardar
                   </button>
                   <button

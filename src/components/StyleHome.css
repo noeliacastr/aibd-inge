@@ -712,6 +712,12 @@ section .containerRight form .forget a {
     text-decoration: none;
 }
   
-  
-  
+  .containerNoti.center-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65vh;
+    /* margin-left: 400px; */
+  }
+    
   

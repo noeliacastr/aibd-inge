@@ -41,7 +41,20 @@ const CreateVenta = ({}) => {
   const [currentDate, setCurrentData] = useState(new Date());
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+
+    setVenta({
+      idVenta: 0,
+      fecha: moment().format("YYYY-MM-DD"),
+      cantidad: 0,
+      metodoPago: "",
+      estado: "",
+      totalVenta: 0,
+      producto: 0,
+    });
+
+  };
 
   M.AutoInit();
   const queryClient = useQueryClient();
@@ -71,6 +84,15 @@ const CreateVenta = ({}) => {
     event.preventDefault();
     create.mutate({
       ...venta,
+    });
+    setVenta({
+      idVenta: 0,
+      fecha: moment().format("YYYY-MM-DD"),
+      cantidad: 0,
+      metodoPago: "",
+      estado: "",
+      totalVenta: 0,
+      producto: 0,
     });
   };
 

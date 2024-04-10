@@ -28,8 +28,14 @@ const CreateUser = ({}) => {
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
+    const handleClose = () => {
+      setOpen(false);
+      setUser({
+        cedulaEmpleado: 0,
+        nombreUsuario: "",
+        password: "",
+      });
+    };
     const queyCLient = useQueryClient();
 
     const createUser = useMutation({
@@ -58,6 +64,11 @@ const CreateUser = ({}) => {
         event.preventDefault()
         createUser.mutate({
             ...user,
+        });
+        setUser({
+          cedulaEmpleado: 0,
+          nombreUsuario: "",
+          password: "",
         });
     };
 

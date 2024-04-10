@@ -57,7 +57,7 @@ const ShowAllProducts = () => {
   });
 
   const row = productos
-    ? productos.map((cls) => ({ ...cls, id: cls.idProducto }))
+    ? productos.map((cls) => ({ ...cls, idProducto: cls.idProducto }))
     : [];
   const columns = [
     { field: "idProducto", headerName: "Número Producto", width: 100 },

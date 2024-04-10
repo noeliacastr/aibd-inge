@@ -16,6 +16,7 @@ import CreateVenta from './componentsSale/CreateSale';
 import EditVenta from './componentsSale/EditSale';
 import { PrivateRoute } from './components/PrivateRoute';
 import AlegraTest from './componentsProduct/pruebaAlegra';
+import Notification from './componentsNotification/CreateNotification';
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
           <Route path='/ventas' element={<PrivateRoute><ShowAllVentas /></PrivateRoute>} />
           <Route path='/venta' element={<PrivateRoute><CreateVenta /></PrivateRoute>} />
           <Route path='/venta/edit/:id' element={<PrivateRoute><EditVenta /></PrivateRoute>} />
-
+          <Route path='/notification' element={<Notification />} />
         </Routes>
       </BrowserRouter>
     </div>

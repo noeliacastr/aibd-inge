@@ -18,7 +18,7 @@ const EditProduct = ({ prod }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  console.log(prod)
   const queyCLient = useQueryClient();
   const [producto, setProducto] = useState({
     idProducto: prod.idProducto,
@@ -98,7 +98,7 @@ const EditProduct = ({ prod }) => {
                 <div className=" col s6">
                   <input
                     disabled
-                    id="id"
+                    id="idProducto"
                     type="text"
                     name="numero"
                     className="validate"
