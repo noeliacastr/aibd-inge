@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import "materialize-css/dist/css/materialize.min.css";
@@ -36,7 +36,7 @@ const CreateEmpleado = ({}) => {
 
   M.AutoInit();
   const queyCLient = useQueryClient();
-
+  const formRef = useRef(null);
   const create = useMutation({
     mutationFn: createEmployee,
     onSuccess: () => {
@@ -56,7 +56,11 @@ const CreateEmpleado = ({}) => {
     event.preventDefault();
     create.mutate({
       ...employee,
+      
     });
+    if (formRef.current) {
+      formRef.current.reset();
+  }
   };
 
   const handleChange = (e) => {
@@ -100,11 +104,10 @@ const CreateEmpleado = ({}) => {
       </IconButton>
       </a>
       <DialogContent >
-        <DialogContentText>
+        {/* <DialogContentText>
           Agregue un nuevo empleado al sistema, llenando los siguientes
           campos.
-        </DialogContentText>
-        
+        </DialogContentText> */}
         <form onSubmit={handleSubmit} className="form-dialog">
           <div className="row">
             <div className="input-field col s6">

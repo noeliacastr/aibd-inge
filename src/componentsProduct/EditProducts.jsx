@@ -21,11 +21,11 @@ const EditProduct = ({ prod }) => {
 
   const queyCLient = useQueryClient();
   const [producto, setProducto] = useState({
-    idProducto: prod.idProducto,
+    idProducto: prod.id,
     nombreProducto: prod.nombreProducto,
-    descripcion: prod.descripcion,
     stock: prod.stock,
     precio: prod.precio,
+    descripcion: prod.descripcion,
   });
 
   const editProduct = useMutation({

@@ -75,6 +75,11 @@ const Navbar = () => {
                 Venta
               </a>
             </li>
+            <li className="tab">
+              <a className="nav-link" href="/caja">
+                Caja
+              </a>
+            </li>
           </ul>
           <Stack direction="row-reverse" spacing={4} className="avatar">
             <Button onClick={handleOpen}>
