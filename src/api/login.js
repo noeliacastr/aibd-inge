@@ -5,4 +5,3 @@ const usuarioAPI = axios.create({
 
 export const login = (user) => usuarioAPI.post('/login', user)
 export const create = (user) => usuarioAPI.post('/',user)
-

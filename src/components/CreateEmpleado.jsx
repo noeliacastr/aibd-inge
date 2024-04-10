@@ -1,9 +1,8 @@
 import React, { useState,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import "materialize-css/dist/css/materialize.min.css";
-import M from "materialize-css";
-import {} from "././StyleHome.css";
+// import "materialize-css/dist/css/materialize.min.css";
+// import "./StyleHome.css";
 import { createEmployee } from "../api/empleado";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -34,13 +33,21 @@ const CreateEmpleado = ({}) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  M.AutoInit();
-  const queyCLient = useQueryClient();
-  const formRef = useRef(null);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Verificar si window está definido antes de llamar a M.AutoInit()
+      import("materialize-css").then((M) => {
+        M.AutoInit();
+      });
+    }
+  }, []);
+
+  const queryClient = useQueryClient();
+
   const create = useMutation({
     mutationFn: createEmployee,
     onSuccess: () => {
-      queyCLient.invalidateQueries("employee");
+      queryClient.invalidateQueries("employee");
       setOpen(false);
       Swal.fire({
         position: "center",
@@ -70,45 +77,36 @@ const CreateEmpleado = ({}) => {
       [name]: value,
     }));
   };
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 600,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
+  
 
   return (
     <div>
-    <div className="bottonAgregar">
-      <a>
-        <button
-          className="button"
-          style={{ verticalAlign: "middle" }}
-          onClick={handleOpen}
-        >
-          <span>Agregar</span>
-        </button>
-      </a>
-    </div>
-    
-    <Dialog open={open} onClose={handleClose} className="dialogContainer">
-      <DialogTitle>Agregar empleado</DialogTitle>
-      <a href="/empleados" >
-      <IconButton aria-label="close" onClick={handleClose} className="custom-icon-button">
-        <CloseIcon />
-      </IconButton>
-      </a>
-      <DialogContent >
-        {/* <DialogContentText>
-          Agregue un nuevo empleado al sistema, llenando los siguientes
-          campos.
-        </DialogContentText> */}
-        <form onSubmit={handleSubmit} className="form-dialog">
+      <div className="bottonAgregar">
+        <a>
+          <Button
+            className="button"
+            style={{ verticalAlign: "middle" }}
+            onClick={handleOpen}
+          >
+            <span>Agregar</span>
+          </Button>
+        </a>
+      </div>
+      
+      <Dialog open={open} onClose={handleClose} className="dialogContainer">
+        <DialogTitle>Agregar empleado</DialogTitle>
+        <a href="/empleados" >
+        <IconButton aria-label="close" onClick={handleClose} className="custom-icon-button">
+          <CloseIcon />
+        </IconButton>
+        </a>
+        <DialogContent >
+          <DialogContentText>
+            Agregue un nuevo empleado al sistema, llenando los siguientes
+            campos.
+          </DialogContentText>
+          
+          <form onSubmit={handleSubmit} className="form-dialog">
           <div className="row">
             <div className="input-field col s6">
               <input
@@ -198,8 +196,8 @@ const CreateEmpleado = ({}) => {
             </div>
           </div>
         </form>
-        
-        <div className="row">
+          
+          <div className="row">
           <button type="submit"  className="button-primary"
           onClick={handleSubmit}>
             Guardar
@@ -213,7 +211,20 @@ const CreateEmpleado = ({}) => {
             Cancelar
           </button>
         </div>
+          <button
+            type="button"
+            className="button-secondary"
+            onClick={handleClose}
+          >
+            Cancelar
+          </button>
+        </div>
 
+
+        </DialogContent>
+        
+      </Dialog>
+    </div>
       </DialogContent>
       
     </Dialog>
