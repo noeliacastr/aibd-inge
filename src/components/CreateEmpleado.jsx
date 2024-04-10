@@ -183,34 +183,51 @@ const CreateEmpleado = ({}) => {
               <label htmlFor="rol">Rol</label>
             </div>
 
-            <div className="input-field col s3">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                className="validate"
-                value={employee.email}
-                onChange={handleChange}
-              />
-              <label htmlFor="email">Email</label>
+              <div className="input-field col s3">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  className="validate"
+                  value={employee.email}
+                  onChange={handleChange}
+                />
+                <label htmlFor="email">Email</label>
+              </div>
             </div>
-          </div>
-        </form>
+            <div className="row">
+              <div className="input-field col s3">
+                <input
+                  id="usuario"
+                  name="nombreUsuario"
+                  type="text"
+                  className="validate"
+                  value={employee.nombreUsuario}
+                  onChange={handleChange}
+                />
+                <label htmlFor="usuario">Nombre de usuario</label>
+              </div>
+
+              <div className="input-field col s3">
+                <input
+                  id="password"
+                  type="password"
+                  name="password"
+                  className="validate"
+                  value={employee.password}
+                  onChange={handleChange}
+                />
+                <label htmlFor="password">Contraseña</label>
+              </div>
+            </div>
+          </form>
           
           <div className="row">
-          <button type="submit"  className="button-primary"
-          onClick={handleSubmit}>
-            Guardar
-          </button>
+            <button type="submit"  className="button-primary"
+            onClick={handleSubmit}>
+              Guardar
+            </button>
 
-          <button
-            type="button"
-            className="button-secondary"
-            onClick={handleClose}
-          >
-            Cancelar
-          </button>
-        </div>
           <button
             type="button"
             className="button-secondary"
@@ -225,10 +242,6 @@ const CreateEmpleado = ({}) => {
         
       </Dialog>
     </div>
-      </DialogContent>
-      
-    </Dialog>
-  </div>
     // <EmployeeForm onSubmit={handleSubmit} initialValue={{}} />
   );
 };
