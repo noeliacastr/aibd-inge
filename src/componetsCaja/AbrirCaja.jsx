@@ -26,13 +26,22 @@ const OpenCash = () => {
         fecha_hora: "",
         hora: "",
         operacion: "",
-        montoInicial: 0,
-        montoFinal: 0,
-        UsuarioEn: 0,
+        montoInicial: "",
+        montoFinal: "",
+        UsuarioEn: "",
     });
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => { setOpen(false);
+        setCaja({
+        fecha_hora: "",
+        hora: "",
+        operacion: "",
+        montoInicial: "",
+        montoFinal: "",
+        UsuarioEn: "",
+        });
+    };
 
     const queryClient = useQueryClient();
     M.AutoInit();
@@ -65,7 +74,14 @@ const OpenCash = () => {
         create.mutate({
             ...caja,
         });
-       
+        setCaja({
+            fecha_hora: "",
+            hora: "",
+            operacion: "",
+            montoInicial: "",
+            montoFinal: "",
+            UsuarioEn: "",
+            });
     };
 
     const handleChange = (e) => {

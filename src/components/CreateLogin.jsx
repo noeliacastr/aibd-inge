@@ -16,8 +16,8 @@ import CreateUser from './CreateUser';
 
     const [authentications, setAuthentications] = useState(
         {
-         "nombreUsuario": '',
-         "password": '',
+        "nombreUsuario": '',
+        "password": '',
         }
     );
     const navigate = useNavigate()
@@ -55,7 +55,7 @@ import CreateUser from './CreateUser';
                 icon: "error",
                 title: "Oops...",
                 text: "Usuario o contraseña incorrectas",
-              });
+            });
         },
     });
 
@@ -70,8 +70,8 @@ import CreateUser from './CreateUser';
     const handleChange = (e) => {
         const { name, value } = e.target;
         setAuthentications((prevAuthentications) => ({
-          ...prevAuthentications,
-          [name]: value,
+        ...prevAuthentications,
+        [name]: value,
         }));
     };
     useEffect(()=>{
@@ -116,10 +116,11 @@ import CreateUser from './CreateUser';
                                     value={authentications.password} onChange={handleChange}/> 
                                 </div>
                                 <p className="forget">
-                                <CreateUser />
+                                {/* <CreateUser /> */}
+                                <a href="/user">¿No tienes una cuenta? </a>
                                 </p>
                                 <div className="inputBox">
-                                   
+                                
                                     <input type="submit" value="Ingresar" onClick={handleSubmit}/>
                                     
                                 </div>

@@ -22,23 +22,22 @@ import Box from "@mui/material/Box";
 
 const CreateProduct = ({}) => {
   const [producto, setProducto] = useState({
-    idProducto: 0,
+    idProducto: "",
     nombreProducto: "",
-    stock: 0,
+    stock: "",
     descripcion: "",
-    precio: 0,
+    precio: "",
   });
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-
     setProducto({
-    idProducto: 0,
+    idProducto: "",
     nombreProducto: "",
-    stock: 0,
+    stock: "",
     descripcion: "",
-    precio: 0,
+    precio: "",
     });
   };
   M.AutoInit();
@@ -65,11 +64,11 @@ const CreateProduct = ({}) => {
       ...producto,
     });
     setProducto({
-      idProducto: 0,
+      idProducto: "",
       nombreProducto: "",
-      stock: 0,
+      stock: "",
       descripcion: "",
-      precio: 0,
+      precio: "",
       });
   };
 
@@ -155,7 +154,7 @@ const CreateProduct = ({}) => {
                   value={producto.precio}
                   onChange={handleChange}
                 />
-                <label htmlFor="precio">precio</label>
+                <label htmlFor="precio">Precio</label>
               </div>
               <div className="input-field col s3">
                 <input
@@ -166,7 +165,7 @@ const CreateProduct = ({}) => {
                   value={producto.stock}
                   onChange={handleChange}
                 />
-                <label htmlFor="stock">stock</label>
+                <label htmlFor="stock">Stock</label>
               </div>
             </div>
           </form>

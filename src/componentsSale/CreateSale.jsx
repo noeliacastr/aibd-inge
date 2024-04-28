@@ -19,17 +19,22 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import moment from 'moment';
 import 'moment/locale/es';
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+
 
 
 const CreateVenta = ({}) => {
   const [venta, setVenta] = useState({
-    idVenta: 0,
+    idVenta: "",
     fecha: moment().format("YYYY-MM-DD"),
-    cantidad: 0,
+    cantidad: '',
     metodoPago: "",
     estado: "",
-    totalVenta: 0,
-    producto: 0,
+    totalVenta: "",
+    producto: "",
   });
   const [currentDate, setCurrentData] = useState(new Date());
   const [open, setOpen] = React.useState(false);
@@ -38,13 +43,13 @@ const CreateVenta = ({}) => {
     setOpen(false);
 
     setVenta({
-      idVenta: 0,
+      idVenta: "",
       fecha: moment().format("YYYY-MM-DD"),
-      cantidad: 0,
+      cantidad: "",
       metodoPago: "",
       estado: "",
-      totalVenta: 0,
-      producto: 0,
+      totalVenta: "",
+      producto: "",
     });
 
   };
@@ -79,13 +84,13 @@ const CreateVenta = ({}) => {
       ...venta,
     });
     setVenta({
-      idVenta: 0,
+      idVenta: "",
       fecha: moment().format("YYYY-MM-DD"),
-      cantidad: 0,
+      cantidad: "",
       metodoPago: "",
       estado: "",
-      totalVenta: 0,
-      producto: 0,
+      totalVenta: "",
+      producto: "",
     });
   };
 
@@ -150,7 +155,10 @@ const CreateVenta = ({}) => {
                 <label htmlFor="fecha">Fecha</label>
               </div>
               <div className="input-field col s3">
-                <input
+              <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Estado</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
                   id="estado"
                   name="estado"
                   type="text"
@@ -158,8 +166,11 @@ const CreateVenta = ({}) => {
                   value={venta.estado}
                   onChange={handleChange}
                   ref={estadoRef}
-                />
-                <label htmlFor="estado">Estado</label>
+                >
+                <MenuItem value="estado">Pago</MenuItem>
+                <MenuItem value="estado">Sin Pagar</MenuItem>
+                </Select>
+              </FormControl>
               </div>
             </div>
             <div className="row">
@@ -175,6 +186,26 @@ const CreateVenta = ({}) => {
                 <label htmlFor="producto">Número de producto </label>
               </div>
               <div className="input-field col s3">
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Metodo de pago</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="metodoPago"
+                    type="text"
+                    value={venta.metodoPago}
+                    label="Choose your option"
+                    onChange={handleChange}
+                    name="metodoPago"
+                  >
+                  <MenuItem value="metodoPago">Tajerta</MenuItem>
+                  <MenuItem value="metodoPago">Efectivo</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+              
+            </div>
+            <div className="row">
+              <div className="input-field col s3">
                 <input
                   id="cantidad"
                   name="cantidad"
@@ -185,20 +216,6 @@ const CreateVenta = ({}) => {
                 />
                 <label htmlFor="cantidad">Cantidad </label>
               </div>
-            </div>
-            <div className="row">
-              <div className="input-field col s3">
-                <input
-                  id="metodoPago"
-                  name="metodoPago"
-                  type="text"
-                  className="validate"
-                  value={venta.metodoPago}
-                  onChange={handleChange}
-                />
-                <label htmlFor="metodoPago">Metodo de pago </label>
-              </div>
-
               <div className="input-field col s3">
                 <input
                   id="totalVenta"

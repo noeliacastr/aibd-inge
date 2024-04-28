@@ -1,4 +1,4 @@
-import React, { useState,useRef } from "react";
+import React, { useState,useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 // import "materialize-css/dist/css/materialize.min.css";
@@ -21,7 +21,7 @@ import Box from "@mui/material/Box";
 
 const CreateEmpleado = ({}) => {
   const [employee, setEmployee] = useState({
-    cedula: 0,
+    cedula: "",
     nombre: "",
     apellidos: "",
     telefono: "",
@@ -35,15 +35,13 @@ const CreateEmpleado = ({}) => {
     setOpen(false);
     // Reiniciar los datos del empleado cuando se cierre el diálogo
     setEmployee({
-      cedula: 0,
+      cedula: "",
       nombre: "",
       apellidos: "",
       telefono: "",
       email: "",
       domicilio: "",
       rol: "",
-      nombreUsuario: "",
-      password: "",
     });
   };
 
@@ -82,6 +80,15 @@ const CreateEmpleado = ({}) => {
     if (formRef.current) {
       formRef.current.reset();
   }
+  setEmployee({
+    cedula: "",
+    nombre: "",
+    apellidos: "",
+    telefono: "",
+    email: "",
+    domicilio: "",
+    rol: "",
+  });
   };
 
   const handleChange = (e) => {
@@ -97,13 +104,13 @@ const CreateEmpleado = ({}) => {
     <div>
       <div className="bottonAgregar">
         <a>
-          <Button
+          <button
             className="button"
             style={{ verticalAlign: "middle" }}
             onClick={handleOpen}
           >
             <span>Agregar</span>
-          </Button>
+          </button>
         </a>
       </div>
       
@@ -131,7 +138,7 @@ const CreateEmpleado = ({}) => {
                 value={employee.cedula}
                 onChange={handleChange}
               />
-              <label htmlFor="cedula">Cedula</label>
+              <label htmlFor="cedula">Cédula</label>
             </div>
           </div>
           <div className="row">
@@ -169,7 +176,7 @@ const CreateEmpleado = ({}) => {
                 value={employee.telefono}
                 onChange={handleChange}
               />
-              <label htmlFor="telefono">Telefono</label>
+              <label htmlFor="telefono">Teléfono</label>
             </div>
 
             <div className="input-field col s3">
@@ -209,49 +216,20 @@ const CreateEmpleado = ({}) => {
                 <label htmlFor="email">Email</label>
               </div>
             </div>
-            <div className="row">
-              <div className="input-field col s3">
-                <input
-                  id="usuario"
-                  name="nombreUsuario"
-                  type="text"
-                  className="validate"
-                  value={employee.nombreUsuario}
-                  onChange={handleChange}
-                />
-                <label htmlFor="usuario">Nombre de usuario</label>
-              </div>
-
-              <div className="input-field col s3">
-                <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  className="validate"
-                  value={employee.password}
-                  onChange={handleChange}
-                />
-                <label htmlFor="password">Contraseña</label>
-              </div>
-            </div>
           </form>
-          
           <div className="row">
             <button type="submit"  className="button-primary"
             onClick={handleSubmit}>
               Guardar
             </button>
-
-          <button
+            <button
             type="button"
             className="button-secondary"
             onClick={handleClose}
-          >
-            Cancelar
-          </button>
-        </div>
-
-
+            >
+              Cancelar
+            </button>
+          </div>
         </DialogContent>
         
       </Dialog>

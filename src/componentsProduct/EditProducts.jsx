@@ -21,7 +21,7 @@ const EditProduct = ({ prod }) => {
   console.log(prod)
   const queyCLient = useQueryClient();
   const [producto, setProducto] = useState({
-    idProducto: prod.id,
+    idProducto: prod.idProducto,
     nombreProducto: prod.nombreProducto,
     stock: prod.stock,
     precio: prod.precio,

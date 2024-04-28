@@ -80,6 +80,11 @@ const Navbar = () => {
                 Caja
               </a>
             </li>
+            <li className="tab">
+              <a className="nav-link" href="/notification">
+                Detecciones
+              </a>
+            </li>
           </ul>
           <Stack direction="row-reverse" spacing={4} className="avatar">
             <Button onClick={handleOpen}>
