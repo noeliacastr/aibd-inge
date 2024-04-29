@@ -34,7 +34,13 @@ const ShowAllReports = () => {
         { field: "operacion", headerName: "operacion", width: 100 },
         { field: "montoInicial", headerName: "montoInicial", width: 100 },
         { field: "montoFinal", headerName: "montoFinal", width: 100 },
-        { field: "UsuarioEn", headerName: "Encargado", width: 100 },
+        { field: "UsuarioEn", headerName: "Encargado", width: 100,
+            renderCell: (params) => (
+                <>
+                    {`${params.row.usuarioEncargado.id} - ${params.row.usuarioEncargado.nombreUsuario}`}
+                </>
+            ),
+        },
         {
             field: "Actio",
             headerName: "Acción",

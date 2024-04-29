@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css";
 import { } from "../components/StyleHome.css";
@@ -18,7 +18,8 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import moment from 'moment';
 import 'moment/locale/es';
-import { createCaja } from "../api/caja"
+import { createCaja, getInformes } from "../api/caja";
+import { getUser } from "../api/usurario";
 
 const OpenCash = () => {
 
@@ -29,6 +30,24 @@ const OpenCash = () => {
         montoInicial: "",
         montoFinal: "",
         UsuarioEn: "",
+    });
+    const {
+        isLoading,
+        data: usuarios,
+        isError,
+        error,
+    } = useQuery({
+        queryKey: ["usuarios"],
+        queryFn: getUser,
+    });
+    const {
+        isLoading,
+        data: usuarios,
+        isError,
+        error,
+    } = useQuery({
+        queryKey: ["usuarios"],
+        queryFn: getUser,
     });
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -74,6 +93,7 @@ const OpenCash = () => {
         create.mutate({
             ...caja,
         });
+
         setCaja({
             fecha_hora: "",
             hora: "",
@@ -144,11 +164,11 @@ const OpenCash = () => {
                                         className="validate"
                                         value={caja.hora}
                                         onChange={handleChange}
-                                        
+
                                     />
                                     <label htmlFor="hora">Hora</label>
                                 </div>
-                                
+
                             </div>
                             <div className="row">
                                 <div className="input-field col s3">
@@ -175,7 +195,7 @@ const OpenCash = () => {
                                 </div>
                             </div>
                             <div className="row">
-                            <div className="input-field col s3">
+                                <div className="input-field col s3">
                                     <FormControl fullWidth>
                                         <InputLabel id="demo-simple-select-label">Operacion</InputLabel>
                                         <Select
@@ -193,15 +213,29 @@ const OpenCash = () => {
                                     </FormControl>
                                 </div>
                                 <div className="input-field col s3">
-                                    <input
-                                        id="UsuarioEn"
-                                        name="UsuarioEn"
-                                        type="number"
-                                        className="validate"
-                                        value={caja.UsuarioEn}
-                                        onChange={handleChange}
-                                    />
-                                    <label htmlFor="UsuarioEn">Usuario Encargado</label>
+                                    <FormControl fullWidth>
+                                        <InputLabel id="demo-simple-select-label">Usuario</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-label"
+                                            id="UsuarioEn"
+                                            type="text"
+                                            value={caja.UsuarioEn}
+                                            label="Choose your option"
+                                            onChange={handleChange}
+                                            name="UsuarioEn"
+                                        >
+                                            <MenuItem value="">Seleccionar usuario</MenuItem>
+                                            {usuarios && usuarios.length > 0 ? (
+                                                usuarios.map((usuario) => (
+                                                    <MenuItem key={usuario.id} value={usuario.id}>
+                                                        {usuario.id}-{usuario.nombreUsuario}
+                                                    </MenuItem>
+                                                ))
+                                            ) : (
+                                                <MenuItem disabled>No hay productos disponibles</MenuItem>
+                                            )}
+                                        </Select>
+                                    </FormControl>
                                 </div>
                             </div>
                         </form>
