@@ -33,14 +33,14 @@ const CreateEmpleado = ({}) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      // Verificar si window está definido antes de llamar a M.AutoInit()
-      import("materialize-css").then((M) => {
-        M.AutoInit();
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     // Verificar si window está definido antes de llamar a M.AutoInit()
+  //     import("materialize-css").then((M) => {
+  //       M.AutoInit();
+  //     });
+  //   }
+  // }, []);
 
   const queryClient = useQueryClient();
 

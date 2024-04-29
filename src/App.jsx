@@ -18,7 +18,9 @@ import ShowAllReports from './componetsCaja/showInformes';
 import OpenCash from './componetsCaja/AbrirCaja';
 import CloseCash from './componetsCaja/CierreCaja'
 import { PrivateRoute } from './components/PrivateRoute';
-import AlegraTest from './componentsProduct/pruebaAlegra';
+import Notification from './componentsNotification/CreareNotification';
+import Prueba from './components/prueba';
+
 
 function App() {
   return (
@@ -26,7 +28,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<CreateLogin />} />
-          <Route path='/alegra' element={<AlegraTest />} />
+          <Route path='/pruebavisor' element={<Prueba />} />
           <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
           <Route path='/empleados' element={<PrivateRoute><ShowAllEmployees /></PrivateRoute>} />
           <Route path='/empleado' element={<PrivateRoute><CreateEmpleado /></PrivateRoute>} />
@@ -41,6 +43,7 @@ function App() {
           <Route path='/caja' element={<PrivateRoute><ShowAllReports /></PrivateRoute>} />
           <Route path='/apertura' element={<PrivateRoute><OpenCash /></PrivateRoute>} />
           <Route path='/cierre/edit/:id' element={<PrivateRoute><CloseCash /></PrivateRoute>} />
+          <Route path='/notification' element={<PrivateRoute><Notification /></PrivateRoute>} />
         </Routes>
       </BrowserRouter>
     </div>
