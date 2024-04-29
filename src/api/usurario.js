@@ -15,6 +15,8 @@ export const getUsuario = async (id) => {
     return response.data;
 }
 export const getUser = async () => {
+   
     const res = await usuarioAPI.get()
     return res.data;
+   
 }

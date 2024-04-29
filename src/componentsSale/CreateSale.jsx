@@ -1,14 +1,19 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css";
-import {} from "../components/StyleHome.css";
+import { } from "../components/StyleHome.css";
 import { createVenta } from "../api/venta";
+import { getProducts } from "../api/product"
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -21,7 +26,7 @@ import moment from 'moment';
 import 'moment/locale/es';
 
 
-const CreateVenta = ({}) => {
+const CreateVenta = ({ }) => {
   const [venta, setVenta] = useState({
     idVenta: 0,
     fecha: moment().format("YYYY-MM-DD"),
@@ -31,6 +36,16 @@ const CreateVenta = ({}) => {
     totalVenta: 0,
     producto: 0,
   });
+  const {
+    isLoading,
+    data: productos,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["productos"],
+    queryFn: getProducts,
+  });
+  
   const [currentDate, setCurrentData] = useState(new Date());
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -65,6 +80,7 @@ const CreateVenta = ({}) => {
     create.mutate({
       ...venta,
     });
+    console.log(venta);
   };
 
   const handleChange = (e) => {
@@ -99,20 +115,20 @@ const CreateVenta = ({}) => {
           </button>
         </a>
       </div>
-      
+
       <Dialog open={open} onClose={handleClose} className="dialogContainer">
         <DialogTitle>Agregar Factura de venta</DialogTitle>
         <a href="/ventas" >
-        <IconButton aria-label="close" onClick={handleClose} className="custom-icon-button">
-          <CloseIcon />
-        </IconButton>
+          <IconButton aria-label="close" onClick={handleClose} className="custom-icon-button">
+            <CloseIcon />
+          </IconButton>
         </a>
         <DialogContent >
           <DialogContentText>
             Agregue una nueva factura al sistema, llenando los siguientes
             campos.
           </DialogContentText>
-          
+
           <form onSubmit={handleSubmit} className="form-dialog">
             <div className="row">
               <div className="input-field col s3">
@@ -122,8 +138,8 @@ const CreateVenta = ({}) => {
                   type="date"
                   className="validate"
                   value={moment(venta.fecha).format("YYYY-MM-DD")}
-                onChange={handleChange}
-                ref={dateRef}
+                  onChange={handleChange}
+                  ref={dateRef}
                 />
                 <label htmlFor="fecha">Fecha</label>
               </div>
@@ -142,15 +158,34 @@ const CreateVenta = ({}) => {
             </div>
             <div className="row">
               <div className="input-field col s3">
-                <input
-                  id="producto"
-                  name="producto"
-                  type="number"
-                  className="validate"
-                  value={venta.producto}
-                  onChange={handleChange}
-                />
-                <label htmlFor="producto">Número de producto </label>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Producto</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="producto"
+                    type="text"
+                    value={venta.producto}
+                    label="Choose your option"
+                    onChange={handleChange}
+                    name="producto"
+                  >
+                    <MenuItem value="">Seleccionar producto</MenuItem>
+                    {productos && productos.length > 0 ? (
+                      productos.map((product) => (
+                        <MenuItem key={product.id} value={product.id}>
+                          {product.id}-{product.nombreProducto}
+                        </MenuItem>
+                      ))
+                    ) : (
+                      <MenuItem disabled>No hay productos disponibles</MenuItem>
+                    )}
+                    {/* {productos.map(producto => (
+                                            <MenuItem key={producto.id} value={producto.id}>
+                                                {`${producto.id} - ${producto.nombreProducto}`}
+                                            </MenuItem>
+                                        ))} */}
+                  </Select>
+                </FormControl>
               </div>
               <div className="input-field col s3">
                 <input
@@ -189,11 +224,12 @@ const CreateVenta = ({}) => {
                 <label htmlFor="totalVenta">Total de venta</label>
               </div>
             </div>
+
           </form>
-          
+
           <div className="row">
-            <button type="submit"  className="button-primary"
-            onClick={handleSubmit}>
+            <button type="submit" className="button-primary"
+              onClick={handleSubmit}>
               Guardar
               <a href="/ventas"></a>
             </button>
@@ -208,10 +244,10 @@ const CreateVenta = ({}) => {
           </div>
 
         </DialogContent>
-        
+
       </Dialog>
     </div>
-    
+
   );
 };
 

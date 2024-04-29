@@ -25,7 +25,7 @@ const ShowAllVentas = () => {
     isLoading,
     data: ventas,
     isError,
-    error,
+    error,  
   } = useQuery({
     queryKey: ["ventas"],
     queryFn: getVentas,
@@ -68,7 +68,13 @@ const ShowAllVentas = () => {
     { field: "fecha", headerName: "Fecha", width: 110 },
     { field: "cantidad", headerName: "Cantidad", width: 100 },
     { field: "estado", headerName: "Estado", width: 100 },
-    { field: "producto", headerName: "Producto", width: 100 },
+    { field: "productos", headerName: "Producto", width: 100,
+      renderCell: (params) => (
+        <>
+        {`${params.row.productos.nombreProducto} - ${params.row.productos.id}`}
+        </>
+      ),
+    },
     { field: "metodoPago", headerName: "Metodo de pago", width: 100 },
     { field: "totalVenta", headerName: "Total de Venta", width: 100 },
     {
