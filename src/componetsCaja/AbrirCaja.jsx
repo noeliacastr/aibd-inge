@@ -40,15 +40,6 @@ const OpenCash = () => {
         queryKey: ["usuarios"],
         queryFn: getUser,
     });
-    const {
-        isLoading,
-        data: usuarios,
-        isError,
-        error,
-    } = useQuery({
-        queryKey: ["usuarios"],
-        queryFn: getUser,
-    });
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => { setOpen(false);
@@ -93,7 +84,6 @@ const OpenCash = () => {
         create.mutate({
             ...caja,
         });
-
         setCaja({
             fecha_hora: "",
             hora: "",
