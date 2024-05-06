@@ -12,6 +12,7 @@ import OpenCash from "./AbrirCaja";
 import CloseCash from "./CierreCaja"
 import ExportReport from "./ExportInforme";
 import Navbar from "../components/Navbar";
+import ButtonAppBar from "../components/Navbar2";
 
 const ShowAllReports = () => {
     const {
@@ -43,8 +44,8 @@ const ShowAllReports = () => {
         },
         {
             field: "Actio",
-            headerName: "Acción",
-            width: 90,
+            headerName: "Cierre",
+            width: 60,
             className: "round-button",
             renderCell: (params) => (
                 <CloseCash caj = {params.row}/>
@@ -52,7 +53,7 @@ const ShowAllReports = () => {
         },
         {
             field: "Action",
-            headerName: "Acción",
+            headerName: "Descargar",
             width: 90,
             className: "round-button",
             renderCell: (params) => (
@@ -75,8 +76,8 @@ const ShowAllReports = () => {
     return (
         <>
             <OpenCash />
-            <Navbar />
-            <div className="dataGridContainerSale">
+            <ButtonAppBar/>
+            <div className="dataGridContainerCaja">
                 <DataGrid
                     rows={row}
                     columns={colums}

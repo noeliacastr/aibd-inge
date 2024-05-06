@@ -43,7 +43,14 @@ const ExportFactura = ({ventaData}) => {
 
     return (
         <>
-            <Button color='success' onClick={generarFactura}>Exportar</Button>
+            {/* <Button color='success' onClick={generarFactura} startIcon={<ArrowCircleDownIcon />}></Button> */}
+            <button
+                type="button"
+                className="round-button"
+                onClick={generarFactura}
+                >
+                <ArrowCircleDownIcon className="delete-icon" />
+            </button>
         </>
     );
 }

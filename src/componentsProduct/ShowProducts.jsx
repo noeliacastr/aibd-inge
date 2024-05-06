@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getProducts, deleteProduct } from "../api/product";
 import Navbar from "../components/Navbar";
+import ButtonAppBar from "../components/Navbar2";
 import 'materialize-css/dist/css/materialize.min.css'
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
@@ -66,19 +67,8 @@ const ShowAllProducts = () => {
     { field: "stock", headerName: "Stock", width: 100 },
     { field: "precio", headerName: "Precio", width: 100 },
     {
-      field: "action",
-      headerName: "Acción",
-      width: 90,
-      className:"round-button",
-      renderCell: (params) => (
-        
-       <DeleteProduct prod = {params.row.id}/>
-        
-      ),
-    },
-    {
       field: "Action",
-      headerName: "Acción",
+      headerName: "Modificar",
       width: 90,
       className:"round-button",
       renderCell: (params) => (
@@ -89,6 +79,18 @@ const ShowAllProducts = () => {
         </>
       ),
     },
+    {
+      field: "action",
+      headerName: "Eliminar",
+      width: 90,
+      className:"round-button",
+      renderCell: (params) => (
+        
+       <DeleteProduct prod = {params.row.id}/>
+        
+      ),
+    },
+    
 
   ];
   const handleClickOpen2 = () => {
@@ -106,7 +108,7 @@ const ShowAllProducts = () => {
 
   return (
     <>
-      <Navbar />
+      <ButtonAppBar/>
       <CreateProduct />
       <div className="dataGridContainerProduct">
         <DataGrid

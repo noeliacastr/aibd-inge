@@ -67,6 +67,7 @@ const EditProduct = ({ prod }) => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 500,
+    height: 400,
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
@@ -90,11 +91,11 @@ const EditProduct = ({ prod }) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+            <Typography id="modal-modal-title" variant="h6" component="h2" className="dialogContentText">
               Editar informacion del producto
             </Typography>
             <form className="col s12" onSubmit={handleSubmit}>
-              <div className="rowCreate">
+              <div className="row">
                 <div className=" col s6">
                   <input
                     disabled

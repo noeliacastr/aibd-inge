@@ -1,309 +1,335 @@
-// import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 
-// const WebRTCComponent = () => {
-// const [pc, setPC] = useState(null);
-// const [dc, setDC] = useState(null);
-// const [dataChannelLog, setDataChannelLog] = useState('');
-// const [iceConnectionLog, setIceConnectionLog] = useState('');
-// const [iceGatheringLog, setIceGatheringLog] = useState('');
-// const [signalingLog, setSignalingLog] = useState('');
+window.BACKEND="https://demo.alicia.software/backend";
 
-// useEffect(() => {
-// const startButton = document.getElementById('start');
-// const stopButton = document.getElementById('stop');
-// const videoElement = document.getElementById('video');
-// const messageVideo = document.getElementById('message-video');
 
-// // Verificar si los elementos existen antes de intentar acceder a sus propiedades
-// if (startButton && stopButton && videoElement && messageVideo) {
-//     // Asignar estilos u otras configuraciones necesarias
-//     // Por ejemplo:
-//     startButton.style.display = 'none';
-//     messageVideo.style.display = 'inherit';
-// }
+const WebRTCComponent = () => {
+  const [dataChannelLog, setDataChannelLog] = useState('');
+  const [iceConnectionLog, setIceConnectionLog] = useState('');
+  const [iceGatheringLog, setIceGatheringLog] = useState('');
+  const [signalingLog, setSignalingLog] = useState('');
 
-// // Agregar otras configuraciones necesarias aquí
+// Estado para la conexión de pares y el canal de datos
+const [pc, setPc] = useState(null);
+const [dc, setDc] = useState(null);
+const [dcInterval, setDcInterval] = useState(null);
 
-// // eslint-disable-next-line react-hooks/exhaustive-deps
-// }, []);
+const createPeerConnection = () => {
+  // Tu implementación existente aquí
+  var config = {
+    sdpSemantics: 'unified-plan'
+};
+//document.getElementById('use-stun').checked
+if (true) {
+    config.iceServers = [
+        {urls: [
+        'stun:stun.zerpatechnology.com:3478'
+        ]},
+        {urls: [
+            "turn:turn.zerpatechnology.com:3478"],
+        username:"zerpatec",
+        credential:"prueba.2023"
+        }
 
-// const createPeerConnection = () => {
-// var config = {
-//     sdpSemantics: 'unified-plan'
-// };
 
-// if (true) {
-//     config.iceServers = [
-//     {
-//         urls: ['stun:stun.zerpatechnology.com:3478']
-//     },
-//     {
-//         urls: ['turn:turn.zerpatechnology.com:3478'],
-//         username: 'zerpatec',
-//         credential: 'prueba.2023'
-//     }
-//     ];
-// }
+    ];
+}
 
-// const newPC = new RTCPeerConnection(config);
+const pc = new RTCPeerConnection(config);
 
-// newPC.addEventListener('icegatheringstatechange', () => {
-//     setIceGatheringLog(prevLog => prevLog + ' -> ' + newPC.iceGatheringState);
-// });
+// register some listeners to help debugging
+pc.addEventListener('icegatheringstatechange', function() {
+}, false);
 
-// newPC.addEventListener('iceconnectionstatechange', () => {
-//     setIceConnectionLog(prevLog => prevLog + ' -> ' + newPC.iceConnectionState);
-// });
+pc.addEventListener('iceconnectionstatechange', function() {
+}, false);
 
-// newPC.addEventListener('signalingstatechange', () => {
-//     setSignalingLog(prevLog => prevLog + ' -> ' + newPC.signalingState);
-// });
 
-// setIceGatheringLog(newPC.iceGatheringState);
-// setIceConnectionLog(newPC.iceConnectionState);
-// setSignalingLog(newPC.signalingState);
+pc.addEventListener('signalingstatechange', function() {
+}, false);
 
-// newPC.addEventListener('track', evt => {
-//     if (evt.track.kind === 'video') {
-//     document.getElementById('video').srcObject = evt.streams[0];
-//     }
-// });
+// connect audio / video
+pc.addEventListener('track', function(evt) {
 
-// setPC(newPC);
-// };
+    if (evt.track.kind == 'video')
+        document.getElementById('video').srcObject = evt.streams[0];
+    else
+        document.getElementById('audio').srcObject = evt.streams[0];
+});
 
-// const negotiate = async () => {
-// pc.addTransceiver('video', { direction: 'recvonly' });
-// pc.addTransceiver('audio', { direction: 'recvonly' });
-
-// try {
-//     const offer = await pc.createOffer();
-//     await pc.setLocalDescription(offer);
-
-//     await new Promise(resolve => {
-//     if (pc.iceGatheringState === 'complete') {
-//         resolve();
-//     } else {
-//         function checkState() {
-//         if (pc.iceGatheringState === 'complete') {
-//             pc.removeEventListener('icegatheringstatechange', checkState);
-//             resolve();
-//         }
-//         }
-//         pc.addEventListener('icegatheringstatechange', checkState);
-//     }
-//     });
-
-//     var codec;
-//     var offerSDP = pc.localDescription;
-
-//     codec = document.getElementById('audio-codec').value;
-//     if (codec !== 'default') {
-//     offerSDP.sdp = sdpFilterCodec('audio', codec, offerSDP.sdp);
-//     }
-
-//     codec = document.getElementById('video-codec').value;
-//     if (codec !== 'default') {
-//     offerSDP.sdp = sdpFilterCodec('video', codec, offerSDP.sdp);
-//     }
-
-//     document.getElementById('offer-sdp').textContent = offerSDP.sdp;
-
-//     const req = await fetch(window.BACKEND + `/servers/${window.SERVIDOR_ID}/ngrok`);
-//     const data = await req.json();
-//     const useWebcam = document.querySelector('#use-video').checked;
-//     const response = await fetch(
-//     window.NGROK_MODE
-//         ? data['ngrok'] + `/offer?use_webcam=${useWebcam}&analytic=${ORDEN}`
-//         : window.BACKEND2 + `/offer?use_webcam=${useWebcam}&analytic=${ORDEN}`,
-//     {
-//         body: JSON.stringify({
-//         sdp: offerSDP.sdp,
-//         type: offerSDP.type,
-//         video_transform: document.getElementById('video-transform').value
-//         }),
-//         headers: {
-//         'Content-Type': 'application/json'
-//         },
-//         method: 'POST'
-//     }
-//     );
-//     const answer = await response.json();
-//     document.getElementById('answer-sdp').textContent = answer.sdp;
-//     await pc.setRemoteDescription(answer);
-// } catch (error) {
-//     alert(error);
-// }
-// };
-
-// const start = () => {
-// document.getElementById('start').style.display = 'none';
-// document.getElementById('message-video').style.display = 'inherit';
-
-// createPeerConnection();
-
-// var time_start = null;
-
-// function current_stamp() {
-//     if (time_start === null) {
-//     time_start = new Date().getTime();
-//     return 0;
-//     } else {
-//     return new Date().getTime() - time_start;
-//     }
-// }
-
-// if (document.getElementById('use-datachannel').checked) {
-//     // Handle Data Channel creation
-// }
-
-// var constraints = {
-//     video: document.getElementById('use-video').checked,
-//     audio: false
-// };
-
-// if (constraints.video) {
-//     var resolution = false; // Handle video resolution
-//     if (resolution) {
-//     resolution = resolution.split('x');
-//     constraints.video = {
-//         width: parseInt(resolution[0], 0),
-//         height: parseInt(resolution[1], 0)
-//     };
-//     } else {
-//     constraints.video = true;
-//     }
-// }
-
-// if (constraints.video) {
-//     navigator.mediaDevices.getUserMedia(constraints).then(
-//     stream => {
-//         stream.getTracks().forEach(track => {
-//         pc.addTrack(track, stream);
-//         });
-//         negotiate();
-//     },
-//     err => {
-//         alert('Could not acquire media: ' + err);
-//     }
-//     );
-// } else {
-//     negotiate();
-// }
-
-// document.getElementById('stop').style.display = 'inline-block';
-// };
-
-// const stop = async () => {
-// document.getElementById('stop').style.display = 'none';
-// document.getElementById('start').style.display = 'inline-block';
-
-// try {
-//     if (window.NGROK_MODE) {
-//     const req = await fetch(data['ngrok'] + `/disconnect`, {
-//         body: JSON.stringify({
-//         analytic: ORDEN
-//         }),
-//         headers: {
-//         'Content-Type': 'application/json'
-//         },
-//         method: 'POST'
-//     });
-//     } else {
-//     const req = await fetch(window.BACKEND2 + `/disconnect`, {
-//         body: JSON.stringify({
-//         analytic: ORDEN
-//         }),
-//         headers: {
-//         'Content-Type': 'application/json'
-//         },
-//         method: 'POST'
-//     });
-//     }
-
-//     if (dc) {
-//     dc.close();
-//     }
-
-//     if (pc.getTransceivers) {
-//     pc.getTransceivers().forEach(transceiver => {
-//         if (transceiver.stop) {
-//         transceiver.stop();
-//         }
-//     });
-//     }
-
-//     pc.getSenders().forEach(sender => {
-//     sender.track.stop();
-//     });
-
-//     setTimeout(() => {
-//     pc.close();
-//     }, 500);
-// } catch (error) {
-//     console.error(error);
-// }
-// };
-
-// const sdpFilterCodec = (kind, codec, realSdp) => {
-// // Implement sdpFilterCodec function
-// };
-
-// return (
-// <div>
-//     <video id="video" autoPlay playsInline></video>
-//     <button id="start" className="btn btn-primary" onClick={start}>
-//     Conectar
-//     </button>
-//     <button id="stop" className="btn btn-primary" onClick={stop}>
-//     Desconectar
-//     </button>
-//     <input id="use-video" type="checkbox" />
-//     <label htmlFor="use-video">Usar video</label>
-// </div>
-// );
-// };
-
-// export default WebRTCComponent;
-import React, { useState } from 'react';
-
-const WebcamComponent = () => {
-  const [webcamStream, setWebcamStream] = useState(null);
-  const [error, setError] = useState(null);
-
-  const startWebcam = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-      setWebcamStream(stream);
-      setError(null); // Limpiar cualquier error previo
-    } catch (error) {
-      console.error('Error al iniciar la webcam:', error);
-      setError('Error al iniciar la webcam. Por favor, verifica tus permisos y intenta nuevamente.');
-    }
-  };
-
-  const stopWebcam = () => {
-    if (webcamStream) {
-      webcamStream.getTracks().forEach(track => track.stop());
-      setWebcamStream(null);
-    }
-  };
-
-  return (
-    <div>
-      {error && <div>Error: {error}</div>}
-      {webcamStream ? (
-        <div>
-          <video autoPlay playsInline muted={true} srcObject={webcamStream}></video>
-          <button onClick={stopWebcam}>Detener Webcam</button>
-        </div>
-      ) : (
-        <button onClick={startWebcam}>Iniciar Webcam</button>
-      )}
-    </div>
-  );
+return pc;
 };
 
-export default WebcamComponent;
+const negotiate = (pc) => {
+  /* Esto es super importante no quitar*/
+  console.log(pc,"dentro de pc");
+  window.NGROK_MODE = true
+  ORDEN = "1107f267-f5ed-491b-a0c3-5ec9fa3c1a6e";
+  SERVIDOR_ID = 2
+  pc.addTransceiver('video', {direction: 'recvonly'});
+  pc.addTransceiver('audio', {direction: 'recvonly'});
+  /*------------*/
+  console.log("Negociando")
+  return pc.createOffer().then(function(offer) {
+
+      return pc.setLocalDescription(offer);
+  }).then(function() {
+      // wait for ICE gathering to complete
+      return new Promise(function(resolve) {
+          if (pc.iceGatheringState === 'complete') {
+              resolve();
+          } else {
+              function checkState() {
+                  if (pc.iceGatheringState === 'complete') {
+                      pc.removeEventListener('icegatheringstatechange', checkState);
+                      resolve();
+                  }
+              }
+              pc.addEventListener('icegatheringstatechange', checkState);
+          }
+      });
+  }).then(async function() {
+      var offer = pc.localDescription;
+      var codec;
+
+      codec = document.getElementById('audio-codec').value;
+      if (codec !== 'default') {
+          offer.sdp = sdpFilterCodec('audio', codec, offer.sdp);
+      }
+
+      codec = document.getElementById('video-codec').value;
+      if (codec !== 'default') {
+          offer.sdp = sdpFilterCodec('video', codec, offer.sdp);
+      }
+
+      document.getElementById('offer-sdp').textContent = offer.sdp;
+      console.log("TTTTTTTTTTTTTTTTTT",{
+                  sdp: offer.sdp,
+                  type: offer.type,
+                  video_transform: document.getElementById('video-transform').value
+              })
+      req=await fetch(window.BACKEND+`/servers/${window.SERVIDOR_ID}/ngrok`)
+      data=await req.json()
+      let use_webcam=document.querySelector("#use-video").checked
+      if (window.NGROK_MODE){
+          console.log("wwwwwwwwwwwwwww ",data["ngrok"]+`/offer?use_webcam=${use_webcam}&analytic=${ORDEN}`)
+          return fetch(data["ngrok"]+`/offer?use_webcam=${use_webcam}&analytic=${ORDEN}`, {
+              body: JSON.stringify({
+                  sdp: offer.sdp,
+                  type: offer.type,
+                  video_transform: document.getElementById('video-transform').value
+              }),
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              method: 'POST'
+          });
+      }
+      else{
+          return fetch(window.BACKEND2+`/offer?use_webcam=${use_webcam}&analytic=${ORDEN}`, {
+              body: JSON.stringify({
+                  sdp: offer.sdp,
+                  type: offer.type,
+                  video_transform: document.getElementById('video-transform').value
+              }),
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              method: 'POST'
+          });
+  }
+  }).then(function(response) {
+      return response.json();
+  }).then(function(answer) {
+      document.getElementById('answer-sdp').textContent = answer.sdp;
+
+      return pc.setRemoteDescription(answer);
+  }).catch(function(e) {
+      alert(e);
+  });
+};
+
+const start = () => {
+  console.log(document.getElementById('start'),"entra al start");
+  document.getElementById('start').style.display = 'none';
 
 
+  const pc = createPeerConnection();
+
+  var time_start = null;
+
+  function current_stamp() {
+      if (time_start === null) {
+          time_start = new Date().getTime();
+          return 0;
+      } else {
+          return new Date().getTime() - time_start;
+      }
+  }
+  
+
+  var constraints = {
+      video: document.getElementById('use-video').checked,
+      audio:false
+  };
+  
+  if (constraints.video) {
+      var resolution = false//document.getElementById('video-resolution').value;
+      if (resolution) {
+          resolution = resolution.split('x');
+          constraints.video = {
+              width: parseInt(resolution[0], 0),
+              height: parseInt(resolution[1], 0)
+          };
+      } else {
+          constraints.video = true;
+      }
+  }
+  
+  if ( constraints.video) {
+      
+      
+      navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+      
+      stream.getTracks().forEach(function(track) {
+          pc.addTrack(track, stream);
+      });
+      
+      return negotiate(pc);
+      }, function(err) {
+          alert('Could not acquire media: ' + err);
+      });
+      
+  }
+  else{
+      negotiate(pc);
+  }
+
+  document.getElementById('stop').style.display = 'inline-block';
+};
+
+const stop = () => {
+  document.getElementById('stop').style.display = 'none';
+  document.getElementById('start').style.display = 'inline-block';
+
+  if (window.NGROK_MODE){
+          
+
+          return fetch(data["ngrok"]+`/disconnect`, {
+              body: JSON.stringify({
+                  analytic: ORDEN
+              }),
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              method: 'POST'
+          });
+      }
+      else{
+          return fetch(window.BACKEND2+`/disconnect`, {
+              body: JSON.stringify({
+                  analytic: ORDEN
+              }),
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              method: 'POST'
+          });
+  }
+  // close data channel
+  if (dc) {
+      dc.close();
+  }
+
+  // close transceivers
+  if (pc.getTransceivers) {
+      pc.getTransceivers().forEach(function(transceiver) {
+          if (transceiver.stop) {
+              transceiver.stop();
+          }
+      });
+  }
+
+  // close local audio / video
+  pc.getSenders().forEach(function(sender) {
+      sender.track.stop();
+  });
+
+  // close peer connection
+  setTimeout(function() {
+      pc.close();
+  }, 500);
+};
+
+const sdpFilterCodec = (kind, codec, realSdp)  =>{
+  var allowed = []
+    var rtxRegex = new RegExp('a=fmtp:(\\d+) apt=(\\d+)\r$');
+    var codecRegex = new RegExp('a=rtpmap:([0-9]+) ' + escapeRegExp(codec))
+    var videoRegex = new RegExp('(m=' + kind + ' .*?)( ([0-9]+))*\\s*$')
+    
+    var lines = realSdp.split('\n');
+
+    var isKind = false;
+    for (var i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith('m=' + kind + ' ')) {
+            isKind = true;
+        } else if (lines[i].startsWith('m=')) {
+            isKind = false;
+        }
+
+        if (isKind) {
+            var match = lines[i].match(codecRegex);
+            if (match) {
+                allowed.push(parseInt(match[1]));
+            }
+
+            match = lines[i].match(rtxRegex);
+            if (match && allowed.includes(parseInt(match[2]))) {
+                allowed.push(parseInt(match[1]));
+            }
+        }
+    }
+
+    var skipRegex = 'a=(fmtp|rtcp-fb|rtpmap):([0-9]+)';
+    var sdp = '';
+
+    isKind = false;
+    for (var i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith('m=' + kind + ' ')) {
+            isKind = true;
+        } else if (lines[i].startsWith('m=')) {
+            isKind = false;
+        }
+
+        if (isKind) {
+            var skipMatch = lines[i].match(skipRegex);
+            if (skipMatch && !allowed.includes(parseInt(skipMatch[2]))) {
+                continue;
+            } else if (lines[i].match(videoRegex)) {
+                sdp += lines[i].replace(videoRegex, '$1 ' + allowed.join(' ')) + '\n';
+            } else {
+                sdp += lines[i] + '\n';
+            }
+        } else {
+            sdp += lines[i] + '\n';
+        }
+    }
+
+    return sdp;
+};
+const escapeRegExp = (string) => {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
+return (
+<div>
+    <video id="video" autoPlay playsInline></video>
+    <button id="start" className="btn btn-primary" onClick={start}>Conectar</button>
+    <button id="stop" style={{ display: 'none' }} className="btn btn-primary" onClick={stop}>Desconectar</button>
+    <input id="use-video" type="checkbox"/>
+    <label htmlFor="use-video">Use video</label>
+</div>
+);
+};
+
+export default WebRTCComponent;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from "../components/Navbar";
+import ButtonAppBar from "../components/Navbar2";
 
 function Notification() {
   const [messages, setMessages] = useState([]);
@@ -50,7 +51,7 @@ function Notification() {
 
   return (
     <>
-    <Navbar />
+    <ButtonAppBar/>
     <div>
       <h1>Detecciónes</h1>
       <div class="containerNoti center-align">

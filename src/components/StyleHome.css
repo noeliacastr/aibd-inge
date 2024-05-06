@@ -1,5 +1,63 @@
+@import url(https://fonts.googleapis.com/css2?family=REM:wght@100;200;400;500;600;700;800&display=swap);
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  border: 0 solid #e5e7eb;
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-spacing: ;
+  --tw-numeric-fraction: ;
+  --tw-ring-inset: ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: ;
+}
+
 .avatar{
     margin: 8px;
+}
+.logo-avantec{
+  width: 480px;
 }
 .nav-extended {
   max-height: 65px; 
@@ -16,7 +74,16 @@
   height: auto; /* Permite que la altura se ajuste automáticamente */
 }
 
+input.disabled {
+  color: #000000 !important; /* Cambia este color al que desees */
+}
 
+input.enabled {
+  color: #000 !important; /* Cambia este color al que desees */
+  border-color: #868585 !important; /* Cambia este color al que desees */
+  background-color: #fdfdfd !important; /* Cambia este color al que desees */
+  /* Otros estilos según tus preferencias */
+}
 
 
 .camaras{
@@ -41,25 +108,46 @@
 .avatar-logo {
     width: 140px;
     height: 50px;
-    margin-left: -1100px;
+    margin-left: -1000px;
     margin-top: 10px;
+}
+.avatarLogOut{
+  margin-left: 60px;
 }
 .left{
     margin-left: 250px;
     font-size: 20px;
 }
 
-.nav-link {
-    padding: 0.1rem 1.2rem;
-    color: #ffff;
-    font-size: 100%;
-    font-family: 'Bree Serif', serif; 
-    font-size: 23px; 
+.drawer-wrapper{
+  width: 230px;
 }
-.nav-link:hover {
-  font-size: 26px;
-    color: #ffff; 
+.MuiDrawer-paperAnchorLeft{
+  background-color: #060f47;
 }
+.MuiTypography-root{
+  font-size: 20px;
+  font-family: 'Bree Serif', serif; 
+}
+.MuiTypography-root:hover {
+  font-size: 23px;
+    color: #ffffff;
+}
+.list-item-text {
+  margin: 30px 0 0 0 ; 
+    text-align: center; 
+    color: #ffffff;
+}
+.dialogContentText{
+  
+  font-size: 19px;
+  color: #000;
+}
+.dialogContentText:hover{
+  font-size: 19px;
+  color: #000;
+}
+
 .delete-icon {
     color: rgb(255, 255, 255); 
     display: flex;
@@ -171,6 +259,7 @@
   .css-ypiqx9-MuiDialogContent-root{
     overflow-x: hidden; 
   }
+
   
   .dialogContainer {
     width: 580px;
@@ -205,32 +294,30 @@
     
   }
   
-  .bottonAgregar{
-    
-    position: right;
-    margin-top: 70px;
-    margin-bottom: 25px;
-    width: 10%;
-    height: 40px;
-    margin-left: 860px;
-  }
   .dataGridContainerSale {
     height: 400px;
-    width: 86%;
+    width: 101%;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+  .dataGridContainerCaja {
+    height: 400px;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 
   }
   .dataGridContainerProduct {
     height: 400px;
-    width: 65%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 
   }
   .dataGridContainerEmple {
     height: 400px;
-    width: 87%;
+    width: 98%;
     margin-left: auto;
     margin-right: auto;
 
@@ -807,4 +894,150 @@ section .containerRight form .forget a {
     font-weight: 600;
     letter-spacing: 1px;
 }
-  
+/* -------------------------------------boton de agregar------------------------------------- */
+
+
+
+
+.invisible {
+  visibility: hidden;
+}
+
+
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+.inset-0 {
+  inset: 0px;
+}
+
+.flex {
+  display: flex;
+}
+.h-6 {
+  height: 1.5rem;
+}
+.w-6 {
+  width: 1.5rem;
+}
+.-translate-x-full {
+  --tw-translate-x: -100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.bottonAgregar{
+    
+  position: right;
+  margin-top: 70px;
+  margin-bottom: 25px;
+  width: 10%;
+  height: 40px;
+  margin-left: 800px;
+}
+.bottonAgregarEm{
+    
+  position: right;
+  margin-top: 70px;
+  margin-bottom: 25px;
+  width: 16%;
+  height: 40px;
+  margin-left: 515px;
+}
+.bottonAgregarPro{
+    
+  position: right;
+  margin-top: 70px;
+  margin-bottom: 25px;
+  width: 25%;
+  height: 40px;
+  margin-left: 600px;
+}
+.bottonAgregarCaj{
+    
+  position: right;
+  margin-top: 70px;
+  margin-bottom: 25px;
+  width: 23%;
+  height: 40px;
+  margin-left: 800px;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.rounded-full {
+  border-radius: 10px;
+}
+.border-2 {
+  border-width: 2px;
+}
+
+.border-purple-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(202 125 182 / var(--tw-border-opacity));
+}
+.bg-purple-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(202 125 182 / var(--tw-bg-opacity));
+}
+
+.p-4 {
+  padding: 1rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.text-purple-500 {
+  --tw-text-opacity: 1;
+  color: rgb(202 125 182 / var(--tw-text-opacity));
+}
+.text-transparent {
+  color: transparent;
+}
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.no-underline {
+  text-decoration-line: none;
+}
+.duration-300 {
+  transition-duration: 0.3s;
+}
+
+
+.group:hover .group-hover\:translate-x-0 {
+  --tw-translate-x: 0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.group:hover .group-hover\:translate-x-full {
+  --tw-translate-x: 100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+
+
+
+
+/*# sourceMappingURL=style.min.css.map */
+
