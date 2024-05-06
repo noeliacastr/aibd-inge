@@ -179,11 +179,6 @@ const CreateVenta = ({ }) => {
                     ) : (
                       <MenuItem disabled>No hay productos disponibles</MenuItem>
                     )}
-                    {/* {productos.map(producto => (
-                                            <MenuItem key={producto.id} value={producto.id}>
-                                                {`${producto.id} - ${producto.nombreProducto}`}
-                                            </MenuItem>
-                                        ))} */}
                   </Select>
                 </FormControl>
               </div>

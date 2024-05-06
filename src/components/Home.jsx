@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import {} from './StyleHome.css';
+import {getUserData} from '../api/login'
 import Navbar from './Navbar';
 import 'materialize-css/dist/css/materialize.min.css';
 
@@ -13,6 +14,20 @@ import camaraN4 from './../img/camaraN4.jpg';
 
 
 const Home = () => {
+    async function loadUserData() {
+        try {
+            const userData = await getUserData();
+            console.log('Datos del usuario:', userData);
+            // Utiliza los datos del usuario como necesites en tu frontend
+        } catch (error) {
+            console.error('Error al cargar datos del usuario:', error);
+        }
+    }
+    
+   
+    loadUserData();
+
+
     return (
         <>
             <Navbar />
