@@ -1,4 +1,4 @@
-import React, { useState,useRef } from "react";
+import React, { useState,useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 // import "materialize-css/dist/css/materialize.min.css";
@@ -15,13 +15,20 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Swal from "sweetalert2";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close"; // Asegúrate de importar el icono que necesitas
+import CloseIcon from "@mui/icons-material/Close"; 
+import ArticleIcon from '@mui/icons-material/Article';
 import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+
+
 
 
 const CreateEmpleado = ({}) => {
   const [employee, setEmployee] = useState({
-    cedula: 0,
+    cedula: "",
     nombre: "",
     apellidos: "",
     telefono: "",
@@ -31,7 +38,19 @@ const CreateEmpleado = ({}) => {
   });
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    // Reiniciar los datos del empleado cuando se cierre el diálogo
+    setEmployee({
+      cedula: "",
+      nombre: "",
+      apellidos: "",
+      telefono: "",
+      email: "",
+      domicilio: "",
+      rol: "",
+    });
+  };
 
   // useEffect(() => {
   //   if (typeof window !== "undefined") {
@@ -68,6 +87,15 @@ const CreateEmpleado = ({}) => {
     if (formRef.current) {
       formRef.current.reset();
   }
+  setEmployee({
+    cedula: "",
+    nombre: "",
+    apellidos: "",
+    telefono: "",
+    email: "",
+    domicilio: "",
+    rol: "",
+  });
   };
 
   const handleChange = (e) => {
@@ -81,27 +109,38 @@ const CreateEmpleado = ({}) => {
 
   return (
     <div>
-      <div className="bottonAgregar">
+      {/* <div className="bottonAgregar">
         <a>
-          <Button
+          <button
             className="button"
             style={{ verticalAlign: "middle" }}
             onClick={handleOpen}
           >
             <span>Agregar</span>
-          </Button>
+          </button>
         </a>
-      </div>
+      </div> */}
+      <div className=" bottonAgregarEm border w-full h-40 flex items-center justify-center">
+      <a href="#_" className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group" onClick={handleOpen}>
+        <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </span>
+        <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">Empleado</span>
+        <span className="relative invisible">Empleado</span>
+      </a>
+    </div>
       
       <Dialog open={open} onClose={handleClose} className="dialogContainer">
-        <DialogTitle>Agregar empleado</DialogTitle>
+        <DialogTitle className="dialogContentText">Agregar empleado</DialogTitle>
         <a href="/empleados" >
         <IconButton aria-label="close" onClick={handleClose} className="custom-icon-button">
           <CloseIcon />
         </IconButton>
         </a>
         <DialogContent >
-          <DialogContentText>
+          <DialogContentText className="dialogContentText">
             Agregue un nuevo empleado al sistema, llenando los siguientes
             campos.
           </DialogContentText>
@@ -117,7 +156,7 @@ const CreateEmpleado = ({}) => {
                 value={employee.cedula}
                 onChange={handleChange}
               />
-              <label htmlFor="cedula">Cedula</label>
+              <label htmlFor="cedula">Cédula</label>
             </div>
           </div>
           <div className="row">
@@ -155,7 +194,7 @@ const CreateEmpleado = ({}) => {
                 value={employee.telefono}
                 onChange={handleChange}
               />
-              <label htmlFor="telefono">Telefono</label>
+              <label htmlFor="telefono">Teléfono</label>
             </div>
 
             <div className="input-field col s3">
@@ -172,15 +211,22 @@ const CreateEmpleado = ({}) => {
           </div>
           <div className="row">
             <div className="input-field col s3">
-              <input
+            <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Rol</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
                 id="rol"
                 name="rol"
                 type="text"
                 className="validate"
                 value={employee.rol}
                 onChange={handleChange}
-              />
-              <label htmlFor="rol">Rol</label>
+              >
+              <MenuItem value="administrador">Administrador</MenuItem>
+              <MenuItem value="cajero">Cajero</MenuItem>
+              <MenuItem value="bartender">Bartender</MenuItem>
+              </Select>
+            </FormControl>
             </div>
 
               <div className="input-field col s3">
@@ -195,49 +241,20 @@ const CreateEmpleado = ({}) => {
                 <label htmlFor="email">Email</label>
               </div>
             </div>
-            <div className="row">
-              <div className="input-field col s3">
-                <input
-                  id="usuario"
-                  name="nombreUsuario"
-                  type="text"
-                  className="validate"
-                  value={employee.nombreUsuario}
-                  onChange={handleChange}
-                />
-                <label htmlFor="usuario">Nombre de usuario</label>
-              </div>
-
-              <div className="input-field col s3">
-                <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  className="validate"
-                  value={employee.password}
-                  onChange={handleChange}
-                />
-                <label htmlFor="password">Contraseña</label>
-              </div>
-            </div>
           </form>
-          
           <div className="row">
             <button type="submit"  className="button-primary"
             onClick={handleSubmit}>
               Guardar
             </button>
-
-          <button
+            <button
             type="button"
             className="button-secondary"
             onClick={handleClose}
-          >
-            Cancelar
-          </button>
-        </div>
-
-
+            >
+              Cancelar
+            </button>
+          </div>
         </DialogContent>
         
       </Dialog>

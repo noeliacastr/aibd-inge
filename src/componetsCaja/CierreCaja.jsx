@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Swal from "sweetalert2";
 import { id } from "date-fns/locale";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const CloseCash = ({ caj }) => {
     console.log(caj);
@@ -70,6 +71,7 @@ const CloseCash = ({ caj }) => {
         left: "50%",
         transform: "translate(-50%, -50%)",
         width: 500,
+        height: 500,
         bgcolor: "background.paper",
         border: "2px solid #000",
         boxShadow: 24,
@@ -79,9 +81,13 @@ const CloseCash = ({ caj }) => {
     return (
         <>
             {/* <EditIcon className="delete-icon" /> */}
-            <Button variant="contained"
-                color="secondary"
-                onClick={handleOpen}>Cierre</Button>
+            <button
+                type="button"
+                className="round-button"
+                onClick={handleOpen}
+                >
+                <LogoutIcon className="delete-icon" />
+            </button>
 
             <div className="fondo-from-conteiner">
                 <Modal
@@ -95,7 +101,7 @@ const CloseCash = ({ caj }) => {
                             Cierre de caja
                         </Typography>
                         <form className="col s12" onSubmit={handleSubmit}>
-                            <div className="rowCreate">
+                            <div className="row">
                                 <div className=" col s6">
                                     <input
                                         disabled

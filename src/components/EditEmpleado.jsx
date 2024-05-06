@@ -65,6 +65,7 @@ const EditEmpleado = ({ emp }) => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: 500,
+    height: 400,
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
@@ -80,7 +81,7 @@ const EditEmpleado = ({ emp }) => {
         >
           <EditIcon className="delete-icon" />
       </button>
-      <div className="fondo-from-conteiner">
+      <div>
         <Modal
           open={open}
           onClose={handleClose}
@@ -88,18 +89,18 @@ const EditEmpleado = ({ emp }) => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Editar informacion del empleado
+            <Typography id="modal-modal-title" variant="h6" component="h2" className="dialogContentText">
+              Editar información del empleado
             </Typography>
             <form className="col s12" onSubmit={handleSubmit}>
-              <div className="rowCreate">
+              <div className="row">
                 <div className=" col s6">
                   <input
                     disabled
                     id="cedula"
                     type="text"
                     name="cedula"
-                    className="validate"
+                    className={"validate" + (employe.cedula ? " enabled" : " disabled")}
                     value={employe.cedula}
                     onChange={handleChangeEdit}
                   />
@@ -143,7 +144,6 @@ const EditEmpleado = ({ emp }) => {
                   />
                   <label htmlFor="telefono">Telefono</label>
                 </div>
-
                 <div className=" col s3">
                   <input
                     id="domicilio"
@@ -161,7 +161,6 @@ const EditEmpleado = ({ emp }) => {
                   <button type="submit" className="btn-primary">
                     Guardar
                   </button>
-
                   <button
                     type="button"
                     className="btn-secondary"
@@ -171,6 +170,7 @@ const EditEmpleado = ({ emp }) => {
                   </button>
                 </a>
               </div>
+              
             </form>
           </Box>
         </Modal>

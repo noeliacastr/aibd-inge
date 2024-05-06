@@ -1,5 +1,63 @@
+@import url(https://fonts.googleapis.com/css2?family=REM:wght@100;200;400;500;600;700;800&display=swap);
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  border: 0 solid #e5e7eb;
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-spacing: ;
+  --tw-numeric-fraction: ;
+  --tw-ring-inset: ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: ;
+}
+
 .avatar{
     margin: 8px;
+}
+.logo-avantec{
+  width: 480px;
 }
 .nav-extended {
   max-height: 65px; 
@@ -16,7 +74,16 @@
   height: auto; /* Permite que la altura se ajuste automáticamente */
 }
 
+input.disabled {
+  color: #000000 !important; /* Cambia este color al que desees */
+}
 
+input.enabled {
+  color: #000 !important; /* Cambia este color al que desees */
+  border-color: #868585 !important; /* Cambia este color al que desees */
+  background-color: #fdfdfd !important; /* Cambia este color al que desees */
+  /* Otros estilos según tus preferencias */
+}
 
 
 .camaras{
@@ -27,7 +94,10 @@
     margin-top: 50px;
     width: 930px;
     margin-left: 0px;
+    margin-bottom: -50px;
 }
+
+
 
 .avatar-A{
     width: 50px;
@@ -38,25 +108,46 @@
 .avatar-logo {
     width: 140px;
     height: 50px;
-    margin-left: -1100px;
+    margin-left: -1000px;
     margin-top: 10px;
+}
+.avatarLogOut{
+  margin-left: 60px;
 }
 .left{
     margin-left: 250px;
     font-size: 20px;
 }
 
-.nav-link {
-    padding: 0.1rem 1.2rem;
-    color: #ffff;
-    font-size: 100%;
-    font-family: 'Bree Serif', serif; 
-    font-size: 23px; 
+.drawer-wrapper{
+  width: 230px;
 }
-.nav-link:hover {
-  font-size: 26px;
-    color: #ffff; 
+.MuiDrawer-paperAnchorLeft{
+  background-color: #060f47;
 }
+.MuiTypography-root{
+  font-size: 20px;
+  font-family: 'Bree Serif', serif; 
+}
+.MuiTypography-root:hover {
+  font-size: 23px;
+    color: #ffffff;
+}
+.list-item-text {
+  margin: 30px 0 0 0 ; 
+    text-align: center; 
+    color: #ffffff;
+}
+.dialogContentText{
+  
+  font-size: 19px;
+  color: #000;
+}
+.dialogContentText:hover{
+  font-size: 19px;
+  color: #000;
+}
+
 .delete-icon {
     color: rgb(255, 255, 255); 
     display: flex;
@@ -109,9 +200,7 @@
     left: '50%';
     transform: 'translate(-50%, -50%)';
     width: 400;
-   
     border: '2px solid #000';
-    
   };
 /*-----------------------------------------------------------------------------------------*/
 
@@ -126,6 +215,12 @@
     background-repeat: no-repeat; 
     background-attachment: fixed;
     
+  }
+  .boxU {
+    display: flex;
+    flex-direction: column; 
+    max-width: 810px; 
+    margin: 0 auto; 
   }
   .box {
     display: flex;
@@ -154,7 +249,7 @@
   }
  
   .css-ypiqx9-MuiDialogContent-root::-webkit-scrollbar{
-    width: 9px;
+    width: 8px;
   }
   .css-ypiqx9-MuiDialogContent-root::-webkit-scrollbar-thumb{
     background: #ca7db6;
@@ -164,21 +259,26 @@
   .css-ypiqx9-MuiDialogContent-root{
     overflow-x: hidden; 
   }
+
   
   .dialogContainer {
     width: 580px;
+    height: 570px;
     position: fixed;
-    top: 5%;
+    top: -1%;
     left: 30%; 
     margin-left: 0px;
-    /* transform: translate(-50%, -50%); */
-    /* max-height: 80vh; */
     overflow-x: hidden;
-    /* padding: 20px; */
-    /* border: 1px solid #ccc; */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
   }
 
+  .dialogContainer .form-dialog {
+    margin-bottom: 60px; /* Ajusta el valor según el espacio que desees agregar */
+  }
+
+  .dialogContainer .row button {
+    margin-right: 10px; /* Ajusta el valor según el espacio que desees agregar */
+    margin-bottom: 20px;
+  }
 
 
   
@@ -194,32 +294,30 @@
     
   }
   
-  .bottonAgregar{
-    
-    position: right;
-    margin-top: 70px;
-    margin-bottom: 25px;
-    width: 10%;
-    height: 40px;
-    margin-left: 860px;
-  }
   .dataGridContainerSale {
     height: 400px;
-    width: 86%;
+    width: 101%;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+  .dataGridContainerCaja {
+    height: 400px;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 
   }
   .dataGridContainerProduct {
     height: 400px;
-    width: 65%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 
   }
   .dataGridContainerEmple {
     height: 400px;
-    width: 87%;
+    width: 98%;
     margin-left: auto;
     margin-right: auto;
 
@@ -382,149 +480,6 @@ section {
     
 }
 
-
-section .container {
-    position: relative;
-    margin-right: 10px;
-    top: 240px;
-    width: 400px;
-    min-height: 500px;
-    background-color:  rgb(255, 255, 255);
-
-    border-radius: 0px 100px 0px 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    
-}
-
-/* el iniciar */
-section .container .from h2 {
-    /* margin-top: 130px; */
-    position: relative;
-    color: #240d0d;
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    
-   
-}
-section .container h1 {
-    position: relative;
-    color: #240d0d;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1px;
-
-}
-
-/* la linea del centro debajo de */
-section .container .from h2::before {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    width: 210px; height: 4px;
-    background: #804999;
-}
-
-/* aca dice el color de si no tenes cuanta */
-section .container form .forget a {  
-    margin-right: 30px;
-    color: #fff;
-    font-weight: 600;
-    text-decoration: underline;
-    text-decoration-color: #fff;  
-    cursor: pointer;
-    text-decoration: none;
-}
-
-/*------------------------------------------------------------------*/
-section .containerRight {
-    position: relative;
-    margin-right: 410px;
-    top: -260px;
-    width: 400px;
-    min-height: 500px;
-    background-color: rgba(255, 255, 255, 0.1);
-    /* border-radius: 10px; */
-    border-radius: 0px 0px 0px 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px);
-    box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.4);
-}
-/* se sube el iniciar */
-section .containerRight form {
-    margin-top: 100px;
-    position: relative;
-
-}
-
-/* el iniciar */
-section .containerRight .from h2 {
-
-    position: relative;
-    color: #fff;
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    
-    
-   
-}
-
-
-
-section .containerRight .from .inputBox input {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    outline: none;
-    padding: 10px 20px;
-
-    border-radius: 0px 15px 0px 15px;
-    font-size: 16px;
-    letter-spacing: 1px;
-    color: #f5f5f5;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    margin-top: 40px;
-    
-}
-
-
-section .containerRight .from .inputBox input::placeholder {
-    color: #fff;
-}
-
-section .containerRight .from .inputBox input[type="submit"] {
-    background: #fff;
-    color: #080808;
-    max-width: 100px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    font-weight: 600;
-}
-section .containerRight .from .forget {
-    
-    margin-top: 5px;
-    color: #fff;
-}
-
-section .containerRight form .forget a {  
-    margin-right: 200px;
-    color: #fff;
-    font-weight: 600;
-    text-decoration: underline;
-    text-decoration-color: #fff;  
-    cursor: pointer;
-    text-decoration: none;
-}
-/*-------------------------------------------------------*/
-
-
-
-
   
 .avatar-image {
     width: 380px;
@@ -535,14 +490,13 @@ section .containerRight form .forget a {
 }
 
 section .container .from h2 {
-  margin-top: -60px;
+  margin-top: -70px;
   position: relative;
   color: #240d0d;
   font-size: 24px;
   font-weight: 600;
   letter-spacing: 1px;
   
- 
 }
 
 
@@ -551,6 +505,217 @@ body {
     overflow-x: hidden;
 }
 
+/* -----------------------user--------------------------------------------------------- */
+
+.fondo-user {
+  background-image: url('https://i.postimg.cc/bNPGCTpB/Alicia-00031.png');
+  position: absolute;
+  top: 0%; 
+  left: 0%;
+  right: 0%;
+  bottom:0%;
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed;
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .fondo-from {
+  background-image: url('https://i.postimg.cc/bNPGCTpB/Alicia-00031.png');
+  position: absolute;
+  top: 0%; 
+  left: 0%;
+  right: 0%;
+  bottom:0%;
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed;
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  
+} */
+
+.avatar-imageU {
+  width: 380px;
+  height: 300px;
+  margin-left: -10px;
+  margin-top: -100px;
+
+}
+
+section .containeir .from h2 {
+margin-top: -70px;
+position: relative;
+color: #240d0d;
+font-size: 24px;
+font-weight: 600;
+letter-spacing: 1px;
+
+}
+
+section .containeir {
+  position: relative;
+  margin-left: 400px;
+  top: 240px;
+  width: 400px;
+  min-height: 500px;
+  background-color:  rgb(255, 255, 255);
+  border-radius: 0px 100px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+section .containeir h1 {
+  margin-right: 5px;
+    position: relative;
+    color: #240d0d;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+}
+
+/* la linea del centro debajo de AIBD*/
+section .containeir .from h2::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    width: 230px; height: 4px;
+    background: #804999;
+}
+
+section .containeir form .forget a {  
+    margin-right: 30px;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: #fff;  
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* .text-user {
+  margin-right: -141px;
+} */
+
+section .containerRightU {
+  position: relative;
+  margin-right: 410px;
+  top: -260px;
+  width: 400px;
+  min-height: 500px;
+  background-color: rgba(255, 255, 255, 0.1);
+  /* border-radius: 10px; */
+  border-radius: 0px 0px 0px 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.4);
+}
+/* se sube el iniciar */
+section .containerRightU form {
+  margin-top: -10px;
+  position: relative;
+  margin-left:650px;
+
+}
+
+
+section .containerRightU .from h2 {
+  bottom: -5px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* la linea del centro debajo de */
+section .containerRightU .from h2::before {
+  /* font-family: 'Humanst521 BT'; */
+  font-family: 'Poppins';
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  width: 185px; height: 2.5px;
+  background: #fff;
+}
+/* section .container .from .inputBox {
+  width: 100%;
+  margin-top: 10px;
+} */
+
+
+section .containerRightU .from .inputBoxU input {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  /* border-radius: 10px; */
+  border-radius: 0px 15px 0px 15px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #e11414;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-top: 40px;
+  
+}
+
+
+section .containerRightU .from .inputBoxU input::placeholder {
+  color: #fff;
+}
+
+/* el color del boton iniciar */
+section .containerRightU .from .inputBoxU input[type="submit"] {
+  background: #fff;
+  margin-top: 20px;
+  margin-left: -680px;
+  color: #080808;
+  max-width: 100px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+section .containerRightU .from .forget {
+  
+  margin-top: 72px;
+  color: #fff;
+}
+
+/* aca dice el color de si no tenes cuanta */
+section .containerRightU form .forget a { 
+  margin-right: 670px;
+  color: #fff;
+  font-weight: 400;
+  text-decoration: underline;
+  text-decoration-color: #fff;  
+  cursor: pointer;
+  text-decoration: none;
+}
+
+section .containerRightU .from h2 {
+  position: relative;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.containerNoti.center-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+  /* margin-left: 400px; */
+}
+  
+
+/* -----------------------login--------------------------------------------------------- */
 section {
     overflow: hidden;
     display: flex;
@@ -573,6 +738,7 @@ section {
   align-items: center;
   
 }
+
 section .container {
   position: relative;
   margin-right: 10px;
@@ -655,7 +821,7 @@ section .containerRight .from h2::before {
     content: '';
     position: absolute;
     bottom: -10px;
-    width: 204px; height: 3px;
+    width: 190px; height: 3px;
     background: #fff;
 }
 /* section .container .from .inputBox {
@@ -712,6 +878,166 @@ section .containerRight form .forget a {
     text-decoration: none;
 }
   
-  
-  
-  
+  .containerNoti.center-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 65vh;
+    /* margin-left: 400px; */
+  }
+
+  section .containerRight .from h2 {
+
+    position: relative;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+/* -------------------------------------boton de agregar------------------------------------- */
+
+
+
+
+.invisible {
+  visibility: hidden;
+}
+
+
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+.inset-0 {
+  inset: 0px;
+}
+
+.flex {
+  display: flex;
+}
+.h-6 {
+  height: 1.5rem;
+}
+.w-6 {
+  width: 1.5rem;
+}
+.-translate-x-full {
+  --tw-translate-x: -100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.bottonAgregar{
+    
+  position: right;
+  margin-top: 70px;
+  margin-bottom: 25px;
+  width: 10%;
+  height: 40px;
+  margin-left: 800px;
+}
+.bottonAgregarEm{
+    
+  position: right;
+  margin-top: 70px;
+  margin-bottom: 25px;
+  width: 16%;
+  height: 40px;
+  margin-left: 515px;
+}
+.bottonAgregarPro{
+    
+  position: right;
+  margin-top: 70px;
+  margin-bottom: 25px;
+  width: 25%;
+  height: 40px;
+  margin-left: 600px;
+}
+.bottonAgregarCaj{
+    
+  position: right;
+  margin-top: 70px;
+  margin-bottom: 25px;
+  width: 23%;
+  height: 40px;
+  margin-left: 800px;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.rounded-full {
+  border-radius: 10px;
+}
+.border-2 {
+  border-width: 2px;
+}
+
+.border-purple-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(202 125 182 / var(--tw-border-opacity));
+}
+.bg-purple-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(202 125 182 / var(--tw-bg-opacity));
+}
+
+.p-4 {
+  padding: 1rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.text-purple-500 {
+  --tw-text-opacity: 1;
+  color: rgb(202 125 182 / var(--tw-text-opacity));
+}
+.text-transparent {
+  color: transparent;
+}
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.no-underline {
+  text-decoration-line: none;
+}
+.duration-300 {
+  transition-duration: 0.3s;
+}
+
+
+.group:hover .group-hover\:translate-x-0 {
+  --tw-translate-x: 0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.group:hover .group-hover\:translate-x-full {
+  --tw-translate-x: 100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+
+
+
+
+/*# sourceMappingURL=style.min.css.map */
+

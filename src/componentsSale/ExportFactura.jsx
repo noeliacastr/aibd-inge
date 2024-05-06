@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { Button } from '@mui/material';
+import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 
 const ExportFactura = ({ventaData}) => {
     const [datos, setDatos] = useState({
@@ -42,7 +43,14 @@ const ExportFactura = ({ventaData}) => {
 
     return (
         <>
-            <Button color='success' onClick={generarFactura}>Exportar</Button>
+            {/* <Button color='success' onClick={generarFactura} startIcon={<ArrowCircleDownIcon />}></Button> */}
+            <button
+                type="button"
+                className="round-button"
+                onClick={generarFactura}
+                >
+                <ArrowCircleDownIcon className="delete-icon" />
+            </button>
         </>
     );
 }

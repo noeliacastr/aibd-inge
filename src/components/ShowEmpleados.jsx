@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getEmployess, deleteEmployee } from "../api/empleado";
 import Navbar from "./Navbar";
+import ButtonAppBar from "./Navbar2"
 import 'materialize-css/dist/css/materialize.min.css'
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
@@ -14,6 +15,7 @@ import CreateEmpleado from "./CreateEmpleado";
 import EditEmpleado from "./EditEmpleado";
 import Swal from "sweetalert2";
 import DeleteEmpleado from "./DeleteEmpleado";
+import ShowDetailsEmp from "./ShowDetailsEmployee";
 
 
 const ShowAllEmployees = () => {
@@ -61,27 +63,25 @@ const ShowAllEmployees = () => {
     : [];
   const columns = [
     { field: "cedula", headerName: "Cédula", width: 100 },
-    { field: "nombre", headerName: "Nombre", width: 130 },
-    { field: "apellidos", headerName: "Apellidos", width: 130 },
-    { field: "telefono", headerName: " Teléfono", width: 130 },
-    { field: "email", headerName: "Correo Electronico", width: 100 },
-    { field: "domicilio", headerName: "Domicilio", width: 130 },
+    { field: "nombre", headerName: "Nombre", width: 110 },
     { field: "rol", headerName: "Rol", width: 90 },
     {
-      field: "action",
-      headerName: "Acción",
-      width: 90,
+      field: "show",
+      headerName: "Detalles",
+      width: 80,
       className:"round-button",
       renderCell: (params) => (
         
-       <DeleteEmpleado emp = {params.row.id}/>
+        <>
+        <ShowDetailsEmp emp={params.row}/>
         
+        </>
       ),
     },
     {
       field: "Action",
-      headerName: "Acción",
-      width: 90,
+      headerName: "Modificar",
+      width: 80,
       className:"round-button",
       renderCell: (params) => (
         
@@ -91,6 +91,18 @@ const ShowAllEmployees = () => {
         </>
       ),
     },
+    {
+      field: "action",
+      headerName: "Eliminar",
+      width: 90,
+      className:"round-button",
+      renderCell: (params) => (
+        
+      <DeleteEmpleado emp = {params.row.id}/>
+        
+      ),
+    },
+    
 
   ];
   const handleClickOpen2 = () => {
@@ -108,7 +120,7 @@ const ShowAllEmployees = () => {
 
   return (
     <>
-      <Navbar />
+      <ButtonAppBar/>
       <CreateEmpleado />
       <div className="dataGridContainerEmple">
         <DataGrid

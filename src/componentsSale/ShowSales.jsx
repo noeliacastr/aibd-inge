@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getVentas, deleteVenta } from "../api/venta";
 import Navbar from "../components/Navbar";
+import ButtonAppBar from "../components/Navbar2";
 import 'materialize-css/dist/css/materialize.min.css'
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
@@ -11,19 +12,18 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 import BackupIcon from '@mui/icons-material/Backup';
 import { IconButton } from '@mui/material';
-
 import CreateSale from "./CreateSale";
 import EditSale from "./EditSale";
 import Swal from "sweetalert2";
 import DeleteSale from "./DeleteSale";
-
 import ExportFactura from "./ExportFactura";
+import ShowDetailsSale from "./ShowDetailsSale";
 
 
 const ShowAllVentas = () => {
   const {
     isLoading,
-    data: ventas,
+    data: venta,
     isError,
     error,  
   } = useQuery({
@@ -60,38 +60,36 @@ const ShowAllVentas = () => {
     },
   });
 
-  const row = ventas
-    ? ventas.map((cls) => ({ ...cls, id: cls.idVenta }))
+  const row = venta
+    ? venta.map((cls) => ({ ...cls, id: cls.idVenta }))
     : [];
   const columns = [
-    { field: "idVenta", headerName: "Número Factura", width: 120 },
     { field: "fecha", headerName: "Fecha", width: 110 },
     { field: "cantidad", headerName: "Cantidad", width: 100 },
     { field: "estado", headerName: "Estado", width: 100 },
-    { field: "productos", headerName: "Producto", width: 100,
+    { field: "productos", headerName: "Producto", width: 120,
       renderCell: (params) => (
         <>
-        {`${params.row.productos.nombreProducto} - ${params.row.productos.id}`}
+        {`${params.row.productos.nombreProducto} - ${params.row.productos.idProducto}`}
         </>
       ),
     },
-    { field: "metodoPago", headerName: "Metodo de pago", width: 100 },
     { field: "totalVenta", headerName: "Total de Venta", width: 100 },
     {
-      field: "action",
-      headerName: "Acción",
-      width: 60,
+      field: "show",
+      headerName: "Mostar",
+      width: 65,
       className: "round-button",
       renderCell: (params) => (
-
-        <DeleteSale vent={params.row.id} />
-
+        <>
+          <ShowDetailsSale vent={params.row} />
+        </>
       ),
     },
     {
       field: "Acción",
-      headerName: "Accion",
-      width: 90,
+      headerName: "Descargar",
+      width: 65,
       className: "round-button",
       renderCell: (params) => (
         <>
@@ -101,8 +99,8 @@ const ShowAllVentas = () => {
     },
     {
       field: "Action",
-      headerName: "Acción",
-      width: 90,
+      headerName: "Editar",
+      width: 65,
       className: "round-button",
       renderCell: (params) => (
 
@@ -110,6 +108,17 @@ const ShowAllVentas = () => {
           <EditSale vent={params.row} />
 
         </>
+      ),
+    },
+    {
+      field: "action",
+      headerName: "Eliminar",
+      width: 60,
+      className: "round-button",
+      renderCell: (params) => (
+
+        <DeleteSale vent={params.row.id} />
+
       ),
     },
 
@@ -129,7 +138,7 @@ const ShowAllVentas = () => {
 
   return (
     <>
-      <Navbar />
+      <ButtonAppBar/>
       <CreateSale />
       <div className="dataGridContainerSale">
         <DataGrid

@@ -18,18 +18,25 @@ import Swal from "sweetalert2";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close"; 
 import Box from "@mui/material/Box";
+import logoLogin from '../img/logoLogin.png'
 
 const CreateUser = ({}) => {
     const [user, setUser] = useState({
-        cedulaEmpleado: 0,
+        cedulaEmpleado: "",
         nombreUsuario: "",
         password: "",
     });
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
+    const handleClose = () => {
+      setOpen(false);
+      setUser({
+        cedulaEmpleado: "",
+        nombreUsuario: "",
+        password: "",
+      });
+    };
     const queyCLient = useQueryClient();
 
     const createUser = useMutation({
@@ -59,6 +66,11 @@ const CreateUser = ({}) => {
         createUser.mutate({
             ...user,
         });
+        setUser({
+          cedulaEmpleado: "",
+          nombreUsuario: "",
+          password: "",
+        });
     };
 
     const handleChange = (e) => {
@@ -70,71 +82,67 @@ const CreateUser = ({}) => {
     };
 
 
-    return (
-      <>
-      <a onClick={handleOpen}>¿No tienes una cuenta?</a>
-        <div>
-            <Dialog open={open} onClose={handleClose} className="dialogContainer">
-                <DialogTitle>Crea tu usuario</DialogTitle>
-                    <DialogContent>
-                    <form onSubmit={handleSubmit} className="form-dialog">
-          <div className="row">
-            <div className="input-field col s6">
-              <input
-                id="cedulaEmpleado"
-                type="text"
-                name="cedulaEmpleado"
-                className="validate"
-                value={user.cedulaEmpleado}
-                onChange={handleChange}
-              />
-              <label htmlFor="cedula">Cedula</label>
+return (
+<>
+{/* <a onClick ={handleOpen}>¿No tienes una cuenta?</a> */}
+<div>
+  <section  className="fondo-user">
+    <div className="box">
+      <div  className="containeir">
+        <div className="from">
+          <img src={logoLogin} alt="Alicia's Avatar" className="avatar-imageU"/>
+            <div>
+              <h2>Bienvenido a AIBD</h2>
+              <h1>El sistema se basa en seguridad-detección de amenazas, servicio 
+                  al cliente y producción empresarial, 
+                  con el apoyo de Inteligencia Artificial, Alicia, por medio de la recolección 
+                  de imágenes y cámaras en tiempo real, y así brindar las alertas necesarias. </h1>
             </div>
-          </div>
-          <div className="row">
-            <div className="input-field col s3">
-              <input
-                id="nombreUsuario"
-                name="nombreUsuario"
-                type="text"
-                className="validate"
-                value={user.nombreUsuario}
-                onChange={handleChange}
-              />
-              <label htmlFor="nombre">Nombre de Usuario</label>
-            </div>
-
-            <div className="input-field col s3">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                className="validate"
-                value={user.password}
-                onChange={handleChange}
-              />
-              <label htmlFor="apellidos">Contraseña</label>
-            </div>
-          </div>
-        </form>
-        <div className="row">
-          <button type="submit"  className="button-primary"
-          onClick={handleSubmit}>
-            Guardar
-          </button>
-
-          <button
-            type="button"
-            className="button-secondary"
-            onClick={handleClose}
-          >
-            Cancelar
-          </button>
         </div>
-                    </DialogContent>
-            </Dialog>
-        </div>
-        </>
-    );
+      </div>
+                    {/* <form> */}
+      <div className="containerRightU">
+        <div className="from">
+          <h2>Crea tu usuario</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="row">
+                <div className="input-field col s3">
+                  <input
+                    type="text" name="cedulaEmpleado" placeholder="Cédula" 
+                    value={user.cedulaEmpleado} onChange={handleChange}/>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s3">
+                  <input
+                    
+                    name="nombreUsuario" type="text" placeholder="Nombre de usuario"
+                    value={user.nombreUsuario} onChange={handleChange}/>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s3">
+                  <input
+                    name="password" type="password" placeholder="Contraseña"
+                    value={user.password} onChange={handleChange}/>
+                </div>
+              </div>
+              <p className="forget">
+              {/* <CreateUser /> */}
+              <a href="/">¿Ya tienes cuenta? </a>
+              </p>
+              <div className="inputBoxU">
+                <input type="submit" value="Guardar" onClick={handleSubmit}/>
+              </div>
+          </form>
+      </div>
+    </div>
+                    {/* </form> */}
+    </div>
+  </section>
+            {/* </Dialog> */}
+  </div>
+</>
+);
 };
 export default CreateUser;
