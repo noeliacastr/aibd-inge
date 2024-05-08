@@ -28,10 +28,10 @@ import MenuItem from "@mui/material/MenuItem";
 
 const CreateEmpleado = ({}) => {
   const [employee, setEmployee] = useState({
-    cedula: "",
+    cedula: 0,
     nombre: "",
     apellidos: "",
-    telefono: "",
+    telefono: 0,
     email: "",
     domicilio: "",
     rol: "",

@@ -72,7 +72,7 @@ export default function ButtonAppBar() {
                         className="avatar-logo"
                         />
                     </Link>
-                    <Stack direction="row-reverse" spacing={4} className="avatarLogOut"> {/* Aquí estás usando Stack */}
+                    <Stack direction="row-reverse" spacing={4} className="avatarLogOut"> 
             <Button onClick={handleOpen}>
                 <Avatar>
                     <AccountCircleRoundedIcon />

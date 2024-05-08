@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const detectionAPI = axios.create({
-    baseURL: 'http://127.0.0.1:8000/aibd/detecion',
+    baseURL: 'http://127.0.0.1:8000/aibd/detection',
     headers:{
         'Authorization': `Bearer ${localStorage.getItem("token")}`
     }
