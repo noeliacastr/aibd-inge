@@ -14,8 +14,6 @@ const ExportFactura = ({ventaData}) => {
         metodoDePago: ventaData.metodoPago,
         total: ventaData.totalVenta,
     });
-    console.log(ventaData)
-   console.log(datos);
     const generarFactura = () =>{
         const doc = new jsPDF();
         
@@ -28,7 +26,7 @@ const ExportFactura = ({ventaData}) => {
         const data = [
             [`${ventaData.producto}`, `${ventaData.cantidad}`, `${ventaData.metodoPago}`, `${ventaData.estado}`, `${ventaData.totalVenta}`]
         ];
-        console.log(data);
+     
 
         doc.autoTable({
             startY: 70,

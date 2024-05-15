@@ -15,6 +15,7 @@ import Avatar from "@mui/material/Avatar";
 import logoAIBD from "../img/logoAIBD.png"
 import { Link } from "react-router-dom";
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import Profile from "./Logout";
 
 import {
     Dialog,
@@ -37,17 +38,17 @@ export default function ButtonAppBar() {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
     const handleOpen = () => {
-    setOpen(true);
+        setOpen(true);
     };
     const handleClose = () => {
         setOpen(false);
     };
     const logout = () => {
-    if (localStorage.getItem("token")) {
-        localStorage.clear();
-        navigate("/");
-    }
-    handleClose();
+        if (localStorage.getItem("token")) {
+            localStorage.clear();
+            navigate("/");
+        }
+        handleClose();
     };
 
     return (
@@ -67,62 +68,68 @@ export default function ButtonAppBar() {
                     <Link to="/home" className="brand-logo">
                         {/* <img src={logoA} alt="Alicia's Avatar" className="avatar-A" /> */}
                         <img
-                        src={logoAIBD}
-                        alt="Alicia's Avatar"
-                        className="avatar-logo"
+                            src={logoAIBD}
+                            alt="Alicia's Avatar"
+                            className="avatar-logo"
                         />
                     </Link>
-                    <Stack direction="row-reverse" spacing={4} className="avatarLogOut"> {/* Aquí estás usando Stack */}
-            <Button onClick={handleOpen}>
-                <Avatar>
-                    <AccountCircleRoundedIcon />
-                </Avatar>
-                </Button>
-                <Dialog open={open} onClose={handleClose}>
-                <DialogTitle className="dialogContentText">Cerrar Sesión</DialogTitle>
-                <DialogContent>
-                    ¿Estás seguro de que deseas cerrar sesión?
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} className="out-button">
-                    Cancelar
-                    </Button>
-                    <Button onClick={logout} className="cancel-button " >
-                    Cerrar Sesión
-                    </Button>
-                </DialogActions>
-                </Dialog>
-            </Stack>
+                    <Profile />
+                   
                 </Toolbar>
             </AppBar>
-            
-            <Drawer 
+
+            <Drawer
                 anchor="left"
                 open={openDrawer}
                 onClose={toggleDrawer}
-        
+
             >
-                <List className="drawer-wrapper ">
-                    <ListItem button key="Inicio" component={Link} to="/home">
-                        <ListItemText primary="Inicio" className="list-item-text" /> 
-                    </ListItem>
-                    <ListItem button key="Empleado" component={Link} to="/empleados">
-                        <ListItemText primary="Empleado" className="list-item-text" /> 
-                    </ListItem>
-                    <ListItem button key="Producto" component={Link} to="/productos">
-                        <ListItemText primary="Producto" className="list-item-text" /> 
-                    </ListItem>
-                    <ListItem button key="Venta" component={Link} to="/ventas">
-                        <ListItemText primary="Venta" className="list-item-text" /> 
-                    </ListItem>
-                    <ListItem button key="Caja" component={Link} to="/caja">
-                        <ListItemText primary="Caja" className="list-item-text" /> 
-                    </ListItem>
-                    <ListItem button key="Detecciones" component={Link} to="/notification">
-                        <ListItemText primary="Detecciones" className="list-item-text" /> 
-                    </ListItem>
-                </List>
+                {localStorage.getItem('useer_rol') === 'admin' && (
+                    <List className="drawer-wrapper ">
+                        <ListItem button key="Inicio" component={Link} to="/home" >
+                            <ListItemText primary="Inicio" className="list-item-text" />
+                        </ListItem >
+                        <ListItem button key="Empleado" component={Link} to="/empleados">
+                            <ListItemText primary="Empleado" className="list-item-text" />
+                        </ListItem>
+                        <ListItem button key="Producto" component={Link} to="/productos">
+                            <ListItemText primary="Producto" className="list-item-text" />
+                        </ListItem>
+                        <ListItem button key="Venta" component={Link} to="/ventas">
+                            <ListItemText primary="Venta" className="list-item-text" />
+                        </ListItem>
+                        <ListItem button key="Caja" component={Link} to="/caja">
+                            <ListItemText primary="Caja" className="list-item-text" />
+                        </ListItem>
+                        <ListItem button key="Alertas" component={Link} to="/notification">
+                            <ListItemText primary="Alertas" className="list-item-text" />
+                        </ListItem>
+                        <ListItem button key="Usuarios" component={Link} to="/users">
+                            <ListItemText primary="Usuarios" className="list-item-text" />
+                        </ListItem>
+                        <ListItem button key="Deteccion" component={Link} to="/video">
+                            <ListItemText primary="Deteccion" className="list-item-text" />
+                        </ListItem>
+                    </List>
+                )}
+                {localStorage.getItem('useer_rol') === 'cajero' && (
+                    <List  className="drawer-wrapper">
+                        <ListItem button key="Caja" component={Link} to="/caja">
+                            <ListItemText primary="Caja" className="list-item-text" />
+                        </ListItem>
+                    </List>
+                )}
+                {localStorage.getItem('useer_rol') === 'bartender' && (
+                    <List  className="drawer-wrapper">
+                        <ListItem button key="Venta" component={Link} to="/ventas">
+                            <ListItemText primary="Venta" className="list-item-text" />
+                        </ListItem>
+                        <ListItem button key="Caja" component={Link} to="/caja">
+                            <ListItemText primary="Caja" className="list-item-text" />
+                        </ListItem>
+                    </List>
+                )}
             </Drawer>
-        </Box>
+        </Box >
     );
 }

@@ -13,7 +13,6 @@ export const updateEmployee = (empleado) => empleadoAPI.put('/', empleado)
 export const deleteEmployee = id => empleadoAPI.delete(`/${id}`)
 
 export const getEmployee = async (id) => {
-    console.log(id)
     const response = await empleadoAPI.get(`/${id}`)
     return response.data;
 }

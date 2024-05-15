@@ -27,8 +27,6 @@ import CreateUser from './CreateUser';
       };
     const queryClient = useQueryClient();
   
-
-
     const createLogin = useMutation({
         mutationFn: login,
         
@@ -50,7 +48,6 @@ import CreateUser from './CreateUser';
             
         },
         onError: (error) => {
-            console.log(error.message)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

@@ -55,7 +55,6 @@ const EditVenta = ({ vent }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(venta);
     editVenta.mutate({
       ...venta,
     });
@@ -63,8 +62,6 @@ const EditVenta = ({ vent }) => {
 
   const handleChangeEdit = (e) => {
     const { name, value } = e.target;
-    console.log(value);
-    console.log(name);
     setVenta((venta) => ({
       ...venta,
       [name]: name === "fecha" ? moment(value).format("YYYY-MM-DD") : value,

@@ -13,7 +13,6 @@ export const updateProduct = (producto) => productAPI.put('/', producto)
 export const deleteProduct = id => productAPI.delete(`/${id}`)
 
 export const getProduct = async (id) => {
-    console.log(id)
     const response = await productAPI.get(`/${id}`)
     return response.data;
 }

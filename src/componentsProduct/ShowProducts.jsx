@@ -58,10 +58,10 @@ const ShowAllProducts = () => {
   });
 
   const row = productos
-    ? productos.map((cls) => ({ ...cls, idProducto: cls.idProducto }))
+    ? productos.map((cls) => ({ ...cls, id: cls.id }))
     : [];
   const columns = [
-    { field: "idProducto", headerName: "Número Producto", width: 100 },
+    { field: "id", headerName: "Número Producto", width: 100 },
     { field: "nombreProducto", headerName: "Nombre Producto", width: 110 },
     { field: "descripcion", headerName: "Descripción", width: 100 },
     { field: "stock", headerName: "Stock", width: 100 },
@@ -94,7 +94,6 @@ const ShowAllProducts = () => {
 
   ];
   const handleClickOpen2 = () => {
-    console.log("abriendo dialogo");
     setOpen(true);
   };
 
@@ -114,7 +113,7 @@ const ShowAllProducts = () => {
         <DataGrid
           rows={row}
           columns={columns}
-          getRowId={(row) => row.idProducto}
+          getRowId={(row) => row.id}
           initialState={{
             pagination: {
               paginationModel: { page: 0, pageSize: 5 },

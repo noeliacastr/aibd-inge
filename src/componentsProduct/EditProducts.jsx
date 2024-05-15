@@ -18,10 +18,9 @@ const EditProduct = ({ prod }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  console.log(prod)
   const queyCLient = useQueryClient();
   const [producto, setProducto] = useState({
-    idProducto: prod.idProducto,
+    id: prod.id,
     nombreProducto: prod.nombreProducto,
     stock: prod.stock,
     precio: prod.precio,
@@ -31,7 +30,7 @@ const EditProduct = ({ prod }) => {
   const editProduct = useMutation({
     mutationFn: updateProduct,
     onSuccess: () => {
-      queyCLient.invalidateQueries("producto");
+      queyCLient.invalidateQueries("productos");
       setOpen(false);
       Swal.fire({
         position: "center",
@@ -45,7 +44,6 @@ const EditProduct = ({ prod }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(producto);
     editProduct.mutate({
       ...producto,
     });
@@ -53,8 +51,6 @@ const EditProduct = ({ prod }) => {
 
   const handleChangeEdit = (e) => {
     const { name, value } = e.target;
-    console.log(value);
-    console.log(name);
     setProducto((producto) => ({
       ...producto,
       [name]: value,
@@ -99,11 +95,11 @@ const EditProduct = ({ prod }) => {
                 <div className=" col s6">
                   <input
                     disabled
-                    id="idProducto"
+                    id="id"
                     type="text"
-                    name="numero"
+                    name="id"
                     className="validate"
-                    value={producto.idProducto}
+                    value={producto.id}
                     onChange={handleChangeEdit}
                   />
                   <label htmlFor="disabled">Número</label>

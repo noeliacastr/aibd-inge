@@ -16,7 +16,6 @@ import { id } from "date-fns/locale";
 import LogoutIcon from '@mui/icons-material/Logout';
 
 const CloseCash = ({ caj }) => {
-    console.log(caj);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -49,7 +48,6 @@ const CloseCash = ({ caj }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(caja);
         editCaja.mutate({
             ...caja,
         });
@@ -57,8 +55,6 @@ const CloseCash = ({ caj }) => {
 
     const handleChangeEdit = (e) => {
         const { name, value } = e.target;
-        console.log(value);
-        console.log(name);
         setCaja((caja) => ({
             ...caja,
             [name]: value,

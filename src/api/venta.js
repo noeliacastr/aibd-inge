@@ -13,7 +13,6 @@ export const updateVenta = (venta) => ventaAPI.put('/', venta)
 export const deleteVenta = id => ventaAPI.delete(`/${id}`)
 
 export const getVenta = async (id) => {
-    console.log(id)
     const response = await ventaAPI.get(`/${id}`)
     return response.data;
 }

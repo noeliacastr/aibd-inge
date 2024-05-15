@@ -106,7 +106,6 @@ const ShowAllEmployees = () => {
 
   ];
   const handleClickOpen2 = () => {
-    console.log("abriendo dialogo");
     setOpen(true);
   };
 

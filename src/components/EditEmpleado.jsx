@@ -43,7 +43,6 @@ const EditEmpleado = ({ emp }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(employe);
     editEmpleado.mutate({
       ...employe,
     });
@@ -51,8 +50,6 @@ const EditEmpleado = ({ emp }) => {
 
   const handleChangeEdit = (e) => {
     const { name, value } = e.target;
-    console.log(value);
-    console.log(name);
     setEmploye((employe) => ({
       ...employe,
       [name]: value,

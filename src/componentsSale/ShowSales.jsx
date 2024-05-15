@@ -70,7 +70,7 @@ const ShowAllVentas = () => {
     { field: "productos", headerName: "Producto", width: 120,
       renderCell: (params) => (
         <>
-        {`${params.row.productos.nombreProducto} - ${params.row.productos.idProducto}`}
+        {`${params.row.productos.nombreProducto} - ${params.row.productos.id}`}
         </>
       ),
     },
@@ -124,7 +124,6 @@ const ShowAllVentas = () => {
 
   ];
   const handleClickOpen2 = () => {
-    console.log("abriendo dialogo");
     setOpen(true);
   };
 

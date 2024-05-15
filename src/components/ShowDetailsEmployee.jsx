@@ -60,7 +60,6 @@ onSuccess: () => {
 
 const handleSubmit = (e) => {
 e.preventDefault();
-console.log(employe);
 editEmpleado.mutate({
     ...employe,
 });
@@ -112,7 +111,6 @@ return (
         <Typography id="modal-modal-title" variant="h6" component="h2" className="dialogContentText">
             Mostrar información del empleado
         </Typography>
-        
         <form className="col s12" onSubmit={handleSubmit}>
             <div className="row">
                 <div className="col s3">

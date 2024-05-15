@@ -8,13 +8,12 @@ const usuarioAPI = axios.create({
 });
 
 export const updateUser = (usuario) => usuarioAPI.put('/', usuario)
-export const deleteUser = (id) => usuarioAPI.delete(`/${id}`)
+export const deleteUser = id => usuarioAPI.delete(`/${id}`)
 export const getUsuario = async (id) => {
-    console.log(id)
     const response = await usuarioAPI.get(`/${id}`)
     return response.data;
 }
-export const getUser = async () => {
+export const getUsers = async () => {
    
     const res = await usuarioAPI.get()
     return res.data;

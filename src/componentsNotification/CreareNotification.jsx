@@ -10,13 +10,11 @@ function Notification() {
     const newSocket = new WebSocket("ws://localhost:8000/ws");
 
     newSocket.onopen = () => {
-      console.log("WebSocket connected");
       // Inicia el temporizador cuando la conexión WebSocket está abierta
       startInterval(newSocket);
     };
 
     newSocket.onmessage = event => {
-      console.log("Message from server ", event.data);
       // Agregar el mensaje recibido al estado de mensajes
       setMessages(prevMessages => [...prevMessages, event.data]);
     };
