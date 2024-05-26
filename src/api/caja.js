@@ -1,8 +1,9 @@
 import axios from 'axios'; 
+import { TOKEN } from './global';
 const cajaApi = axios.create({
-    baseURL: 'http://127.0.0.1:8000/aibd/caja',
+    baseURL: 'https://aibdproject.onrender.com/aibd/caja',
     headers: {
-        'Authorization': `Bearer ${localStorage.getItem("token")}`
+        'Authorization': `Bearer ${TOKEN}`
     }
 });
 export const createCaja = (caja) => cajaApi.post('/', caja);

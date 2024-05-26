@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { TOKEN } from './global';
 const ventaAPI = axios.create({
-    baseURL: 'http://127.0.0.1:8000/aibd/venta',
+    baseURL: 'https://aibdproject.onrender.com/aibd/venta',
     headers:{
-        'Authorization': `Bearer ${localStorage.getItem("token")}`
+        'Authorization': `Bearer ${TOKEN}`
     }
 });
 

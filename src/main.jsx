@@ -7,20 +7,20 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import 'materialize-css/dist/css/materialize.min.css';
 import './index.css'
-import {QueryClientProvider, QueryClient} from '@tanstack/react-query'
-import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { StyledEngineProvider } from '@mui/material/styles';
 
 const queryClient = new QueryClient()
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-    <StyledEngineProvider injectFirst>
-    <App />
-    </StyledEngineProvider>
-    <ReactQueryDevtools initialIsOpen={false}/>
+      <StyledEngineProvider injectFirst>
+        <App />
+      </StyledEngineProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
-    
+
   </React.StrictMode>,
 );

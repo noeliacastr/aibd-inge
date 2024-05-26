@@ -1,98 +1,115 @@
-
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import './App.css'
 import "materialize-css/dist/css/materialize.min.css";
-import { BrowserRouter, Routes, Route, Navigate, redirect } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useQuery } from "@tanstack/react-query";
-import { getUserData } from '../src/api/login'
-import CreateEmpleado from './components/CreateEmpleado';
-import CreateLogin from './components/CreateLogin';
-import ShowAllEmployees from './components/ShowEmpleados';
-import Home from './components/Home';
-import EditEmpleado from './components/EditEmpleado';
-import CreateProduct from './componentsProduct/CreateProduct';
-import EditProduct from './componentsProduct/EditProducts';
-import ShowAllProducts from './componentsProduct/ShowProducts';
-import ShowAllVentas from './componentsSale/ShowSales';
-import CreateVenta from './componentsSale/CreateSale';
-import EditVenta from './componentsSale/EditSale';
-import ShowAllReports from './componetsCaja/showInformes';
-import OpenCash from './componetsCaja/AbrirCaja';
-import CloseCash from './componetsCaja/CierreCaja'
-import { PrivateRoute } from './components/PrivateRoute';
-import Notification from './componentsNotification/CreateNotification';
-import CreateUser from './components/CreateUser';
-import WebRTCComponent from './componentsNotification/createStart';
-import ShowDetailsEmp from './components/ShowDetailsEmployee';
-import ShowDetailsSale from './componentsSale/ShowDetailsSale';
-import DrawerAppBar from './components/Navbar2';
-import ShowAllUsers from "./components/userComponent/ShowUsers";
+import { getUserData } from './api/login'
+import CreateEmpleado from './components/empleado/CreateEmpleado';
+import CreateLogin from './components/auth/CreateLogin';
+import ShowAllEmployees from './components/empleado/ShowEmpleados';
+import Home from './components/layout/Home';
+import EditEmpleado from './components/empleado/EditEmpleado';
+import CreateProduct from './components/product/CreateProduct';
+import EditProduct from './components/product/EditProducts';
+import ShowAllProducts from './components/product/ShowProducts';
+import ShowAllVentas from './components/sale/ShowSales';
+import CreateVenta from './components/sale/CreateSale';
+import EditVenta from './components/sale/EditSale';
+import ShowAllReports from './components/caja/showInformes';
+import OpenCash from './components/caja/AbrirCaja';
+import CloseCash from './components/caja/CierreCaja'
+import { PrivateRoute } from './components/utils/PrivateRoute';
+import Notification from './components/notification/CreateNotification';
+import CreateUser from './components/auth/CreateUser';
+import WebRTCComponent from './components/notification/createStart';
+import ShowDetailsEmp from './components/empleado/ShowDetailsEmployee';
+import ShowDetailsSale from './components/sale/ShowDetailsSale';
+import ShowAllUsers from "./components/user/ShowUsers";
+import { useAuthStore } from "./hooks/useAuthStore";
+import ButtonAppBar from "./components/layout/Navbar";
 
 
 function App() {
-  const [token, setToken] = useState("");
-  const [user, setUser] = useState();
+
+  const { isAuth, token, currentUser } = useAuthStore();
+
+  const clearAuth = useAuthStore(
+    (state) => state.clearAuth
+  );
+
+  const setCurrentUser = useAuthStore(
+    (state) => state.setCurrentUser
+  );
 
   const { data: current, isError, isSuccess } = useQuery({
     queryKey: ["current"],
     queryFn: getUserData,
-    onSuccess: (current) => {
-      setUser(current.data);
-      setToken(localStorage.getItem("useer_rol"));
-
-    },
-    onError: (er) => {
-      setUser(null)
-      localStorage.clear();
-    }
   });
+
+  useEffect(() => {
+    if(isError){
+      clearAuth();
+    }
+    if(isSuccess){
+      setCurrentUser(current, true);
+    }
+  }, [current, isSuccess, isError]);
+  
+
 
   return (
     <div className="App">
       <BrowserRouter>
-        {localStorage.getItem('useer_rol') === 'admin' ? (
-          <Routes>
-            <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
-            <Route path='/nav' element={<PrivateRoute><DrawerAppBar /></PrivateRoute>} />
-            <Route path='/empleados' element={<PrivateRoute><ShowAllEmployees /></PrivateRoute>} />
-            <Route path='/empleado' element={<PrivateRoute><CreateEmpleado /></PrivateRoute>} />
-            <Route path='/empleado/edit/:id' element={<PrivateRoute><EditEmpleado /></PrivateRoute>} />
-            <Route path='/empleado/show/:id' element={<PrivateRoute><ShowDetailsEmp /></PrivateRoute>} />
-            <Route path='/productos' element={<PrivateRoute><ShowAllProducts /></PrivateRoute>} />
-            <Route path='/producto' element={<PrivateRoute><CreateProduct /></PrivateRoute>} />
-            <Route path='/producto/edit/:id' element={<PrivateRoute><EditProduct /></PrivateRoute>} />
-            <Route path='/ventas' element={<PrivateRoute><ShowAllVentas /></PrivateRoute>} />
-            <Route path='/venta' element={<PrivateRoute ><CreateVenta /></PrivateRoute>} />
-            <Route path='/venta/edit/:id' element={<PrivateRoute><EditVenta /></PrivateRoute>} />
-            <Route path='/venta/show/:id' element={<PrivateRoute><ShowDetailsSale /></PrivateRoute>} />
-            <Route path='/notification' element={<Notification />} />
-            <Route path='/caja' element={<PrivateRoute><ShowAllReports /></PrivateRoute>} />
-            <Route path='/apertura' element={<PrivateRoute><OpenCash /></PrivateRoute>} />
-            <Route path='/cierre/edit/:id' element={<PrivateRoute><CloseCash /></PrivateRoute>} />
-            <Route path='/video' element={<PrivateRoute><WebRTCComponent /></PrivateRoute>} />
-            <Route path='/users' element={<PrivateRoute><ShowAllUsers /></PrivateRoute>} />
-          </Routes>
+      <ButtonAppBar />
+        {isAuth && !!token ? (
+          <div>
+            {currentUser.rol === "admin" ? (
+              <Routes>
+                <Route element={<PrivateRoute isAuth={isAuth} />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path='/empleados' element={<ShowAllEmployees />} />
+                  <Route path='/empleado' element={<CreateEmpleado />} />
+                  <Route path='/empleado/edit/:id' element={<EditEmpleado />} />
+                  <Route path='/empleado/show/:id' element={<ShowDetailsEmp />} />
+                  <Route path='/productos' element={<ShowAllProducts />} />
+                  <Route path='/producto' element={<CreateProduct />} />
+                  <Route path='/producto/edit/:id' element={<EditProduct />} />
+                  <Route path='/ventas' element={<ShowAllVentas />} />
+                  <Route path='/venta' element={<CreateVenta />} />
+                  <Route path='/venta/edit/:id' element={<EditVenta />} />
+                  <Route path='/venta/show/:id' element={<ShowDetailsSale />} />
+                  <Route path='/notification' element={<Notification />} />
+                  <Route path='/caja' element={<ShowAllReports />} />
+                  <Route path='/apertura' element={<OpenCash />} />
+                  <Route path='/cierre/edit/:id' element={<CloseCash />} />
+                  <Route path='/video' element={<WebRTCComponent />} />
+                  <Route path='/users' element={<ShowAllUsers />} />
+                  <Route path="*" element={<Navigate to="/" />} />
+                </Route>
+              </Routes>
+            ) : (
+              <Routes>
+                <Route element={<PrivateRoute isAuth={isAuth} />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path='/ventas' element={<ShowAllVentas />} />
+                  <Route path='/venta' element={<CreateVenta />} />
+                  <Route path='/venta/edit/:id' element={<EditVenta />} />
+                  <Route path='/venta/show/:id' element={<ShowDetailsSale />} />
+                  <Route path='/caja' element={<ShowAllReports />} />
+                  <Route path='/apertura' element={<OpenCash />} />
+                  <Route path='/cierre/edit/:id' element={<CloseCash />} />
+                  <Route path="*" element={<Navigate to="/" />} />
+                </Route>
+              </Routes>
+            )}
+          </div>
         ) : (
           <Routes>
-            <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
-            <Route path='/nav' element={<PrivateRoute><DrawerAppBar /></PrivateRoute>} />
-            <Route path='/ventas' element={<PrivateRoute><ShowAllVentas /></PrivateRoute>} />
-            <Route path='/venta' element={<PrivateRoute ><CreateVenta /></PrivateRoute>} />
-            <Route path='/venta/edit/:id' element={<PrivateRoute><EditVenta /></PrivateRoute>} />
-            <Route path='/venta/show/:id' element={<PrivateRoute><ShowDetailsSale /></PrivateRoute>} />
-            <Route path='/caja' element={<PrivateRoute><ShowAllReports /></PrivateRoute>} />
-            <Route path='/apertura' element={<PrivateRoute><OpenCash /></PrivateRoute>} />
-            <Route path='/cierre/edit/:id' element={<PrivateRoute><CloseCash /></PrivateRoute>} />
-            
+            <Route path='/' element={<CreateLogin />} />
+            <Route path='/user' element={<CreateUser />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
-
         )}
-
-        <Routes>
-
-          <Route path='/' element={<CreateLogin />} />
-          <Route path='/user' element={<CreateUser />} />
-        </Routes>
       </BrowserRouter>
     </div>
   )
