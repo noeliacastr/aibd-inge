@@ -108,11 +108,11 @@ input.enabled {
 .avatar-logo {
     width: 140px;
     height: 50px;
-    margin-left: -1000px;
+    margin-left: -800px;
     margin-top: 10px;
 }
 .avatarLogOut{
-  margin-left: 79px;
+  margin-left: 180px;
 }
 .left{
     margin-left: 250px;

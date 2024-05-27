@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { TOKEN } from './global';
 const productAPI = axios.create({
-    baseURL: 'http://127.0.0.1:8000/aibd/producto',
+    baseURL: 'https://aibdproject.onrender.com/aibd/producto',
     headers:{
-        'Authorization': `Bearer ${localStorage.getItem("token")}`
+        'Authorization': `Bearer ${TOKEN}`
     }
 });
 
@@ -13,7 +14,6 @@ export const updateProduct = (producto) => productAPI.put('/', producto)
 export const deleteProduct = id => productAPI.delete(`/${id}`)
 
 export const getProduct = async (id) => {
-    console.log(id)
     const response = await productAPI.get(`/${id}`)
     return response.data;
 }

@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { TOKEN } from './global';
 const empleadoAPI = axios.create({
-    baseURL: 'http://127.0.0.1:8000/aibd/empleado',
+    baseURL: 'https://aibdproject.onrender.com/aibd/empleado',
     headers:{
-        'Authorization': `Bearer ${localStorage.getItem("token")}`
+        'Authorization': `Bearer ${TOKEN}`
     }
 });
 
@@ -13,7 +14,6 @@ export const updateEmployee = (empleado) => empleadoAPI.put('/', empleado)
 export const deleteEmployee = id => empleadoAPI.delete(`/${id}`)
 
 export const getEmployee = async (id) => {
-    console.log(id)
     const response = await empleadoAPI.get(`/${id}`)
     return response.data;
 }
