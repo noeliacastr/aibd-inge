@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ButtonAppBar from "../layout/Navbar";
 
 window.BACKEND = "https://demo.alicia.software/backend";
@@ -17,6 +17,10 @@ const WebRTCComponent = () => {
     const [pc, setPc] = useState(null);
     const [dc, setDc] = useState(null);
     const [dcInterval, setDcInterval] = useState(null);
+
+    //
+    const videoRef = useRef(null);
+    const [isStreaming, setIsStreaming] = useState(false);
 
     const createPeerConnection = () => {
         // Tu implementación existente aquí
@@ -378,31 +382,35 @@ const WebRTCComponent = () => {
 
     return (
         <>
-            <ButtonAppBar />
-            <div>
-                <video id="video" autoPlay playsInline></video>
+        <ButtonAppBar />
+        <div className="container">
+            <div className="left-section">
+                <video id="video" ref={videoRef} autoPlay playsInline></video>
+                <div className="controls">
                 <button id="start" className="btn btn-primary" onClick={start}>Conectar</button>
                 <button id="stop" style={{ display: 'none' }} className="btn btn-primary" onClick={stop}>Desconectar</button>
+                </div>
                 <input id="use-video" type="checkbox" />
                 <label htmlFor="use-video">Use video</label>
             </div>
-            <div>
-                <h1>Detecciónes</h1>
+            <div className="right-section">
+                <h1>Detecciones</h1>
                 <div className="containerNoti center-align">
-                    <div className="row">
-                        {messages.map((message, index) => (
-                            <div className="col s12 m6" key={index}>
-                                <div className="card blue-grey darken-3">
-                                    <div className="card-content white-text">
-                                        <span className="card-title"></span>
-                                        <p>{message}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                <div className="row">
+                    {messages.map((message, index) => (
+                    <div className="col s12 m6" key={index}>
+                        <div className="card blue-grey darken-3">
+                        <div className="card-content white-text">
+                            <span className="card-title"></span>
+                            <p>{message}</p>
+                        </div>
+                        </div>
                     </div>
+                    ))}
+                </div>
                 </div>
             </div>
+        </div>
         </>
     );
 };

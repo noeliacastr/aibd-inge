@@ -108,7 +108,7 @@ input.enabled {
 .avatar-logo {
     width: 140px;
     height: 50px;
-    margin-left: -800px;
+    margin-left: -1000px;
     margin-top: 10px;
 }
 .avatarLogOut{
@@ -255,10 +255,19 @@ input.enabled {
     background: #ca7db6;
     border-radius: 10px;
   }
+
+  .css-stvpp2-MuiDialogContent-root{
+    overflow-x: hidden;
+  }
  
   .css-ypiqx9-MuiDialogContent-root{
     overflow-x: hidden; 
   }
+
+  .css-4t3x6l-MuiPaper-root-MuiDrawer-paper::-webkit-scrollbar{
+    width: 8px;
+  }
+
 
   
   .dialogContainer {
@@ -269,6 +278,15 @@ input.enabled {
     left: 30%; 
     margin-left: 0px;
     overflow-x: hidden;
+  }
+  .userContainer {
+    width: 530px;
+    height: 540px;
+    position: fixed;
+    top: -1%;
+    left: 30%; 
+    margin-left: 0px;
+    overflow-y: hidden;
   }
 
   .dialogContainer .form-dialog {
@@ -503,6 +521,61 @@ section .container .from h2 {
 body {  
   /* background-color: #d6d3d36c; */
     overflow-x: hidden;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.left-section {
+  flex: 1;
+  margin-right: 20px; /* Espacio entre las secciones */
+  position: absolute; /* Cambiado a absoluto */
+  top: 80px; /* Ajusta este valor según sea necesario */
+  width: 100%;
+  left: 5px;
+  max-width: 650px;  /* Ajusta esto según el tamaño deseado */
+  margin: 0 auto;
+  background-color: #000;
+}
+
+.right-section {
+  flex: 1;
+  margin-right: -550px;
+}
+
+video {
+  width: 650px;
+  height: auto;
+  display: block;
+  background-color: #000;
+}
+
+.controls {
+  position: absolute;
+  bottom: -40px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.controls button,
+.controls input,
+.controls label {
+  background: #ca7db6;
+  border: none;
+  padding: 5px 10px;
+  margin: 0;
+  border-radius: 3px;
+}
+
+.controls button:hover,
+.controls input:hover,
+.controls label:hover {
+  background: #ca7db6;
 }
 
 /* -----------------------user--------------------------------------------------------- */

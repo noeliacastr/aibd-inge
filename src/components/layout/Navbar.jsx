@@ -56,7 +56,7 @@ export default function ButtonAppBar() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Link to="/home" className="brand-logo">
+                    <Link to="/home">
                         {/* <img src={logoA} alt="Alicia's Avatar" className="avatar-A" /> */}
                         <img
                             src={logoAIBD}

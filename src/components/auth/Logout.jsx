@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+
 import { useNavigate } from "react-router-dom";
 import { Stack, Button, Avatar, Dialog, DialogTitle, DialogContent, DialogActions, Box, TextField, Typography } from '@mui/material';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { useAuthStore } from '../../hooks/useAuthStore';
+
 
 
 const Profile = () => {
@@ -43,38 +45,42 @@ const Profile = () => {
                             </Avatar>
                         )}
                     </Button>
-                    <Dialog open={open} onClose={handleClose}>
+                    <Dialog open={open} onClose={handleClose} className="userContainer">
                         <DialogTitle >
-                            <Typography variant="h3">Perfil de Usuario</Typography>
+                            <Typography variant="h3" className="dialogContentText">Perfil de Usuario</Typography>
                         </DialogTitle>
                         <DialogContent dividers sx={{ p: 1 }}>
                             <div className='row'>
-                                <div className="col s6">
-                                    <TextField
+                                <div className="col s3">
+                                    <input
                                         label="ID"
                                         value={currentUser?.sub}
+                                        className={"validate" + (currentUser?.sub ? " enabled" : " disabled")}
                                         disabled
                                         variant='standard'
                                         fullWidth
                                         style={{ marginBottom: '12px' }}
+            
                                     />
                                 </div>
                             </div>
                             <div className='row'>
                                 <div className="col s3" >
-                                    <TextField
+                                    <input
                                         label="Nombre"
                                         variant='standard'
                                         value={currentUser?.nombre}
+                                        className={"validate" + (currentUser?.nombre ? " enabled" : " disabled")}
                                         fullWidth
                                         disabled
                                         style={{ marginBottom: '12px' }}
                                     />
                                 </div>
                                 <div className="col s3" >
-                                    <TextField
+                                    <input
                                         label="Rol"
                                         value={currentUser?.rol}
+                                        className={"validate" + (currentUser?.rol ? " enabled" : " disabled")}
                                         variant="standard"
                                         fullWidth
                                         disabled

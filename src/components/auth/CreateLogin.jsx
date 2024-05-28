@@ -27,7 +27,7 @@ const CreateLogin = () => {
             setTokenState(response.data);
             Swal.fire({
                 title: "¡Hola! soy Alicia",
-                html: `<img src="${aliciaAvatar}" alt="Alicia Avatar" class="alicia-img" /> <br/> Cualquier consulta estoy para ayudarte`,
+                html: `<img src="${aliciaAvatar}" alt="Alicia Avatar" class="alicia-img" /> <br/>`,
             });
             navigate('/');
             setTimeout(() => {
