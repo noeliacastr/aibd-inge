@@ -483,21 +483,12 @@ section {
   
 .avatar-image {
     width: 380px;
-    height: 300px;
+    height: 350px;
     margin-left: -10px;
     margin-top: -100px;
-  
 }
 
-section .container .from h2 {
-  margin-top: -70px;
-  position: relative;
-  color: #240d0d;
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  
-}
+
 
 
 body {  
@@ -741,37 +732,48 @@ section {
 
 section .container {
   position: relative;
+  display: flex;
   margin-right: 10px;
   top: 240px;
-  width: 400px;
+  width: 380px;
   min-height: 500px;
-  background-color:  rgb(255, 255, 255);
-  border-radius: 0px 100px 0px 0px;
-  display: flex;
+  /*background-color:  rgb(255, 255, 255);*/
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0px 70px 70px 0px;
   justify-content: center;
   align-items: center;
+  box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.4);
 }
 
+section .containerRight .from h1{
+  margin-right: 5px;
+  position: relative;
+  color: #240d0d;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
 
-section .container h1 {
-    position: relative;
-    color: #240d0d;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 1px;
-
+section .containerRight .from h2 {
+  margin-top: -70px;
+  position: relative;
+  color: #240d0d;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  
 }
 
 /* la linea del centro debajo de AIBD*/
-section .container .from h2::before {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    width: 230px; height: 4px;
-    background: #804999;
+section .containerRight .from h2::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  width: 230px; height: 4px;
+  background: #804999;
 }
 
-section .container form .forget a {  
+section .containerRight form .forget a {  
     margin-right: 30px;
     color: #fff;
     font-weight: 600;
@@ -784,13 +786,13 @@ section .container form .forget a {
 /*------------------------------------------------------------------*/
 section .containerRight {
     position: relative;
-    margin-right: 410px;
+    margin-right: 390px;
     top: -260px;
-    width: 400px;
+    width: 380px;
     min-height: 500px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color:  rgb(255, 255, 255);
     /* border-radius: 10px; */
-    border-radius: 0px 0px 0px 100px;
+    border-radius: 70px 0px 0px 70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -798,16 +800,16 @@ section .containerRight {
     box-shadow: 8px 0px 8px rgba(0, 0, 0, 0.4);
 }
 /* se sube el iniciar */
-section .containerRight form {
-    margin-top: 100px;
+section .container form {
+    margin-top: 60px;
     position: relative;
 
 }
 
 
-section .containerRight .from h2 {
-
-    color: #fff;
+section .container .from h2 {
+    
+    color: #804999;;
     font-size: 24px;
     font-weight: 600;
     letter-spacing: 1px;
@@ -815,14 +817,14 @@ section .containerRight .from h2 {
 }
 
 /* la linea del centro debajo de */
-section .containerRight .from h2::before {
+section .container .from h2::before {
     /* font-family: 'Humanst521 BT'; */
     font-family: 'Poppins';
     content: '';
     position: absolute;
     bottom: -10px;
     width: 190px; height: 3px;
-    background: #fff;
+    background: white;
 }
 /* section .container .from .inputBox {
     width: 100%;
@@ -830,7 +832,7 @@ section .containerRight .from h2::before {
 } */
 
 
-section .containerRight .from .inputBox input {
+section .container .from .inputBox input {
     background: rgba(255, 255, 255, 0.2);
     border: none;
     outline: none;
@@ -846,12 +848,12 @@ section .containerRight .from .inputBox input {
 }
 
 
-section .containerRight .from .inputBox input::placeholder {
+section .container .from .inputBox input::placeholder {
     color: #fff;
 }
 
 /* el color del boton iniciar */
-section .containerRight .from .inputBox input[type="submit"] {
+section .container .from .inputBox input[type="submit"] {
     background: #fff;
     margin-top: 25px;
     color: #080808;
@@ -860,14 +862,14 @@ section .containerRight .from .inputBox input[type="submit"] {
     margin-bottom: 15px;
     font-weight: 600;
 }
-section .containerRight .from .forget {
+section .container .from .forget {
     
     margin-top: 3px;
     color: #fff;
 }
 
 /* aca dice el color de si no tenes cuanta */
-section .containerRight form .forget a { 
+section .container form .forget a { 
   margin-left: 50px; 
     margin-right: 50px;
     color: #fff;
@@ -886,7 +888,7 @@ section .containerRight form .forget a {
     /* margin-left: 400px; */
   }
 
-  section .containerRight .from h2 {
+  section .container .from h2 {
 
     position: relative;
     color: #fff;

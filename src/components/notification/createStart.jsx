@@ -335,7 +335,7 @@ const WebRTCComponent = () => {
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
     }
     useEffect(() => {
-        const newSocket = new WebSocket("ws:https://aibdproject.onrender.com/ws");
+        const newSocket = new WebSocket("wss://aibdproject.onrender.com/ws");
 
         newSocket.onopen = () => {
             console.log("WebSocket connected");

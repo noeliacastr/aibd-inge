@@ -67,18 +67,6 @@ const CreateLogin = () => {
                     <div className="container">
 
                         <div className="from">
-                            <img src={logoLogin} alt="Alicia's Avatar" className="avatar-image" />
-                            <div>
-                                <h2>Bienvenido a AIBD</h2>
-                              
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className="containerRight">
-
-                        <div className="from">
-
                             <h2>Inicio de Sesión </h2>
                             <form onSubmit={handleSubmit}>
                                 <div className="input-field col s6">
@@ -101,6 +89,19 @@ const CreateLogin = () => {
 
                                 {/* <p Link to="" class="forget"><a Link to="/create-user">¿No tienes una cuenta? </a></p> */}
                             </form>
+
+                        </div>
+                    </div>
+                    <div className="containerRight">
+
+                        <div className="from">
+                            <img src={logoLogin} alt="Alicia's Avatar" className="avatar-image" />
+                            <div>
+                                <h2>Bienvenido a AIBD</h2>
+                                <h1>Te estamos vigilando</h1>
+
+                            </div>
+
 
                         </div>
                     </div>
